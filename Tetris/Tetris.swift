@@ -6,11 +6,12 @@
 //  Copyright © 2018 Retroactive Fiasco. All rights reserved.
 //
 
-import Cocoa
-
 class Tetris {
 
-    let sceneWidth = 300
-    let sceneHeight = 400
+    // Based on 2009 Tetris Design Guidelines.
+
+    // Size of the matrix in cells.
+    let matrixWidth = 10
+    let matrixHeight = 20
 
 }
