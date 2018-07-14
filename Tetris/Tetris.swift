@@ -20,6 +20,7 @@ class Tetris {
     let pikachu = texture(named: "Pikachu")
     let pants = texture(named: "Pants")
 
+    // This is called once, before the game starts.
     func start() {
         // The lower left corner of the grid is row 0, column 0.
 
