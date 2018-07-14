@@ -6,6 +6,8 @@ let gridSizeY = 24
 // The number of rows that are hidden beyond the top of the scren.
 let hiddenMatrixRows = 3.8
 
+// test
+
 let pikachu = texture(named: "Pikachu")
 let pants = texture(named: "Pants")
 
