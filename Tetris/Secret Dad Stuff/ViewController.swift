@@ -35,6 +35,9 @@ class ViewController: NSViewController {
 
         let tetris: Tetris = TetrisManager.shared.tetris
         tetris.start()
+
+        let scene: Scene = TetrisManager.shared.scene
+        scene.viewHasAppeared = true
     }
 
     private func initScene() {

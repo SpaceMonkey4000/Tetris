@@ -10,7 +10,9 @@ import SpriteKit
 import GameplayKit
 
 class Scene: SKScene {
-    
+
+    public var viewHasAppeared = false
+
     override func didMove(to view: SKView) {
         // Do nothing.
     }
@@ -23,7 +25,11 @@ class Scene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered.
+        let tetris: Tetris = TetrisManager.shared.tetris
+
+        if viewHasAppeared {
+            tetris.update()
+        }
     }
 
 }

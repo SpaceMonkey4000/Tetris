@@ -23,8 +23,8 @@ public func setTexture(_ index: Int, row: Int, column: Int) {
     let matrix: Matrix = TetrisManager.shared.matrix
     let cell = matrix.cellAt(row: row, column: column)
     if cell == nil {
-        print("Error: Tried to set texture of cell which is out of range at row \(row), column \(column)")
-        fatalError()
+        print("Warning: Tried to set texture of cell which is out of range: row \(row), column \(column)")
+        return
     }
     cell?.textureIndex = index
 }
@@ -34,8 +34,8 @@ public func clearTexture(row: Int, column: Int) {
     let matrix: Matrix = TetrisManager.shared.matrix
     let cell = matrix.cellAt(row: row, column: column)
     if cell == nil {
-        print("Error: Tried to clear texture of cell which is out of range at row \(row), column \(column)")
-        fatalError()
+        print("Warning: Tried to clear texture of cell which is out of range: row \(row), column \(column)")
+        return
     }
     cell?.textureIndex = nil
 }
