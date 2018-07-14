@@ -35,14 +35,17 @@ class TextureAtlasController {
 
         for index in 0..<indexCount {
             guard let name = indexToNameDictionary[index] else {
+                print("Error: Could not find texture with index: \(index)")
                 fatalError()
             }
             indexToTextureArray.append(textureAtlas.textureNamed(name))
         }
     }
 
-    public func texture(withIndex index: Int) -> SKTexture {
-        assert(index >= 0 && index < indexToTextureArray.count)
+    public func texture(withIndex index: Int) -> SKTexture? {
+        guard index >= 0 && index < indexToTextureArray.count else {
+            return nil
+        }
         return indexToTextureArray[index]
     }
 

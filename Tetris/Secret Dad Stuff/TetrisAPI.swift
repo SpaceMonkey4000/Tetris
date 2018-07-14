@@ -22,12 +22,20 @@ public func texture(named name: String) -> Int {
 public func setTexture(_ index: Int, row: Int, column: Int) {
     let matrix: Matrix = TetrisManager.shared.matrix
     let cell = matrix.cellAt(row: row, column: column)
-    cell.textureIndex = index
+    if cell == nil {
+        print("Error: Tried to set texture of cell which is out of range at row \(row), column \(column)")
+        fatalError()
+    }
+    cell?.textureIndex = index
 }
 
 /// Clears the texture at a grid cell.
 public func clearTexture(row: Int, column: Int) {
     let matrix: Matrix = TetrisManager.shared.matrix
     let cell = matrix.cellAt(row: row, column: column)
-    cell.textureIndex = nil
+    if cell == nil {
+        print("Error: Tried to clear texture of cell which is out of range at row \(row), column \(column)")
+        fatalError()
+    }
+    cell?.textureIndex = nil
 }

@@ -28,6 +28,7 @@ class Tetris {
         setTexture(pants, row: 4, column: 0)
         setTexture(pants, row: 4, column: 1)
         setTexture(pikachu, row: 5, column: 2)
+        clearTexture(row: 3, column: 0)
     }
 
 }

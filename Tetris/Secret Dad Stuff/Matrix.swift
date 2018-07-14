@@ -37,14 +37,19 @@ class Matrix {
         }
     }
 
-    public func cellAt(row: Int, column: Int) -> Cell {
+    public func cellAt(row: Int, column: Int) -> Cell? {
+        guard row >= 0 && row < rows && column >= 0 && column < columns else {
+            return nil
+        }
         return cells[row][column]
     }
 
     private func foreach(_ closure: ((Int, Int, Cell) -> ())) {
         for row in 0..<rows {
             for column in 0..<columns {
-                closure(row, column, cellAt(row: row, column: column))
+                if let cell = cellAt(row: row, column: column) {
+                    closure(row, column, cell)
+                }
             }
         }
     }
