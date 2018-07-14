@@ -13,6 +13,10 @@ class TetrisManager {
     static let shared = TetrisManager()
     private init() { }
 
-    public var tetris = Tetris()
+    public var scene: Scene!
+
+    public var tetris: Tetris!
+
+    public var matrix: Matrix!
 
 }

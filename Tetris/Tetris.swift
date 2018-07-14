@@ -15,6 +15,6 @@ class Tetris {
     let matrixRows = 24
 
     // The number of rows that are hidden off the top of the scren.
-    let hiddenMatrixRows = 4
+    let hiddenMatrixRows = 3.8
 
 }

@@ -13,9 +13,20 @@ class Cell {
     let spriteNode = SKSpriteNode()
 
     // Width and height of each cell, in pixels.
-    public static let size = CGSize(width: 32.0, height: 32.0)
+    public static let size = CGSize(width: 64.0, height: 64.0)
 
     init() {
         spriteNode.size = Cell.size
+
+        spriteNode.texture = SKTexture(imageNamed: "Pikachu")
     }
+
+    public func layout(row: Int, column: Int) {
+        let matrix: Matrix = TetrisManager.shared.matrix
+        let scene: Scene = TetrisManager.shared.scene
+
+        spriteNode.position = matrix.locationOfCellAt(row: row, column: column)
+        scene.addChild(spriteNode)
+    }
+
 }

@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  Scene.swift
 //  Tetris
 //
 //  Created by Drew Olbrich on 7/14/18.
@@ -9,10 +9,10 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class Scene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    private var label: SKLabelNode?
+    private var spinnyNode: SKShapeNode?
 
     override func didMove(to view: SKView) {
         
@@ -85,8 +85,7 @@ class GameScene: SKScene {
         }
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        // Called before each frame is rendered.
     }
 }
