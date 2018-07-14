@@ -13,7 +13,7 @@ var counter = 0
 var column = 0
 var row = matrixRows - 1
 
-// This is called once, before the game starts.
+// This function is called once, before the game starts.
 func first() {
     // The lower left corner of the grid is row 0, column 0.
 
