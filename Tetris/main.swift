@@ -10,7 +10,7 @@ let pikachu = texture(named: "Pikachu")
 let pants = texture(named: "Pants")
 
 var pantsCounter = 0
-var pantsX = 0
+var pantsX = 2
 var pantsY = gridSizeY - 1
 
 // This function is called once, before the game starts.
