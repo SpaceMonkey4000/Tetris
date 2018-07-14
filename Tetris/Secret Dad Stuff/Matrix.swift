@@ -17,8 +17,8 @@ class Matrix {
     private var cells: [Row] = []
 
     init() {
-        self.rows = matrixRows
-        self.columns = matrixColumns
+        self.rows = gridSizeY
+        self.columns = gridSizeX
 
         initCells()
     }
@@ -35,18 +35,18 @@ class Matrix {
         }
     }
 
-    public func cellAt(row: Int, column: Int) -> Cell? {
-        guard row >= 0 && row < rows && column >= 0 && column < columns else {
+    public func cellAt(x: Int, y: Int) -> Cell? {
+        guard y >= 0 && y < rows && x >= 0 && x < columns else {
             return nil
         }
-        return cells[row][column]
+        return cells[y][x]
     }
 
     private func foreach(_ closure: ((Int, Int, Cell) -> ())) {
-        for row in 0..<rows {
-            for column in 0..<columns {
-                if let cell = cellAt(row: row, column: column) {
-                    closure(row, column, cell)
+        for y in 0..<rows {
+            for x in 0..<columns {
+                if let cell = cellAt(x: x, y: y) {
+                    closure(x, y, cell)
                 }
             }
         }
@@ -54,14 +54,14 @@ class Matrix {
 
     /// Returns the SceneKit scene location of a cell, given integer coordinates.
     /// (0, 0) is in the lower left.
-    public func locationOfCellAt(row: Int, column: Int) -> CGPoint {
-        return CGPoint(x: (CGFloat(column) + 0.5)*Cell.size.width,
-                       y: (CGFloat(row) + 0.5)*Cell.size.height)
+    public func locationOfCellAt(x: Int, y: Int) -> CGPoint {
+        return CGPoint(x: (CGFloat(x) + 0.5)*Cell.size.width,
+                       y: (CGFloat(y) + 0.5)*Cell.size.height)
     }
 
     public func layoutCells() {
-        foreach { (row, column, cell) in
-            cell.layout(row: row, column: column)
+        foreach { (x, y, cell) in
+            cell.layout(x: x, y: y)
         }
     }
 

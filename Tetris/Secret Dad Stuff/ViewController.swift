@@ -36,7 +36,7 @@ class ViewController: NSViewController {
     }
 
     private func initScene() {
-        let scene = Scene(size: CGSize(width: CGFloat(matrixColumns)*Cell.size.width, height: (CGFloat(matrixRows) - CGFloat(hiddenMatrixRows))*Cell.size.height))
+        let scene = Scene(size: CGSize(width: CGFloat(gridSizeX)*Cell.size.width, height: (CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows))*Cell.size.height))
         scene.scaleMode = .aspectFit
         skView.presentScene(scene)
 

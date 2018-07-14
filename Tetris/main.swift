@@ -1,27 +1,27 @@
 
-// Size of the matrix in cells.
-let matrixColumns = 10
-let matrixRows = 24
+// Size of the grid in cells.
+let gridSizeX = 10
+let gridSizeY = 24
 
-// The number of rows that are hidden off the top of the scren.
+// The number of rows that are hidden beyond the top of the scren.
 let hiddenMatrixRows = 3.8
 
 let pikachu = texture(named: "Pikachu")
 let pants = texture(named: "Pants")
 
 var counter = 0
-var column = 0
-var row = matrixRows - 1
+var pantsX = 0
+var pantsY = gridSizeY - 1
 
 // This function is called once, before the game starts.
 func first() {
-    // The lower left corner of the grid is row 0, column 0.
+    // The lower left corner of the grid is coordinate 0, 0.
 
-    setTexture(pants, row: 3, column: 0)
-    setTexture(pants, row: 4, column: 0)
-    setTexture(pants, row: 4, column: 1)
-    setTexture(pikachu, row: 5, column: 2)
-    clearTexture(row: 3, column: 0)
+    setTexture(pants, x: 0, y: 3)
+    setTexture(pants, x: 0, y: 4)
+    setTexture(pants, x: 1, y: 4)
+    setTexture(pikachu, x: 2, y: 5)
+    clearTexture(x: 0, y: 3)
 }
 
 // This function is called 60 times per second.
@@ -29,9 +29,9 @@ func update() {
     counter -= 1
     if counter < 0 {
         counter = 10
-        clearTexture(row: row, column: column)
-        row -= 1
-        setTexture(pants, row: row, column: column)
+        clearTexture(x: pantsX, y: pantsY)
+        pantsY -= 1
+        setTexture(pants, x: pantsX, y: pantsY)
     }
 }
 

@@ -37,14 +37,14 @@ class Cell {
         spriteNode.size = Cell.size
     }
 
-    public func layout(row: Int, column: Int) {
+    public func layout(x: Int, y: Int) {
         let matrix: Matrix = TetrisManager.shared.matrix
         let scene: Scene = TetrisManager.shared.scene
 
-        self.row = row
-        self.column = column
+        self.row = y
+        self.column = x
 
-        spriteNode.position = matrix.locationOfCellAt(row: row, column: column)
+        spriteNode.position = matrix.locationOfCellAt(x: x, y: y)
         scene.addChild(spriteNode)
     }
 

@@ -29,7 +29,7 @@ public func texture(named name: String) -> Int {
 }
 
 /// Sets a texture at a grid cell.
-public func setTexture(_ index: Int, row: Int, column: Int) {
+public func setTexture(_ index: Int, x: Int, y: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
         print("Error: setTexture must only be called in the start or update functions.")
         fatalError()
@@ -38,24 +38,24 @@ public func setTexture(_ index: Int, row: Int, column: Int) {
     let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
     textureAtlasController.createIfNecessary()
 
-    let cell = matrix.cellAt(row: row, column: column)
+    let cell = matrix.cellAt(x: x, y: y)
     if cell == nil {
-        print("Warning: Tried to set texture of cell which is out of range: row \(row), column \(column)")
+        print("Warning: Tried to set texture of cell which is out of range: x=\(x), y=\(y)")
         return
     }
     cell?.textureIndex = index
 }
 
 /// Clears the texture at a grid cell.
-public func clearTexture(row: Int, column: Int) {
+public func clearTexture(x: Int, y: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
         print("Error: clearTexture must only be called in the start or update functions.")
         fatalError()
     }
 
-    let cell = matrix.cellAt(row: row, column: column)
+    let cell = matrix.cellAt(x: x, y: y)
     if cell == nil {
-        print("Warning: Tried to clear texture of cell which is out of range: row \(row), column \(column)")
+        print("Warning: Tried to clear texture of cell which is out of range: x=\(x), y=\(y)")
         return
     }
     cell?.textureIndex = nil
