@@ -33,6 +33,11 @@ func fallPants() {
     pantsCounter -= 1
     if pantsCounter < 0 {
         pantsCounter = 10
+
+        if hasTextureAt(x: pantsX, y: pantsY - 1) {
+            return
+        }
+
         clearTexture(x: pantsX, y: pantsY)
         pantsY -= 1
         setTexture(pants, x: pantsX, y: pantsY)
