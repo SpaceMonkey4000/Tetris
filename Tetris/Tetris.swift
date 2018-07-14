@@ -11,7 +11,10 @@ class Tetris {
     // Based on 2009 Tetris Design Guidelines.
 
     // Size of the matrix in cells.
-    let matrixWidth = 10
-    let matrixHeight = 20
+    let matrixColumns = 10
+    let matrixRows = 24
+
+    // The number of rows that are hidden off the top of the scren.
+    let hiddenMatrixRows = 4
 
 }

@@ -14,10 +14,7 @@ class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
 
-    private let tetris = Tetris()
-
-    // Width and height of each cell, in pixels.
-    private let cellSize = CGSize(width: 16.0, height: 16.0)
+    private var matrix: Matrix!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +23,9 @@ class ViewController: NSViewController {
             return
         }
 
-        let scene = GameScene(size: CGSize(width: CGFloat(tetris.matrixWidth)*cellSize.width, height: CGFloat(tetris.matrixHeight)*cellSize.height))
+        let tetris = TetrisManager.shared.tetris
+
+        let scene = GameScene(size: CGSize(width: CGFloat(tetris.matrixColumns)*Cell.size.width, height: CGFloat(tetris.matrixRows)*Cell.size.height))
         scene.scaleMode = .aspectFit
         view.presentScene(scene)
 
@@ -35,6 +34,8 @@ class ViewController: NSViewController {
 
         view.showsFPS = false
         view.showsNodeCount = false
+
+        matrix = Matrix()
     }
 
 }
