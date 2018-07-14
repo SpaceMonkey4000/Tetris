@@ -9,7 +9,7 @@ let hiddenMatrixRows = 3.8
 let pikachu = texture(named: "Pikachu")
 let pants = texture(named: "Pants")
 
-var counter = 0
+var pantsCounter = 0
 var pantsX = 0
 var pantsY = gridSizeY - 1
 
@@ -26,9 +26,13 @@ func first() {
 
 // This function is called 60 times per second.
 func update() {
-    counter -= 1
-    if counter < 0 {
-        counter = 10
+    fallPants()
+}
+
+func fallPants() {
+    pantsCounter -= 1
+    if pantsCounter < 0 {
+        pantsCounter = 10
         clearTexture(x: pantsX, y: pantsY)
         pantsY -= 1
         setTexture(pants, x: pantsX, y: pantsY)
