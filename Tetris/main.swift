@@ -44,5 +44,10 @@ func fallPants() {
     }
 }
 
+// This function is called whenever the user presses a key.
+func keyPress(key: Int) {
+    print("key =", key)
+}
+
 // This function starts the game and must be called at the end of the file.
 start()

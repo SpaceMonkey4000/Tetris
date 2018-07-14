@@ -22,10 +22,7 @@ class Scene: SKScene {
     }
 
     override func keyDown(with event: NSEvent) {
-        switch event.keyCode {
-        default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
-        }
+        keyPress(key: Int(event.keyCode))
     }
     
     override func update(_ currentTime: TimeInterval) {
