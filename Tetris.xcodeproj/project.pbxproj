@@ -14,6 +14,7 @@
 		3A5F13E720FA78B900A43C21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13E620FA78B900A43C21 /* ViewController.swift */; };
 		3A5F13E920FA78BA00A43C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13E820FA78BA00A43C21 /* Assets.xcassets */; };
 		3A5F13EC20FA78BA00A43C21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13EA20FA78BA00A43C21 /* Main.storyboard */; };
+		3A5F13F620FA7D9E00A43C21 /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F520FA7D9E00A43C21 /* Tetris.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		3A5F13EB20FA78BA00A43C21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A5F13ED20FA78BA00A43C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A5F13EE20FA78BA00A43C21 /* Tetris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tetris.entitlements; sourceTree = "<group>"; };
+		3A5F13F520FA7D9E00A43C21 /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,17 +61,26 @@
 		3A5F13DD20FA78B900A43C21 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				3A5F13F520FA7D9E00A43C21 /* Tetris.swift */,
+				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
+			);
+			path = Tetris;
+			sourceTree = "<group>";
+		};
+		3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */ = {
+			isa = PBXGroup;
+			children = (
 				3A5F13DE20FA78B900A43C21 /* AppDelegate.swift */,
+				3A5F13E620FA78B900A43C21 /* ViewController.swift */,
+				3A5F13E420FA78B900A43C21 /* GameScene.swift */,
+				3A5F13EA20FA78BA00A43C21 /* Main.storyboard */,
 				3A5F13E020FA78B900A43C21 /* GameScene.sks */,
 				3A5F13E220FA78B900A43C21 /* Actions.sks */,
-				3A5F13E420FA78B900A43C21 /* GameScene.swift */,
-				3A5F13E620FA78B900A43C21 /* ViewController.swift */,
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
-				3A5F13EA20FA78BA00A43C21 /* Main.storyboard */,
 				3A5F13ED20FA78BA00A43C21 /* Info.plist */,
 				3A5F13EE20FA78BA00A43C21 /* Tetris.entitlements */,
 			);
-			path = Tetris;
+			path = "Secret Dad Stuff";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +157,7 @@
 			files = (
 				3A5F13E720FA78B900A43C21 /* ViewController.swift in Sources */,
 				3A5F13E520FA78B900A43C21 /* GameScene.swift in Sources */,
+				3A5F13F620FA7D9E00A43C21 /* Tetris.swift in Sources */,
 				3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,11 +293,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Tetris/Tetris.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Tetris/Secret Dad Stuff/Tetris.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 88HA7759D7;
-				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_FILE = "Tetris/Secret Dad Stuff/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -300,11 +312,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Tetris/Tetris.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Tetris/Secret Dad Stuff/Tetris.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 88HA7759D7;
-				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_FILE = "Tetris/Secret Dad Stuff/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
