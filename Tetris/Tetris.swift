@@ -18,7 +18,6 @@ class Tetris {
     let hiddenMatrixRows = 3.8
 
     let pikachu = texture(named: "Pikachu")
-
     let pants = texture(named: "Pants")
 
     func start() {
