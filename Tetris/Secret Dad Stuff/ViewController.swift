@@ -14,6 +14,8 @@ class ViewController: NSViewController {
 
     @IBOutlet var skView: SKView!
 
+    private let textureAtlasController = TextureAtlasController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,8 +27,14 @@ class ViewController: NSViewController {
 
         initMatrix()
 
-        let matrix: Matrix = TetrisManager.shared.matrix
-        matrix.layoutCells()
+        initTextures()
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        let tetris: Tetris = TetrisManager.shared.tetris
+        tetris.start()
     }
 
     private func initScene() {
@@ -49,8 +57,17 @@ class ViewController: NSViewController {
 
     private func initMatrix() {
         assert(TetrisManager.shared.scene != nil)
+
         let matrix = Matrix()
         TetrisManager.shared.matrix = matrix
+
+        matrix.layoutCells()
+    }
+
+    private func initTextures() {
+        let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
+
+        textureAtlasController.create()
     }
 
 }

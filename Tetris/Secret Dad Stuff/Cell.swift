@@ -15,10 +15,19 @@ class Cell {
     // Width and height of each cell, in pixels.
     public static let size = CGSize(width: 64.0, height: 64.0)
 
+    public var textureIndex: Int? {
+        didSet {
+            guard let textureIndex = textureIndex else {
+                spriteNode.texture = nil
+                return
+            }
+            let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
+            spriteNode.texture = textureAtlasController.texture(withIndex: textureIndex)
+        }
+    }
+
     init() {
         spriteNode.size = Cell.size
-
-        spriteNode.texture = SKTexture(imageNamed: "Pikachu")
     }
 
     public func layout(row: Int, column: Int) {

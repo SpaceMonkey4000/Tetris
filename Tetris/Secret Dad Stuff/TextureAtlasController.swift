@@ -20,10 +20,14 @@ class TextureAtlasController {
 
     private var indexCount = 0
 
-    public func addTexture(name: String, image: NSImage) {
+    public func addTexture(name: String, image: NSImage) -> Int {
+        let index = indexCount
+
         nameToImageDictionary[name] = image
-        indexToNameDictionary[indexCount] = name
+        indexToNameDictionary[index] = name
         indexCount += 1
+
+        return index
     }
 
     public func create() {
@@ -38,7 +42,7 @@ class TextureAtlasController {
     }
 
     public func texture(withIndex index: Int) -> SKTexture {
-        assert(index > 0 && index < indexToTextureArray.count)
+        assert(index >= 0 && index < indexToTextureArray.count)
         return indexToTextureArray[index]
     }
 

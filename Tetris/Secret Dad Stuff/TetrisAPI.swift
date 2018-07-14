@@ -1,0 +1,32 @@
+//
+//  TetrisAPI.swift
+//  Tetris
+//
+//  Created by Drew Olbrich on 7/14/18.
+//  Copyright © 2018 Retroactive Fiasco. All rights reserved.
+//
+
+import Cocoa
+
+public func texture(named name: String) -> Int {
+    guard let image = NSImage(named: NSImage.Name(name)) else {
+        print("Could not find image in asset catalog: \(name)")
+        fatalError()
+    }
+
+    return TetrisManager.shared.textureAtlasController.addTexture(name: name, image: image)
+}
+
+/// Sets a texture at a grid cell.
+public func setTexture(_ index: Int, row: Int, column: Int) {
+    let matrix: Matrix = TetrisManager.shared.matrix
+    let cell = matrix.cellAt(row: row, column: column)
+    cell.textureIndex = index
+}
+
+/// Removes the texture at a grid cell.
+public func clearTexture(row: Int, column: Int) {
+    let matrix: Matrix = TetrisManager.shared.matrix
+    let cell = matrix.cellAt(row: row, column: column)
+    cell.textureIndex = nil
+}

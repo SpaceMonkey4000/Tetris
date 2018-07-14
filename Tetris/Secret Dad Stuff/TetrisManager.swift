@@ -19,4 +19,6 @@ class TetrisManager {
 
     public var matrix: Matrix!
 
+    public let textureAtlasController = TextureAtlasController()
+
 }

@@ -37,7 +37,7 @@ class Matrix {
         }
     }
 
-    private func cellAt(row: Int, column: Int) -> Cell {
+    public func cellAt(row: Int, column: Int) -> Cell {
         return cells[row][column]
     }
 
