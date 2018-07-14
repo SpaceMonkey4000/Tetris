@@ -25,7 +25,7 @@ public func setTexture(_ index: Int, row: Int, column: Int) {
     cell.textureIndex = index
 }
 
-/// Removes the texture at a grid cell.
+/// Clears the texture at a grid cell.
 public func clearTexture(row: Int, column: Int) {
     let matrix: Matrix = TetrisManager.shared.matrix
     let cell = matrix.cellAt(row: row, column: column)
