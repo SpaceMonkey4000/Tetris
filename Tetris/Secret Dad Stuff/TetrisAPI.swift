@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Adds a texture with a name of an image in the asset catalog.
 public func texture(named name: String) -> Int {
     guard let image = NSImage(named: NSImage.Name(name)) else {
         print("Could not find image in asset catalog: \(name)")
