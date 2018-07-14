@@ -25,7 +25,7 @@ class TextureAtlasController {
 
         let index = indexCount
 
-        nameToImageDictionary[name] = image
+        nameToImageDictionary[name] = image.resized(to: NSSize(width: Cell.size.width, height: Cell.size.width))
         indexToNameDictionary[index] = name
         indexCount += 1
 

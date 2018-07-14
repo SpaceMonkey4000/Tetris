@@ -16,6 +16,7 @@ class Cell {
     var column: Int = -1
 
     // Width and height of each cell, in pixels.
+    // The textures are assembled into a texture atlas, so a power of two here is probably advantageous.
     public static let size = CGSize(width: 64.0, height: 64.0)
 
     public var textureIndex: Int? {
