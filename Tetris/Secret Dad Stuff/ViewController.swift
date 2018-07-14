@@ -17,30 +17,40 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let view = self.skView else {
-            return
-        }
+        TetrisManager.shared.tetris = Tetris()
 
-        let tetris = Tetris()
-        TetrisManager.shared.tetris = tetris
+        initScene()
+
+        initView()
+
+        initMatrix()
+
+        let matrix: Matrix = TetrisManager.shared.matrix
+        matrix.layoutCells()
+    }
+
+    private func initScene() {
+        let tetris: Tetris = TetrisManager.shared.tetris
 
         let scene = Scene(size: CGSize(width: CGFloat(tetris.matrixColumns)*Cell.size.width, height: (CGFloat(tetris.matrixRows) - CGFloat(tetris.hiddenMatrixRows))*Cell.size.height))
         scene.scaleMode = .aspectFit
-        view.presentScene(scene)
+        skView.presentScene(scene)
 
         TetrisManager.shared.scene = scene
+    }
 
+    private func initView() {
         // The documentation says that this provides better performance.
-        view.ignoresSiblingOrder = true
+        skView.ignoresSiblingOrder = true
 
-        view.showsFPS = false
-        view.showsNodeCount = false
+        skView.showsFPS = false
+        skView.showsNodeCount = false
+    }
 
+    private func initMatrix() {
         assert(TetrisManager.shared.scene != nil)
         let matrix = Matrix()
         TetrisManager.shared.matrix = matrix
-
-        matrix.layoutCells()
     }
 
 }
