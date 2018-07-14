@@ -11,7 +11,7 @@ import SpriteKit
 
 class TextureAtlasController {
 
-    public private(set) var textureAtlas: SKTextureAtlas!
+    public private(set) var textureAtlas: SKTextureAtlas?
 
     private var nameToImageDictionary: [String : Any] = [:]
     private var indexToNameDictionary: [Int : String] = [:]
@@ -21,6 +21,8 @@ class TextureAtlasController {
     private var indexCount = 0
 
     public func addTexture(name: String, image: NSImage) -> Int {
+        print("Adding texture: \(name)")
+
         let index = indexCount
 
         nameToImageDictionary[name] = image
@@ -30,7 +32,15 @@ class TextureAtlasController {
         return index
     }
 
-    public func create() {
+    public func createIfNecessary() {
+        if textureAtlas == nil {
+            create()
+        }
+    }
+
+    private func create() {
+        print("Creating texture atlas.")
+
         textureAtlas = SKTextureAtlas(dictionary: nameToImageDictionary)
 
         for index in 0..<indexCount {
@@ -38,7 +48,7 @@ class TextureAtlasController {
                 print("Error: Could not find texture with index: \(index)")
                 fatalError()
             }
-            indexToTextureArray.append(textureAtlas.textureNamed(name))
+            indexToTextureArray.append(textureAtlas!.textureNamed(name))
         }
     }
 

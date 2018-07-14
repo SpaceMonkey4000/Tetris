@@ -18,7 +18,7 @@
 		3A5F13E720FA78B900A43C21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13E620FA78B900A43C21 /* ViewController.swift */; };
 		3A5F13E920FA78BA00A43C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13E820FA78BA00A43C21 /* Assets.xcassets */; };
 		3A5F13EC20FA78BA00A43C21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13EA20FA78BA00A43C21 /* Main.storyboard */; };
-		3A5F13F620FA7D9E00A43C21 /* Tetris.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F520FA7D9E00A43C21 /* Tetris.swift */; };
+		3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F520FA7D9E00A43C21 /* main.swift */; };
 		3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */; };
 		3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F920FA843100A43C21 /* Matrix.swift */; };
 /* End PBXBuildFile section */
@@ -38,7 +38,7 @@
 		3A5F13EB20FA78BA00A43C21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A5F13ED20FA78BA00A43C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A5F13EE20FA78BA00A43C21 /* Tetris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tetris.entitlements; sourceTree = "<group>"; };
-		3A5F13F520FA7D9E00A43C21 /* Tetris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetris.swift; sourceTree = "<group>"; };
+		3A5F13F520FA7D9E00A43C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "2009 Tetris Design Guideline.pdf"; sourceTree = "<group>"; };
 		3A5F13F920FA843100A43C21 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +75,7 @@
 			children = (
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
-				3A5F13F520FA7D9E00A43C21 /* Tetris.swift */,
+				3A5F13F520FA7D9E00A43C21 /* main.swift */,
 				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
 			);
 			path = Tetris;
@@ -180,7 +180,7 @@
 				3A5F13E520FA78B900A43C21 /* Scene.swift in Sources */,
 				3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */,
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,
-				3A5F13F620FA7D9E00A43C21 /* Tetris.swift in Sources */,
+				3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */,
 				3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */,
 				3A2FB97D20FA8B4500AF6592 /* Cell.swift in Sources */,
 			);

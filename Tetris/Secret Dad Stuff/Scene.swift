@@ -9,6 +9,10 @@
 import SpriteKit
 import GameplayKit
 
+private func callGlobalUpdate() {
+    update()
+}
+
 class Scene: SKScene {
 
     public var viewHasAppeared = false
@@ -25,10 +29,8 @@ class Scene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        let tetris: Tetris = TetrisManager.shared.tetris
-
         if viewHasAppeared {
-            tetris.update()
+            callGlobalUpdate()
         }
     }
 

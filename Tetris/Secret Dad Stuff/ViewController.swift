@@ -19,31 +19,24 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        TetrisManager.shared.tetris = Tetris()
-
         initScene()
 
         initView()
 
         initMatrix()
-
-        initTextures()
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        let tetris: Tetris = TetrisManager.shared.tetris
-        tetris.start()
+        first()
 
         let scene: Scene = TetrisManager.shared.scene
         scene.viewHasAppeared = true
     }
 
     private func initScene() {
-        let tetris: Tetris = TetrisManager.shared.tetris
-
-        let scene = Scene(size: CGSize(width: CGFloat(tetris.matrixColumns)*Cell.size.width, height: (CGFloat(tetris.matrixRows) - CGFloat(tetris.hiddenMatrixRows))*Cell.size.height))
+        let scene = Scene(size: CGSize(width: CGFloat(matrixColumns)*Cell.size.width, height: (CGFloat(matrixRows) - CGFloat(hiddenMatrixRows))*Cell.size.height))
         scene.scaleMode = .aspectFit
         skView.presentScene(scene)
 
@@ -65,12 +58,6 @@ class ViewController: NSViewController {
         TetrisManager.shared.matrix = matrix
 
         matrix.layoutCells()
-    }
-
-    private func initTextures() {
-        let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
-
-        textureAtlasController.create()
     }
 
 }

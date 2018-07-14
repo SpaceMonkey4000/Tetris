@@ -17,10 +17,8 @@ class Matrix {
     private var cells: [Row] = []
 
     init() {
-        let tetris: Tetris = TetrisManager.shared.tetris
-
-        self.rows = tetris.matrixRows
-        self.columns = tetris.matrixColumns
+        self.rows = matrixRows
+        self.columns = matrixColumns
 
         initCells()
     }

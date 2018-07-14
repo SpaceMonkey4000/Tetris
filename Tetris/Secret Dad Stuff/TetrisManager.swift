@@ -15,8 +15,6 @@ class TetrisManager {
 
     public var scene: Scene!
 
-    public var tetris: Tetris!
-
     public var matrix: Matrix!
 
     public let textureAtlasController = TextureAtlasController()
