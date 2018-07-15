@@ -19,8 +19,8 @@ var slidetimer = 0
 var stickdelay = 30
 var tilesinline = 0
 
-var STrefreshes = 0
-let STmaxrefreshes = 15
+var stRefreshes = 0
+let stMaxRefreshes = 15
 
 // This function is called once, before the game starts.
 func first() {
@@ -58,9 +58,9 @@ func update() {
                 setTexture(garbage, x: pantsX, y: pantsY)
             }
             if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
-                STrefreshes -= 1
+                stRefreshes -= 1
                 slidetimer = stickdelay
-                if STrefreshes < 1 {
+                if stRefreshes < 1 {
                     slidetimer = 1
                 }
             }
@@ -76,9 +76,9 @@ func update() {
             }
         }
         if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
-            STrefreshes -= 1
+            stRefreshes -= 1
             slidetimer = stickdelay
-            if STrefreshes < 1 {
+            if stRefreshes < 1 {
                 slidetimer = 1
             }
         }
@@ -97,11 +97,11 @@ func spawnMino(){
     slidetimer = stickdelay
     pantsX = 5
     pantsY = gridSizeY - 3
-    STrefreshes = STmaxrefreshes
+    stRefreshes = stMaxRefreshes
 }
 
 func fallMino() {
-    print ("STrefreshes =", STrefreshes)
+    print ("STrefreshes =", stRefreshes)
     print ("Slidetimer =",slidetimer)
     if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
         if slidetimer>1 {
