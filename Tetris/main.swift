@@ -1,7 +1,7 @@
 
 // Size of the grid in cells.
-let gridSizeX = 20
-let gridSizeY = 20
+let gridSizeX = 10
+let gridSizeY = 24
 
 // The number of rows that are hidden beyond the top of the screen.
 let hiddenMatrixRows = 3.8
@@ -26,7 +26,7 @@ var softdropCounter = 0
 
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
-var nextItem: Shape = iEast
+var nextItem: Shape = monomino
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
@@ -233,11 +233,25 @@ func keyPress(key: Int) {
             shape.erase(x: tX, y: tY)
                 spawnMino()
         }
+        if keyIsPressed(1) {
+            shape.erase(x: tX, y: tY)
+            shape = monomino
+            shape.draw (x: tX, y: tY)
+        }
+        if keyIsPressed(2) {
+            shape.erase(x: tX, y: tY)
+            shape = instaClear
+            shape.draw (x: tX, y: tY)
+        }
+        if keyIsPressed(3) {
+            shape.erase(x: tX, y: tY)
+            shape = tetrisplus
+            shape.draw (x: tX, y: tY)
+        }
     }
 }
 func generateNextItem() {
     rng1 = random(min: 0, max: 6)
-    if rng1 == 0 {
         switch rng1 {
         case 0:
             nextItem = iNorth
@@ -254,10 +268,9 @@ func generateNextItem() {
         case 6:
             nextItem = zNorth
         default:
-            print ("oops!")
+            nextItem = monomino
     }
 
-    }
     
 }
 
