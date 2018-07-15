@@ -7,21 +7,22 @@ let gridSizeY = 24
 let hiddenMatrixRows = 3.8
 
 let garbage = texture(named: "Garbageicon")
-var fallspeed = 40
-var softdropfallspeed = 2
+var fallspeed = 30
+var softdropfallspeed = 1
 
 var fallCounter = 0
 var pantsX = 0
 var pantsY = 0
 var slidetimer = 0
-var stickdelay = 60
+var stickdelay = 30
+var tilesinline = 0
 
 // This function is called once, before the game starts.
 func first() {
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<10 {
+    for a in 0..<5 {
         setTexture(garbage, x: a, y: 0)
     }
     
@@ -61,7 +62,7 @@ func spawnMino(){
 }
 
 func fallMino() {
-    if hasTextureAt(x: pantsX, y: pantsY - 1) {
+    if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
         if slidetimer>1 {
             slidetimer = slidetimer - 1
         }
@@ -75,9 +76,9 @@ func fallMino() {
             fallCounter = fallspeed
         }
         
-        if hasTextureAt(x: pantsX, y: pantsY - 1) {
+        if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
             if slidetimer == 1 {
-                spawnMino()
+                linecheck()
             }
             return
         }
@@ -87,11 +88,25 @@ func fallMino() {
         setTexture(garbage, x: pantsX, y: pantsY)
     }
 }
-
+func linecheck() {
+    for c in 0..<10 {
+        tilesinline = 0
+        for b in 0..<10 {
+            if hasTextureAt (x: b, y: c) {
+                tilesinline = tilesinline + 1
+            }
+            if tilesinline == 10 {
+                clearline(y: c)
+            }
+    }
+}
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
     print("key =", key)
 }
+    func clearline(y: Int) {
+        //put stuff here
+    }
 
 // This function starts the game and must be called at the end of the file.
 start()
