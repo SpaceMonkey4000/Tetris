@@ -7,6 +7,7 @@ let gridSizeY = 24
 let hiddenMatrixRows = 3.8
 var softfallcounter = 0
 let garbage = texture(named: "Garbageicon")
+let orangebasic = texture(named: "Orangebasic")
 var fallspeed = 30
 var softdropfallspeed = 1
 
@@ -38,7 +39,7 @@ func first() {
 }
 
 func createShapes() {
-    lNorth.texture = garbage
+    lNorth.texture = orangebasic
     lNorth.addMino(mx: 0, my: 1)
     lNorth.addMino(mx: 1, my: 1)
     lNorth.addMino(mx: 2, my: 1)

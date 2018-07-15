@@ -32,8 +32,11 @@ class Shape {
 
     // Erase the mino. x and y are the position of the lower left corner
     // of the mino in the grid.
+    // look to the ways of the tiny potato
     func erase(x: Int, y: Int) {
-        // TODO
+        for mino in minos {
+            clearTexture(x: x + mino.mx, y: y + mino.my)
+        }
     }
 
     // Returns true if the mino collides with any non-blank textures
