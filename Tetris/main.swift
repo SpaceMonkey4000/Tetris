@@ -31,7 +31,7 @@ func first() {
 func update() {
     fallMino()
     print(slidetimer)
-
+    
 }
 
 func spawnMino(){
