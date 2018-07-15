@@ -5,7 +5,7 @@ let gridSizeY = 24
 
 // The number of rows that are hidden beyond the top of the scren.
 let hiddenMatrixRows = 3.8
-
+var softfallcounter = 0
 let garbage = texture(named: "Garbageicon")
 var fallspeed = 30
 var softdropfallspeed = 1
@@ -16,6 +16,9 @@ var pantsY = 0
 var slidetimer = 0
 var stickdelay = 30
 var tilesinline = 0
+
+var STrefreshes = 0
+let STmaxrefreshes = 15
 
 // This function is called once, before the game starts.
 func first() {
@@ -32,7 +35,7 @@ func first() {
 // This function is called 60 times per second.
 func update() {
     fallMino()
-    print(slidetimer)
+    softFall()
     
     if keyIsPressed(123) {
         if !hasTextureAt(x: pantsX - 1, y: pantsY){
@@ -40,6 +43,13 @@ func update() {
                 clearTexture(x: pantsX, y: pantsY)
                 pantsX = pantsX - 1
                 setTexture(garbage, x: pantsX, y: pantsY)
+            }
+            if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
+                STrefreshes -= 1
+                slidetimer = stickdelay
+                if STrefreshes < 1 {
+                    slidetimer = 1
+                }
             }
         }
     }
@@ -52,16 +62,34 @@ func update() {
                 setTexture(garbage, x: pantsX, y: pantsY)
             }
         }
+        if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
+            STrefreshes -= 1
+            slidetimer = stickdelay
+            if STrefreshes < 1 {
+                slidetimer = 1
+            }
+        }
     }
 }
-
+func softFall(){
+    softfallcounter -= 1
+    if softfallcounter < 0 {
+        if keyIsPressed(125){
+            fallCounter = softdropfallspeed
+            softfallcounter = softdropfallspeed
+        }
+    }
+}
 func spawnMino(){
     slidetimer = stickdelay
     pantsX = 5
     pantsY = gridSizeY - 3
+    STrefreshes = STmaxrefreshes
 }
 
 func fallMino() {
+    print ("STrefreshes =", STrefreshes)
+    print ("Slidetimer =",slidetimer)
     if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
         if slidetimer>1 {
             slidetimer = slidetimer - 1
