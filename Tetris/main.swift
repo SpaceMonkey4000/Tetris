@@ -70,7 +70,7 @@ func fallMino() {
     fallCounter -= 1
     if fallCounter < 0 {
         if keyIsPressed(125){
-        fallCounter = softdropfallspeed
+            fallCounter = softdropfallspeed
         }
         if !keyIsPressed(125){
             fallCounter = fallspeed
@@ -88,25 +88,36 @@ func fallMino() {
         setTexture(garbage, x: pantsX, y: pantsY)
     }
 }
-func linecheck() {
-    for c in 0..<10 {
-        tilesinline = 0
-        for b in 0..<10 {
-            if hasTextureAt (x: b, y: c) {
-                tilesinline = tilesinline + 1
-            }
-            if tilesinline == 10 {
-                clearline(y: c)
-            }
+
+//line clear func
+func clearline(y: Int) {
+    for x in 0..<gridSizeX {
+        clearTexture(x: x, y: y)
     }
 }
+// check for line
+func linecheck() {
+    for y in 0..<gridSizeY {
+        tilesinline = 0
+        for x in 0..<gridSizeX {
+            if hasTextureAt (x: x, y: y) {
+                tilesinline += 1
+            }
+            
+        }
+        if tilesinline == gridSizeX {
+            clearline(y: y)
+        }
+    }
+    spawnMino()
+}
+
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
     print("key =", key)
 }
-    func clearline(y: Int) {
-        //put stuff here
-    }
+
 
 // This function starts the game and must be called at the end of the file.
 start()
+
