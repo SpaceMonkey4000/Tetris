@@ -12,7 +12,7 @@ var softdropfallspeed = 2
 
 let garbage = texture(named: "Garbageicon")
 
-var shape: Shape = zWest
+var shape: Shape = iEast
 
 var fallCounter = 0
 var tX = 0
@@ -30,6 +30,9 @@ var dirCounter2 = 0
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
+
+let debugTools = 1
+
 
 createAllPieces()
 
@@ -95,7 +98,6 @@ func update() {
             }
         }
     }
-    
     
 }
 func softFall(){
@@ -217,7 +219,12 @@ func keyPress(key: Int) {
         slidetimer = 0
         stRefreshes = 0
     }
-        
+    if debugTools == 1 {
+        if keyIsPressed(0) {
+            shape.erase(x: tX, y: tY)
+                spawnMino()
+        }
+    }
 }
 
 // This function starts the game and must be called at the end of the file.
