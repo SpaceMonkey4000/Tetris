@@ -1,35 +1,35 @@
 //
 //  Example:
 //
-//  // The current tetrimino that will appear in the grid.
-//  var tetrimino: Tetrimino = Tetrimino()
+//  // The current tetromino that will appear in the grid.
+//  var tetromino: Tetromino = Tetromino()
 //
-//  // Create a new J tetrimino.
-//  func createJTetrimino() -> Tetrimino {
-//      return Tetrimino(shapes: [jNorth, jEast, jSouth, jWest])
+//  // Create a new J tetromino.
+//  func createJTetromino() -> Tetromino {
+//      return Tetromino(shapes: [jNorth, jEast, jSouth, jWest])
 //  }
 //
-//  tetrimino = createJTetrimino()
+//  tetromino = createJTetromino()
 //
-//  // Place the tetrimino in the grid.
-//  tetrimino.addToGridAt(x: 3, y: gridSizeY - 4)
+//  // Place the tetromino in the grid.
+//  tetromino.addToGridAt(x: 3, y: gridSizeY - 4)
 //
-//  // Move the tetrimino one cell to the right.
-//  if tetrimino.canMoveBy(dx: 1, dy: 0) {
-//      tetrimino.moveBy(dx: 1, dy: 0)
+//  // Move the tetromino one cell to the right.
+//  if tetromino.canMoveBy(dx: 1, dy: 0) {
+//      tetromino.moveBy(dx: 1, dy: 0)
 //  }
 //
-//  // Rotate the tetrimino clockwise.
-//  if tetrimino.canRotateClockwise() {
-//      tetrimino.rotateClockwise()
+//  // Rotate the tetromino clockwise.
+//  if tetromino.canRotateClockwise() {
+//      tetromino.rotateClockwise()
 //  }
 //
 
 import Foundation
 
-class Tetrimino {
+class Tetromino {
 
-    // The position of the Tetrimino. We'll used this instead of tX and tY
+    // The position of the Tetromino. We'll used this instead of tX and tY
     // from now on.
     private var x: Int = 0
     private var y: Int = 0
@@ -40,12 +40,12 @@ class Tetrimino {
     // A number between 0 and 3, corresponding to north, east, south, west.
     private var direction: Int = 0
 
-    // Creates an empty tetrimino with no shapes.
+    // Creates an empty tetromino with no shapes.
     init() {
         self.shapes = []
     }
 
-    // Creates a tetrimino with an array of shapes.
+    // Creates a tetromino with an array of shapes.
     init(shapes: [Shape]) {
         assert(shapes.count == 4)
         self.shapes = shapes
@@ -75,71 +75,71 @@ class Tetrimino {
 
     // Implement the following function in terms of the ones above:
 
-    // Returns the tetrimino's direction, rotated clockwise one direction.
+    // Returns the tetromino's direction, rotated clockwise one direction.
     // If the direction is 3, the function should return 0.
     func getClockwiseDirection() -> Int {
         // TODO
         return 0
     }
 
-    // Returns the tetrimino's direction, rotated counterclockwise one direction.
+    // Returns the tetromino's direction, rotated counterclockwise one direction.
     // If the direction is 0, the function should return 3.
     func getCounterclockwiseDirection() -> Int {
         // TODO
         return 0
     }
 
-    // Adds the tetrimino to the grid at a location.
-    // We'll call this once when the tetrimino is created, and then never again.
+    // Adds the tetromino to the grid at a location.
+    // We'll call this once when the tetromino is created, and then never again.
     func addToGridAt(x: Int, y: Int) {
         // TODO
     }
 
-    // Removes the tetrimino from the grid. We'll call this if we want to
-    // remove the tetrimino from the grid and replace it with a new one,
+    // Removes the tetromino from the grid. We'll call this if we want to
+    // remove the tetromino from the grid and replace it with a new one,
     // for testing. We do not expect to call this during regular game play.
     func removeFromGrid() {
         // TODO
     }
 
-    // Returns true if the tetrimino can be moved by an offset
+    // Returns true if the tetromino can be moved by an offset
     // without colliding with other minos or with the edge of the grid.
     func canMoveBy(dx: Int, dy: Int) -> Bool {
-        // TODO: This function should first erase the tetrimino, then test
-        // if the tetrimino can be moved, then draw the tetrimino,
+        // TODO: This function should first erase the tetromino, then test
+        // if the tetromino can be moved, then draw the tetromino,
         // then return the result.
         return false
     }
 
-    // Move the tetrimino.
+    // Move the tetromino.
     func moveBy(dx: Int, dy: Int) {
-        // TODO: This function should first erase the tetrimino, then
-        // then move the tetrimino, then draw the tetrimino in its new location.
+        // TODO: This function should first erase the tetromino, then
+        // then move the tetromino, then draw the tetromino in its new location.
     }
 
-    // Returns true if the tetrimino can be rotated clockwise
+    // Returns true if the tetromino can be rotated clockwise
     // without colliding with other minos or with the edge of the grid.
     func canRotateClockwise() -> Bool {
         let newDirection = getClockwiseDirection()
-        // TODO: This function should first erase the tetrimino,
+        // TODO: This function should first erase the tetromino,
         // then test if it collides with anything when rotated to
-        // its new direction, then draw the tetrimino with its original direction.
+        // its new direction, then draw the tetromino with its original direction.
         return false
     }
 
-    // Returns true if the tetrimino can be rotated counterclockwise
+    // Returns true if the tetromino can be rotated counterclockwise
     // without colliding with other minos or with the edge of the grid.
     func canRotateCounterclockwise() -> Bool {
         // TODO
         return false
     }
 
-    // Rotate the tetrimino clockwise.
+    // Rotate the tetromino clockwise.
     func rotateClockwise() {
-        // TODO: Erase the tetrimino, rotate it clockwise, then draw it.
+        // TODO: Erase the tetromino, rotate it clockwise, then draw it.
     }
 
-    // Rotate the tetrimino counterclockwise.
+    // Rotate the tetromino counterclockwise.
     func rotateCounterclockwise() {
         // TODO
     }
