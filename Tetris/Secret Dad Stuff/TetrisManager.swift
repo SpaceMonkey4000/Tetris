@@ -19,4 +19,6 @@ class TetrisManager {
 
     public let textureAtlasController = TextureAtlasController()
 
+    public let keyController = KeyController()
+
 }

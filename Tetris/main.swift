@@ -31,7 +31,14 @@ func first() {
 func update() {
     fallMino()
     print(slidetimer)
-    
+
+    if keyIsPressed(0) {
+        // The 'a' key is held down.
+    }
+
+    if keyIsPressed(1) {
+        // The 's' key is held down.
+    }
 }
 
 func spawnMino(){

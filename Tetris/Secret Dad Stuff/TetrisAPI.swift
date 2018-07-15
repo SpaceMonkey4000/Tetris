@@ -28,7 +28,8 @@ public func texture(named name: String) -> Int {
     return TetrisManager.shared.textureAtlasController.addTexture(name: name, image: image)
 }
 
-/// Sets a texture at a grid cell.
+/// Sets a texture at a grid cell. If 0 is specified for the texture,
+/// the cell's texture is cleared.
 public func setTexture(_ index: Int, x: Int, y: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
         print("Error: setTexture must only be called in the start or update functions.")
@@ -43,7 +44,12 @@ public func setTexture(_ index: Int, x: Int, y: Int) {
         print("Warning: Tried to call setTexture on a cell which is out of range: x=\(x), y=\(y)")
         return
     }
-    cell?.textureIndex = index
+    if index == 0 {
+        // This matches the behavior of clearTexture.
+        cell?.textureIndex = nil
+    } else {
+        cell?.textureIndex = index
+    }
 }
 
 /// Clears the texture at a grid cell.
@@ -75,8 +81,7 @@ public func hasTextureAt(x: Int, y: Int) -> Bool {
     return cell.textureIndex != nil
 }
 
-/// Returns the texture at a grid cell. The program will crash if you call this with
-/// the coordinates of a grid cell that has no texture.
+/// Returns the texture at a grid cell. Returns 0 if the cell has no texture.
 public func textureAt(x: Int, y: Int) -> Int {
     guard let matrix = TetrisManager.shared.matrix else {
         print("Error: textureAt must only be called in the start or update functions.")
@@ -85,13 +90,17 @@ public func textureAt(x: Int, y: Int) -> Int {
 
     guard let cell = matrix.cellAt(x: x, y: y) else {
         print("Warning: Tried to call textureAt on a cell which is out of range: x=\(x), y=\(y)")
-        fatalError()
+        return 0
     }
 
     guard let textureIndex = cell.textureIndex else {
-        print("Warning: Tried to call textureAt on a cell which has no texture.")
-        fatalError()
+        return 0
     }
 
     return textureIndex
 }
+
+public func keyIsPressed(_ key: Int) -> Bool {
+    return TetrisManager.shared.keyController.keyIsPressed(key)
+}
+

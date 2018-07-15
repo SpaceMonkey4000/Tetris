@@ -22,9 +22,20 @@ class Scene: SKScene {
     }
 
     override func keyDown(with event: NSEvent) {
-        keyPress(key: Int(event.keyCode))
+        let key = Int(event.keyCode)
+        let keyWasAlreadyPressed = TetrisManager.shared.keyController.keyIsPressed(key)
+
+        TetrisManager.shared.keyController.keyDown(with: event)
+
+        if !keyWasAlreadyPressed {
+            keyPress(key: key)
+        }
     }
-    
+
+    override func keyUp(with event: NSEvent) {
+        TetrisManager.shared.keyController.keyUp(with: event)
+    }
+
     override func update(_ currentTime: TimeInterval) {
         if viewHasAppeared {
             callGlobalUpdate()
