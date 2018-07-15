@@ -11,10 +11,6 @@ let orangebasic = texture(named: "Orangebasic")
 var fallspeed = 30
 var softdropfallspeed = 1
 
-let lNorth = Shape()
-let lSouth = Shape()
-let lEast = Shape()
-let lWest = Shape()
 
 var shape: Shape = lEast
 
@@ -166,41 +162,7 @@ func linecheck() {
 func keyPress(key: Int) {
     print("key =", key)
 }
-func createLpieces() {
-    createLnorth()
-    createLsouth()
-    createLeast()
-    createLwest()
-}
 
-func createLnorth() {
-    lNorth.texture = orangebasic
-    lNorth.addMino(mx: 0, my: 1)
-    lNorth.addMino(mx: 1, my: 1)
-    lNorth.addMino(mx: 2, my: 1)
-    lNorth.addMino(mx: 2, my: 2)
-}
-func createLsouth() {
-    lSouth.texture = orangebasic
-    lSouth.addMino(mx: 0, my: 0)
-    lSouth.addMino(mx: 0, my: 1)
-    lSouth.addMino(mx: 1, my: 1)
-    lSouth.addMino(mx: 2, my: 1)
-}
-func createLeast() {
-    lEast.texture = orangebasic
-    lEast.addMino(mx: 1, my: 1)
-    lEast.addMino(mx: 1, my: 0)
-    lEast.addMino(mx: 2, my: 0)
-    lEast.addMino(mx: 1, my: 2)
-}
-func createLwest() {
-    lWest.texture = orangebasic
-    lWest.addMino(mx: 0, my: 2)
-    lWest.addMino(mx: 1, my: 1)
-    lWest.addMino(mx: 1, my: 0)
-    lWest.addMino(mx: 1, my: 2)
-}
 // This function starts the game and must be called at the end of the file.
 start()
 

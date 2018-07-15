@@ -24,6 +24,7 @@
 		3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */; };
 		3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F920FA843100A43C21 /* Matrix.swift */; };
 		3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD3FE120FB8D6900D9EEDB /* Shape.swift */; };
+		7769072F20FBBE70003F4C57 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7769072E20FBBE70003F4C57 /* Shapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "2009 Tetris Design Guideline.pdf"; sourceTree = "<group>"; };
 		3A5F13F920FA843100A43C21 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		3AAD3FE120FB8D6900D9EEDB /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		7769072E20FBBE70003F4C57 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
 				3A5F13F520FA7D9E00A43C21 /* main.swift */,
 				3AAD3FE120FB8D6900D9EEDB /* Shape.swift */,
+				7769072E20FBBE70003F4C57 /* Shapes.swift */,
 				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
 			);
 			path = Tetris;
@@ -193,6 +196,7 @@
 				3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */,
 				3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */,
 				3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */,
+				7769072F20FBBE70003F4C57 /* Shapes.swift in Sources */,
 				3A2FB98720FADE6A00AF6592 /* KeyController.swift in Sources */,
 				3A2FB97D20FA8B4500AF6592 /* Cell.swift in Sources */,
 			);
