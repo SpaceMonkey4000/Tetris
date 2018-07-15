@@ -89,12 +89,17 @@ func fallMino() {
     }
 }
 
-//line clear func
+//line clear
 func clearline(y: Int) {
-    for x in 0..<gridSizeX {
-        clearTexture(x: x, y: y)
+    for ye in y..<gridSizeY {
+        for x in 0..<gridSizeX {
+            let texture = textureAt(x: x, y: ye + 1)
+            setTexture(texture, x: x, y: ye)
+            
+        }
     }
 }
+
 // check for line
 func linecheck() {
     for y in 0..<gridSizeY {
