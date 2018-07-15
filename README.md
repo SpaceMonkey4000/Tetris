@@ -1,3 +1,3 @@
 # Tetris
 
-![alt text](/Images/Screenshot.png "Title")
+![alt text](/Images/Screenshot-364.png "Title")
