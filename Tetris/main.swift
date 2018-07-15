@@ -46,43 +46,45 @@ func createShapes() {
     lNorth.addMino(mx: 2, my: 2)
 }
 
+func refreshSlideTimer() {
+    if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
+        stRefreshes -= 1
+        slidetimer = stickdelay
+        if stRefreshes < 1 {
+            slidetimer = 1
+        }
+    }
+}
+
 // This function is called 60 times per second.
 func update() {
     fallMino()
     softFall()
 
     if keyIsPressed(123) {
-        if !hasTextureAt(x: pantsX - 1, y: pantsY){
+        lNorth.erase(x: pantsX, y: pantsY)
+
+        if !lNorth.collides(x: pantsX - 1, y: pantsY) && !lNorth.collidesWithEdgeOfGrid(x: pantsX - 1, y: pantsY){
             if pantsX > 0 {
-                lNorth.erase(x: pantsX, y: pantsY)
                 pantsX = pantsX - 1
-                lNorth.draw(x: pantsX, y: pantsY)
             }
-            if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
-                stRefreshes -= 1
-                slidetimer = stickdelay
-                if stRefreshes < 1 {
-                    slidetimer = 1
-                }
-            }
+            refreshSlideTimer()
         }
+        lNorth.draw(x: pantsX, y: pantsY)
     }
 
     if keyIsPressed(124) {
-        if !hasTextureAt(x: pantsX + 1, y: pantsY){
+        lNorth.erase(x: pantsX, y: pantsY)
+
+        if !lNorth.collides(x: pantsX + 1, y: pantsY) && !lNorth.collidesWithEdgeOfGrid(x: pantsX + 1, y: pantsY){
             if pantsX < 9 {
-                lNorth.erase(x: pantsX, y: pantsY)
                 pantsX = pantsX + 1
-                lNorth.draw(x: pantsX, y: pantsY)
             }
+            refreshSlideTimer()
         }
-        if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
-            stRefreshes -= 1
-            slidetimer = stickdelay
-            if stRefreshes < 1 {
-                slidetimer = 1
-            }
-        }
+
+        lNorth.draw(x: pantsX, y: pantsY)
+
     }
 }
 func softFall(){
