@@ -95,3 +95,8 @@ public func textureAt(x: Int, y: Int) -> Int {
 
     return textureIndex
 }
+
+public func keyIsPressed(_ key: Int) -> Bool {
+    return TetrisManager.shared.keyController.keyIsPressed(key)
+}
+

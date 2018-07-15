@@ -12,6 +12,7 @@
 		3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FB98020FA9A3300AF6592 /* TextureAtlasController.swift */; };
 		3A2FB98320FAA1A200AF6592 /* TetrisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FB98220FAA1A200AF6592 /* TetrisAPI.swift */; };
 		3A2FB98520FABE6400AF6592 /* NSImage+Resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FB98420FABE6400AF6592 /* NSImage+Resized.swift */; };
+		3A2FB98720FADE6A00AF6592 /* KeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2FB98620FADE6A00AF6592 /* KeyController.swift */; };
 		3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13DE20FA78B900A43C21 /* AppDelegate.swift */; };
 		3A5F13E120FA78B900A43C21 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13E020FA78B900A43C21 /* GameScene.sks */; };
 		3A5F13E320FA78B900A43C21 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13E220FA78B900A43C21 /* Actions.sks */; };
@@ -30,6 +31,7 @@
 		3A2FB98020FA9A3300AF6592 /* TextureAtlasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureAtlasController.swift; sourceTree = "<group>"; };
 		3A2FB98220FAA1A200AF6592 /* TetrisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisAPI.swift; sourceTree = "<group>"; };
 		3A2FB98420FABE6400AF6592 /* NSImage+Resized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resized.swift"; sourceTree = "<group>"; };
+		3A2FB98620FADE6A00AF6592 /* KeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyController.swift; sourceTree = "<group>"; };
 		3A5F13DB20FA78B900A43C21 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5F13DE20FA78B900A43C21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A5F13E020FA78B900A43C21 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				3A5F13F920FA843100A43C21 /* Matrix.swift */,
 				3A2FB97C20FA8B4500AF6592 /* Cell.swift */,
 				3A2FB98020FA9A3300AF6592 /* TextureAtlasController.swift */,
+				3A2FB98620FADE6A00AF6592 /* KeyController.swift */,
 				3A2FB98420FABE6400AF6592 /* NSImage+Resized.swift */,
 				3A5F13EA20FA78BA00A43C21 /* Main.storyboard */,
 				3A5F13E020FA78B900A43C21 /* GameScene.sks */,
@@ -186,6 +189,7 @@
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,
 				3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */,
 				3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */,
+				3A2FB98720FADE6A00AF6592 /* KeyController.swift in Sources */,
 				3A2FB97D20FA8B4500AF6592 /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
