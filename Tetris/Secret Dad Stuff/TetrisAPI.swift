@@ -41,7 +41,7 @@ public func setTexture(_ index: Int, x: Int, y: Int) {
 
     let cell = matrix.cellAt(x: x, y: y)
     if cell == nil {
-        print("Warning: Tried to call setTexture on a cell which is out of range: x=\(x), y=\(y)")
+        // print("Warning: Tried to call setTexture on a cell which is out of range: x=\(x), y=\(y)")
         return
     }
     if index == 0 {
