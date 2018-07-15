@@ -43,9 +43,11 @@ class Shape {
     // that already exist in the grid. x and y are the position of the
     // lower left corner of the mino in the grid.
     func collides(x: Int, y: Int) -> Bool {
-        // TODO
-        // return true
-
+        for mino in minos {
+            if hasTextureAt(x: mino.mx + x, y: mino.my + y) {
+                return true
+            }
+        }
         return false
     }
 
@@ -53,10 +55,11 @@ class Shape {
     // x and y are the position of the
     // lower left corner of the mino in the grid.
     func collidesWithEdgeOfGrid(x: Int, y: Int) -> Bool {
-        // TODO
-        // return true
-
+        for mino in minos {
+            if mino.mx + x > gridSizeX - 1 || mino.mx + x < 0 || mino.my + y < 0 {
+                return true
+            }
+        }
         return false
     }
-
 }

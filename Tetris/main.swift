@@ -34,8 +34,8 @@ func first() {
 
     createShapes()
 
-    lNorth.draw(x: 0, y: 10)
-    lNorth.draw(x: 1, y: 14)
+//    lNorth.draw(x: 0, y: 10)
+//    lNorth.draw(x: 1, y: 14)
 }
 
 func createShapes() {
@@ -54,9 +54,9 @@ func update() {
     if keyIsPressed(123) {
         if !hasTextureAt(x: pantsX - 1, y: pantsY){
             if pantsX > 0 {
-                clearTexture(x: pantsX, y: pantsY)
+                lNorth.erase(x: pantsX, y: pantsY)
                 pantsX = pantsX - 1
-                setTexture(garbage, x: pantsX, y: pantsY)
+                lNorth.draw(x: pantsX, y: pantsY)
             }
             if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
                 stRefreshes -= 1
@@ -71,9 +71,9 @@ func update() {
     if keyIsPressed(124) {
         if !hasTextureAt(x: pantsX + 1, y: pantsY){
             if pantsX < 9 {
-                clearTexture(x: pantsX, y: pantsY)
+                lNorth.erase(x: pantsX, y: pantsY)
                 pantsX = pantsX + 1
-                setTexture(garbage, x: pantsX, y: pantsY)
+                lNorth.draw(x: pantsX, y: pantsY)
             }
         }
         if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
@@ -125,9 +125,9 @@ func fallMino() {
             return
         }
 
-        clearTexture(x: pantsX, y: pantsY)
+        lNorth.erase(x: pantsX, y: pantsY)
         pantsY -= 1
-        setTexture(garbage, x: pantsX, y: pantsY)
+        lNorth.draw(x: pantsX, y: pantsY)
     }
 }
 
