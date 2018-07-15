@@ -189,6 +189,12 @@ func linecheck() {
     }
     if lineScore > 0 {
         print("you cleared ",lineScore," lines!")
+        if lineScore == 4 {
+            print("Tetris!")
+        }
+        if lineScore == 5 {
+            print("Tetris plus!")
+        }
     }
 }
 
@@ -246,6 +252,11 @@ func keyPress(key: Int) {
         if keyIsPressed(3) {
             shape.erase(x: tX, y: tY)
             shape = tetrisplus
+            shape.draw (x: tX, y: tY)
+        }
+        if keyIsPressed(4) {
+            shape.erase(x: tX, y: tY)
+            shape = xPiece
             shape.draw (x: tX, y: tY)
         }
     }
