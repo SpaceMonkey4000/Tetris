@@ -50,9 +50,11 @@ let oSouth = Shape()
 let oEast = Shape()
 let oWest = Shape()
 
+//debug pieces
 let monomino = Shape()
 let instaClear = Shape()
 let tetrisplus = Shape()
+let xPiece = Shape()
 
 func createAllPieces() {
     createLpieces()
@@ -111,6 +113,7 @@ func createMiscpieces() {
     createMonoMino()
     createInstaClear()
     createTetrisPlus()
+    createXpiece()
 }
 //L pieces
 func createLnorth() {
@@ -308,9 +311,7 @@ func createIeast() {
     iEast.addMino(mx: 2, my: 1)
     iEast.addMino(mx: 2, my: 2)
     iEast.addMino(mx: 2, my: 3)
-    //iEast.addMino(mx: 2, my: 4)
-    //iEast.addMino(mx: 2, my: 5)
-    // Tetris plus?????
+
 }
 func createIwest() {
     iWest.texture = cyanbasic
@@ -342,3 +343,14 @@ func createTetrisPlus() {
     tetrisplus.addMino(mx: 1, my: 3)
     tetrisplus.addMino(mx: 1, my: 4)
 }
+//X
+
+func createXpiece() {
+    xPiece.texture = blackbasic
+    xPiece.addMino(mx: 1, my: 1)
+    xPiece.addMino(mx: 1, my: 2)
+    xPiece.addMino(mx: 0, my: 1)
+    xPiece.addMino(mx: 2, my: 1)
+    xPiece.addMino(mx: 1, my: 0)
+}
+
