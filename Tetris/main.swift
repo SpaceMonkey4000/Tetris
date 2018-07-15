@@ -33,6 +33,7 @@ let stMaxRefreshes = 99999
 
 let debugTools = 1
 
+var rng1 = 0
 
 createAllPieces()
 
@@ -110,6 +111,12 @@ func softFall(){
     }
 }
 func spawnMino(){
+    generateRandomPiece()
+    rng1 = random(min: 0, max: 6)
+    if rng1 == 0 {
+        
+    }
+
     slidetimer = stickdelay
     tX = 3
     tY = gridSizeY - 4
@@ -226,7 +233,32 @@ func keyPress(key: Int) {
         }
     }
 }
+func generateRandomPiece() {
+    if rng1 == 0 {
+        shape = lNorth
+    }
+    if rng1 == 1 {
+        shape = jNorth
+    }
+    if rng1 == 2 {
+        shape = tNorth
+    }
+    if rng1 == 3 {
+        shape = sNorth
+    }
+    if rng1 == 4 {
+        shape = zNorth
+    }
+    if rng1 == 5 {
+        shape = oNorth
+    }
+    if rng1 == 6 {
+        shape = iNorth
+    }
+    
+}
 
 // This function starts the game and must be called at the end of the file.
 start()
+
 
