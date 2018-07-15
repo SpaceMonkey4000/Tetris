@@ -8,6 +8,7 @@ let hiddenMatrixRows = 3.8
 
 let garbage = texture(named: "Garbageicon")
 var fallspeed = 40
+var softdropfallspeed = 2
 
 var fallCounter = 0
 var pantsX = 0
@@ -31,13 +32,25 @@ func first() {
 func update() {
     fallMino()
     print(slidetimer)
-
-    if keyIsPressed(0) {
-        // The 'a' key is held down.
+    
+    if keyIsPressed(123) {
+        if !hasTextureAt(x: pantsX - 1, y: pantsY){
+            if pantsX > 0 {
+                clearTexture(x: pantsX, y: pantsY)
+                pantsX = pantsX - 1
+                setTexture(garbage, x: pantsX, y: pantsY)
+            }
+        }
     }
-
-    if keyIsPressed(1) {
-        // The 's' key is held down.
+    
+    if keyIsPressed(124) {
+        if !hasTextureAt(x: pantsX + 1, y: pantsY){
+            if pantsX < 9 {
+                clearTexture(x: pantsX, y: pantsY)
+                pantsX = pantsX + 1
+                setTexture(garbage, x: pantsX, y: pantsY)
+            }
+        }
     }
 }
 
@@ -55,7 +68,12 @@ func fallMino() {
     }
     fallCounter -= 1
     if fallCounter < 0 {
-        fallCounter = fallspeed
+        if keyIsPressed(125){
+        fallCounter = softdropfallspeed
+        }
+        if !keyIsPressed(125){
+            fallCounter = fallspeed
+        }
         
         if hasTextureAt(x: pantsX, y: pantsY - 1) {
             if slidetimer == 1 {
