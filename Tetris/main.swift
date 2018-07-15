@@ -12,6 +12,11 @@ var fallspeed = 30
 var softdropfallspeed = 1
 
 let lNorth = Shape()
+let lSouth = Shape()
+let lEast = Shape()
+let lWest = Shape()
+
+var shape: Shape = lEast
 
 var fallCounter = 0
 var pantsX = 0
@@ -39,11 +44,7 @@ func first() {
 }
 
 func createShapes() {
-    lNorth.texture = orangebasic
-    lNorth.addMino(mx: 0, my: 1)
-    lNorth.addMino(mx: 1, my: 1)
-    lNorth.addMino(mx: 2, my: 1)
-    lNorth.addMino(mx: 2, my: 2)
+    createLpieces()
 }
 
 func refreshSlideTimer() {
@@ -64,28 +65,24 @@ func update() {
     softFall()
 //leftarrow
     if keyIsPressed(123) {
-        lNorth.erase(x: pantsX, y: pantsY)
-
-        if !lNorth.collides(x: pantsX - 1, y: pantsY) && !lNorth.collidesWithEdgeOfGrid(x: pantsX - 1, y: pantsY){
-            if pantsX > 0 {
-                pantsX = pantsX - 1
-            }
+        shape.erase(x: pantsX, y: pantsY)
+        
+        if !shape.collides(x: pantsX - 1, y: pantsY) && !shape.collidesWithEdgeOfGrid(x: pantsX - 1, y: pantsY){
+            pantsX = pantsX - 1
             refreshSlideTimer()
         }
-        lNorth.draw(x: pantsX, y: pantsY)
+        shape.draw(x: pantsX, y: pantsY)
     }
 //rightarrow
     if keyIsPressed(124) {
-        lNorth.erase(x: pantsX, y: pantsY)
+        shape.erase(x: pantsX, y: pantsY)
 
-        if !lNorth.collides(x: pantsX + 1, y: pantsY) && !lNorth.collidesWithEdgeOfGrid(x: pantsX + 1, y: pantsY){
-            if pantsX < gridSizeX - 1 {
-                pantsX = pantsX + 1
-            }
+        if !shape.collides(x: pantsX + 1, y: pantsY) && !shape.collidesWithEdgeOfGrid(x: pantsX + 1, y: pantsY){
+            pantsX = pantsX + 1
             refreshSlideTimer()
         }
 
-        lNorth.draw(x: pantsX, y: pantsY)
+        shape.draw(x: pantsX, y: pantsY)
 
     }
 }
@@ -106,9 +103,9 @@ func spawnMino(){
 }
 
 func fallMino() {
-    lNorth.erase(x: pantsX, y: pantsY)
+    shape.erase(x: pantsX, y: pantsY)
 
-    if lNorth.collides(x: pantsX, y: pantsY - 1) || lNorth.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
+    if shape.collides(x: pantsX, y: pantsY - 1) || shape.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
         if slidetimer>1 {
             slidetimer = slidetimer - 1
         }
@@ -122,8 +119,8 @@ func fallMino() {
             fallCounter = fallspeed
         }
 
-        if lNorth.collides(x: pantsX, y: pantsY - 1) || lNorth.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
-            lNorth.draw(x: pantsX, y: pantsY)
+        if shape.collides(x: pantsX, y: pantsY - 1) || shape.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
+            shape.draw(x: pantsX, y: pantsY)
             
             if slidetimer < 2 {
                 linecheck()
@@ -135,7 +132,7 @@ func fallMino() {
         pantsY -= 1
     }
     
-    lNorth.draw(x: pantsX, y: pantsY)
+    shape.draw(x: pantsX, y: pantsY)
 }
 
 //line clear
@@ -169,8 +166,41 @@ func linecheck() {
 func keyPress(key: Int) {
     print("key =", key)
 }
+func createLpieces() {
+    createLnorth()
+    createLsouth()
+    createLeast()
+    createLwest()
+}
 
-
+func createLnorth() {
+    lNorth.texture = orangebasic
+    lNorth.addMino(mx: 0, my: 1)
+    lNorth.addMino(mx: 1, my: 1)
+    lNorth.addMino(mx: 2, my: 1)
+    lNorth.addMino(mx: 2, my: 2)
+}
+func createLsouth() {
+    lSouth.texture = orangebasic
+    lSouth.addMino(mx: 0, my: 0)
+    lSouth.addMino(mx: 0, my: 1)
+    lSouth.addMino(mx: 1, my: 1)
+    lSouth.addMino(mx: 2, my: 1)
+}
+func createLeast() {
+    lEast.texture = orangebasic
+    lEast.addMino(mx: 1, my: 1)
+    lEast.addMino(mx: 1, my: 0)
+    lEast.addMino(mx: 2, my: 0)
+    lEast.addMino(mx: 1, my: 2)
+}
+func createLwest() {
+    lWest.texture = orangebasic
+    lWest.addMino(mx: 0, my: 2)
+    lWest.addMino(mx: 1, my: 1)
+    lWest.addMino(mx: 1, my: 0)
+    lWest.addMino(mx: 1, my: 2)
+}
 // This function starts the game and must be called at the end of the file.
 start()
 
