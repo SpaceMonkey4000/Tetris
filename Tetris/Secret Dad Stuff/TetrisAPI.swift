@@ -89,7 +89,7 @@ public func textureAt(x: Int, y: Int) -> Int {
     }
 
     guard let cell = matrix.cellAt(x: x, y: y) else {
-        print("Warning: Tried to call textureAt on a cell which is out of range: x=\(x), y=\(y)")
+        // print("Warning: Tried to call textureAt on a cell which is out of range: x=\(x), y=\(y)")
         return 0
     }
 
