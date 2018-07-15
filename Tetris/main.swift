@@ -12,7 +12,7 @@ var softdropfallspeed = 2
 
 let garbage = texture(named: "Garbageicon")
 
-var shape: Shape = zWest
+var shape: Shape = iEast
 
 var fallCounter = 0
 var tX = 0
@@ -26,15 +26,22 @@ var softdropCounter = 0
 
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
-
+var nextItem: Shape = iEast
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
+
+let debugTools = 1
+
+var rng1 = 0
+
 
 createAllPieces()
 
 // This function is called once, before the game starts.
 func first() {
+    generateNextItem()
+    print("Next mino is: ",nextItem)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
@@ -96,7 +103,6 @@ func update() {
         }
     }
     
-    
 }
 func softFall(){
     softfallcounter -= 1
@@ -108,6 +114,11 @@ func softFall(){
     }
 }
 func spawnMino(){
+    shape = nextItem
+    generateNextItem()
+    print("Next mino is: ",nextItem)
+    
+
     slidetimer = stickdelay
     tX = 3
     tY = gridSizeY - 4
@@ -217,9 +228,40 @@ func keyPress(key: Int) {
         slidetimer = 0
         stRefreshes = 0
     }
-        
+    if debugTools == 1 {
+        if keyIsPressed(0) {
+            shape.erase(x: tX, y: tY)
+                spawnMino()
+        }
+    }
+}
+func generateNextItem() {
+    rng1 = random(min: 0, max: 6)
+    if rng1 == 0 {
+        nextItem = lNorth
+    }
+    if rng1 == 1 {
+        nextItem = jNorth
+    }
+    if rng1 == 2 {
+        nextItem = tNorth
+    }
+    if rng1 == 3 {
+        nextItem = sNorth
+    }
+    if rng1 == 4 {
+        nextItem = zNorth
+    }
+    if rng1 == 5 {
+        nextItem = oNorth
+    }
+    if rng1 == 6 {
+        nextItem = iNorth
+    }
+    
 }
 
 // This function starts the game and must be called at the end of the file.
 start()
+
 
