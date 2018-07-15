@@ -15,6 +15,11 @@ let bluebasic = texture(named: "Bluebasic")
 let yellowbasic = texture(named: "Yellowbasic")
 let cyanbasic = texture(named: "Cyanbasic")
 let purplebasic = texture(named: "Purplebasic")
+let pinkbasic = texture(named: "Pinkbasic")
+let blackbasic = texture(named: "Blackbasic")
+let whitebasic = texture(named: "Whitebasic")
+let bloodbasic = texture(named: "Bloodbasic")
+let brownbasic = texture(named: "Brownbasic")
 
 let lNorth = Shape()
 let lSouth = Shape()
@@ -45,6 +50,12 @@ let oSouth = Shape()
 let oEast = Shape()
 let oWest = Shape()
 
+//debug pieces
+let monomino = Shape()
+let instaClear = Shape()
+let tetrisplus = Shape()
+let xPiece = Shape()
+
 func createAllPieces() {
     createLpieces()
     createIpieces()
@@ -53,6 +64,7 @@ func createAllPieces() {
     createTpieces()
     createZpieces()
     createSpieces()
+    createMiscpieces()
 }
 
 func createLpieces() {
@@ -96,6 +108,12 @@ func createOpieces() {
     createOsouth()
     createOeast()
     createOwest()
+}
+func createMiscpieces() {
+    createMonoMino()
+    createInstaClear()
+    createTetrisPlus()
+    createXpiece()
 }
 //L pieces
 func createLnorth() {
@@ -293,9 +311,7 @@ func createIeast() {
     iEast.addMino(mx: 2, my: 1)
     iEast.addMino(mx: 2, my: 2)
     iEast.addMino(mx: 2, my: 3)
-    //iEast.addMino(mx: 2, my: 4)
-    //iEast.addMino(mx: 2, my: 5)
-    // Tetris plus?????
+
 }
 func createIwest() {
     iWest.texture = cyanbasic
@@ -304,3 +320,37 @@ func createIwest() {
     iWest.addMino(mx: 1, my: 2)
     iWest.addMino(mx: 1, my: 3)
 }
+//monomino
+func createMonoMino() {
+    monomino.texture = garbage
+    monomino.addMino(mx: 0, my: 0)
+}
+//instaclear
+func createInstaClear() {
+    instaClear.texture = whitebasic
+    for y in 0..<20 {
+        for x in 0..<30 {
+            instaClear.addMino(mx: x - 15, my: y - 10)
+        }
+    }
+}
+//tetris plus
+func createTetrisPlus() {
+    tetrisplus.texture = bloodbasic
+    tetrisplus.addMino(mx: 1, my: 0)
+    tetrisplus.addMino(mx: 1, my: 1)
+    tetrisplus.addMino(mx: 1, my: 2)
+    tetrisplus.addMino(mx: 1, my: 3)
+    tetrisplus.addMino(mx: 1, my: 4)
+}
+//X
+
+func createXpiece() {
+    xPiece.texture = blackbasic
+    xPiece.addMino(mx: 1, my: 1)
+    xPiece.addMino(mx: 1, my: 2)
+    xPiece.addMino(mx: 0, my: 1)
+    xPiece.addMino(mx: 2, my: 1)
+    xPiece.addMino(mx: 1, my: 0)
+}
+

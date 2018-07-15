@@ -26,7 +26,7 @@ var softdropCounter = 0
 
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
-var nextItem: Shape = iEast
+var nextItem: Shape = monomino
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
@@ -233,31 +233,44 @@ func keyPress(key: Int) {
             shape.erase(x: tX, y: tY)
                 spawnMino()
         }
+        if keyIsPressed(1) {
+            shape.erase(x: tX, y: tY)
+            shape = monomino
+            shape.draw (x: tX, y: tY)
+        }
+        if keyIsPressed(2) {
+            shape.erase(x: tX, y: tY)
+            shape = instaClear
+            shape.draw (x: tX, y: tY)
+        }
+        if keyIsPressed(3) {
+            shape.erase(x: tX, y: tY)
+            shape = tetrisplus
+            shape.draw (x: tX, y: tY)
+        }
     }
 }
 func generateNextItem() {
     rng1 = random(min: 0, max: 6)
-    if rng1 == 0 {
-        nextItem = lNorth
+        switch rng1 {
+        case 0:
+            nextItem = iNorth
+        case 1:
+            nextItem = tNorth
+        case 2:
+            nextItem = oNorth
+        case 3:
+            nextItem = lNorth
+        case 4:
+            nextItem = jNorth
+        case 5:
+            nextItem = sNorth
+        case 6:
+            nextItem = zNorth
+        default:
+            nextItem = monomino
     }
-    if rng1 == 1 {
-        nextItem = jNorth
-    }
-    if rng1 == 2 {
-        nextItem = tNorth
-    }
-    if rng1 == 3 {
-        nextItem = sNorth
-    }
-    if rng1 == 4 {
-        nextItem = zNorth
-    }
-    if rng1 == 5 {
-        nextItem = oNorth
-    }
-    if rng1 == 6 {
-        nextItem = iNorth
-    }
+
     
 }
 
@@ -265,3 +278,23 @@ func generateNextItem() {
 start()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//hello
