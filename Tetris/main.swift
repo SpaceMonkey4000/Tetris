@@ -28,7 +28,7 @@ func first() {
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<5 {
+    for a in 0..<7 {
         setTexture(garbage, x: a, y: 0)
     }
 
@@ -58,9 +58,11 @@ func refreshSlideTimer() {
 
 // This function is called 60 times per second.
 func update() {
+    print("slidetimer=",slidetimer)
+    print("refreshes=",stRefreshes)
     fallMino()
     softFall()
-
+//leftarrow
     if keyIsPressed(123) {
         lNorth.erase(x: pantsX, y: pantsY)
 
@@ -72,12 +74,12 @@ func update() {
         }
         lNorth.draw(x: pantsX, y: pantsY)
     }
-
+//rightarrow
     if keyIsPressed(124) {
         lNorth.erase(x: pantsX, y: pantsY)
 
         if !lNorth.collides(x: pantsX + 1, y: pantsY) && !lNorth.collidesWithEdgeOfGrid(x: pantsX + 1, y: pantsY){
-            if pantsX < 9 {
+            if pantsX < gridSizeX - 1 {
                 pantsX = pantsX + 1
             }
             refreshSlideTimer()
@@ -99,14 +101,14 @@ func softFall(){
 func spawnMino(){
     slidetimer = stickdelay
     pantsX = 5
-    pantsY = gridSizeY - 3
+    pantsY = gridSizeY - 7
     stRefreshes = stMaxRefreshes
 }
 
 func fallMino() {
-    print ("STrefreshes =", stRefreshes)
-    print ("Slidetimer =",slidetimer)
-    if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
+    lNorth.erase(x: pantsX, y: pantsY)
+
+    if lNorth.collides(x: pantsX, y: pantsY - 1) || lNorth.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
         if slidetimer>1 {
             slidetimer = slidetimer - 1
         }
@@ -120,17 +122,20 @@ func fallMino() {
             fallCounter = fallspeed
         }
 
-        if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
-            if slidetimer == 1 {
+        if lNorth.collides(x: pantsX, y: pantsY - 1) || lNorth.collidesWithEdgeOfGrid(x: pantsX, y: pantsY - 1){
+            lNorth.draw(x: pantsX, y: pantsY)
+            
+            if slidetimer < 2 {
                 linecheck()
+                spawnMino()
             }
             return
         }
-
-        lNorth.erase(x: pantsX, y: pantsY)
+        
         pantsY -= 1
-        lNorth.draw(x: pantsX, y: pantsY)
     }
+    
+    lNorth.draw(x: pantsX, y: pantsY)
 }
 
 //line clear
@@ -158,7 +163,6 @@ func linecheck() {
             clearline(y: y)
         }
     }
-    spawnMino()
 }
 
 // This function is called whenever the user presses a key.
