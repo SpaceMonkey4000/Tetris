@@ -18,7 +18,8 @@ class TextureAtlasController {
 
     private var indexToTextureArray: [SKTexture] = []
 
-    private var indexCount = 0
+    // We start with index 1, since index 0 represents the absence of a texture.
+    private var indexCount = 1
 
     public func addTexture(name: String, image: NSImage) -> Int {
         print("Adding texture: \(name)")
@@ -43,7 +44,8 @@ class TextureAtlasController {
 
         textureAtlas = SKTextureAtlas(dictionary: nameToImageDictionary)
 
-        for index in 0..<indexCount {
+        // We skip 0 because it does not correspond to a texture.
+        for index in 1..<indexCount {
             guard let name = indexToNameDictionary[index] else {
                 print("Error: Could not find texture with index: \(index)")
                 fatalError()
@@ -53,6 +55,8 @@ class TextureAtlasController {
     }
 
     public func texture(withIndex index: Int) -> SKTexture? {
+        let index = index - 1
+
         guard index >= 0 && index < indexToTextureArray.count else {
             return nil
         }
