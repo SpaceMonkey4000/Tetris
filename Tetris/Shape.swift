@@ -46,4 +46,14 @@ class Shape {
         return false
     }
 
+    // Returns true if the mino collides with the edge of the grid.
+    // x and y are the position of the
+    // lower left corner of the mino in the grid.
+    func collidesWithEdgeOfGrid(x: Int, y: Int) -> Bool {
+        // TODO
+        // return true
+
+        return false
+    }
+
 }
