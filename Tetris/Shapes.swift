@@ -16,6 +16,7 @@ let yellowbasic = texture(named: "Yellowbasic")
 let cyanbasic = texture(named: "Cyanbasic")
 let purplebasic = texture(named: "Purplebasic")
 
+
 let lNorth = Shape()
 let lSouth = Shape()
 let lEast = Shape()
@@ -44,6 +45,7 @@ let oNorth = Shape()
 let oSouth = Shape()
 let oEast = Shape()
 let oWest = Shape()
+let monomino = Shape()
 
 func createAllPieces() {
     createLpieces()
@@ -53,6 +55,7 @@ func createAllPieces() {
     createTpieces()
     createZpieces()
     createSpieces()
+    createMiscpieces()
 }
 
 func createLpieces() {
@@ -96,6 +99,9 @@ func createOpieces() {
     createOsouth()
     createOeast()
     createOwest()
+}
+func createMiscpieces() {
+    createMonoMino()
 }
 //L pieces
 func createLnorth() {
@@ -303,4 +309,8 @@ func createIwest() {
     iWest.addMino(mx: 1, my: 1)
     iWest.addMino(mx: 1, my: 2)
     iWest.addMino(mx: 1, my: 3)
+}
+//monomino
+func createMonoMino() {
+    monomino.addMino(mx: 0, my: 0)
 }

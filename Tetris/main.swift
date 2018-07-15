@@ -1,7 +1,7 @@
 
 // Size of the grid in cells.
-let gridSizeX = 10
-let gridSizeY = 24
+let gridSizeX = 20
+let gridSizeY = 20
 
 // The number of rows that are hidden beyond the top of the screen.
 let hiddenMatrixRows = 3.8
@@ -238,25 +238,25 @@ func keyPress(key: Int) {
 func generateNextItem() {
     rng1 = random(min: 0, max: 6)
     if rng1 == 0 {
-        nextItem = lNorth
+        switch rng1 {
+        case 0:
+            nextItem = iNorth
+        case 1:
+            nextItem = tNorth
+        case 2:
+            nextItem = oNorth
+        case 3:
+            nextItem = lNorth
+        case 4:
+            nextItem = jNorth
+        case 5:
+            nextItem = sNorth
+        case 6:
+            nextItem = zNorth
+        default:
+            print ("oops!")
     }
-    if rng1 == 1 {
-        nextItem = jNorth
-    }
-    if rng1 == 2 {
-        nextItem = tNorth
-    }
-    if rng1 == 3 {
-        nextItem = sNorth
-    }
-    if rng1 == 4 {
-        nextItem = zNorth
-    }
-    if rng1 == 5 {
-        nextItem = oNorth
-    }
-    if rng1 == 6 {
-        nextItem = iNorth
+
     }
     
 }
