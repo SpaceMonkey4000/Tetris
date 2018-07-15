@@ -6,11 +6,11 @@ let gridSizeY = 24
 // The number of rows that are hidden beyond the top of the scren.
 let hiddenMatrixRows = 3.8
 var softfallcounter = 0
-let garbage = texture(named: "Garbageicon")
-let orangebasic = texture(named: "Orangebasic")
+
 var fallspeed = 30
 var softdropfallspeed = 1
 
+let garbage = texture(named: "Garbageicon")
 
 var shape: Shape = lEast
 
