@@ -6,41 +6,60 @@ let gridSizeY = 24
 // The number of rows that are hidden beyond the top of the scren.
 let hiddenMatrixRows = 3.8
 
-let Garbage = texture(named: "Garbageicon")
-var fallspeed = 20
+let garbage = texture(named: "Garbageicon")
+var fallspeed = 5
 
 var fallCounter = 0
-var pantsX = 2
-var pantsY = gridSizeY - 1
+var pantsX = 0
+var pantsY = 0
+var slidetimer = 0
+
 
 // This function is called once, before the game starts.
 func first() {
+    spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
     for a in 0..<10 {
-        setTexture(Garbage, x: a, y: 0)
+        setTexture(garbage, x: a, y: 0)
     }
-
-
+    
+    
 }
 
 // This function is called 60 times per second.
 func update() {
     fallMino()
+    print(slidetimer)
+    if hasTextureAt(x: pantsX, y: pantsY - 1) {
+        if slidetimer>1 {
+            slidetimer = slidetimer - 1
+        }
+    }
+}
+
+func spawnMino(){
+    slidetimer = 350
+    pantsX = 5
+    pantsY = gridSizeY - 3
 }
 
 func fallMino() {
     fallCounter -= 1
     if fallCounter < 0 {
         fallCounter = fallspeed
-
+        
         if hasTextureAt(x: pantsX, y: pantsY - 1) {
+            
+            if slidetimer == 1 {
+                spawnMino()
+            }
             return
         }
-
+        
         clearTexture(x: pantsX, y: pantsY)
         pantsY -= 1
-        setTexture(Garbage, x: pantsX, y: pantsY)
+        setTexture(garbage, x: pantsX, y: pantsY)
     }
 }
 
