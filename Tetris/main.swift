@@ -31,11 +31,7 @@ func first() {
 func update() {
     fallMino()
     print(slidetimer)
-    if hasTextureAt(x: pantsX, y: pantsY - 1) {
-        if slidetimer>1 {
-            slidetimer = slidetimer - 1
-        }
-    }
+
 }
 
 func spawnMino(){
@@ -45,6 +41,11 @@ func spawnMino(){
 }
 
 func fallMino() {
+    if hasTextureAt(x: pantsX, y: pantsY - 1) {
+        if slidetimer>1 {
+            slidetimer = slidetimer - 1
+        }
+    }
     fallCounter -= 1
     if fallCounter < 0 {
         fallCounter = fallspeed
