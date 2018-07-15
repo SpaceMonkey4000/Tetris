@@ -294,15 +294,3 @@ func createIwest() {
     iWest.addMino(mx: 1, my: 2)
     iWest.addMino(mx: 1, my: 3)
 }
-
-
-
-
-
-
-
-
-
-
-
-

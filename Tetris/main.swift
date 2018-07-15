@@ -110,7 +110,7 @@ func softFall(){
 func spawnMino(){
     slidetimer = stickdelay
     tX = 3
-    tY = gridSizeY - 7
+    tY = gridSizeY - 4
     stRefreshes = stMaxRefreshes
 }
 
@@ -182,7 +182,6 @@ func linecheck() {
 }
 
 // This function is called whenever the user presses a key.
-//spacebar is 49
 func keyPress(key: Int) {
     //leftarrow
     if keyIsPressed(123) {
@@ -208,6 +207,17 @@ func keyPress(key: Int) {
         shape.draw(x: tX, y: tY)
         
     }
+    //spacebar (harddrop)
+    if keyIsPressed(49) {
+        shape.erase(x: tX, y: tY)
+        while !shape.collides(x: tX, y: tY - 1) && !shape.collidesWithEdgeOfGrid(x: tX, y: tY - 1){
+            tY = tY - 1
+        }
+        shape.draw(x: tX, y: tY)
+        slidetimer = 0
+        stRefreshes = 0
+    }
+        
 }
 
 // This function starts the game and must be called at the end of the file.
