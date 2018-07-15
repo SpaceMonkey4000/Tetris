@@ -56,7 +56,8 @@ class Tetromino {
     // corresponding to the value of direction.
 
     private func draw(x: Int, y: Int, direction: Int) {
-        shapes[direction].draw(x: x, y: y)
+        let shape = shapes[direction]
+        shape.draw(x: x, y: y)
     }
 
     private func erase(x: Int, y: Int, direction: Int) {
@@ -91,8 +92,11 @@ class Tetromino {
 
     // Adds the tetromino to the grid at a location.
     // We'll call this once when the tetromino is created, and then never again.
-    func addToGridAt(x: Int, y: Int) {
-        // TODO
+    func addToGridAt(x: Int, y: Int, direction: Int) {
+        self.x = x
+        self.y = y
+        self.direction = direction
+        // TODO: Draw the tetromino.
     }
 
     // Removes the tetromino from the grid. We'll call this if we want to
