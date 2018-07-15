@@ -104,3 +104,9 @@ public func keyIsPressed(_ key: Int) -> Bool {
     return TetrisManager.shared.keyController.keyIsPressed(key)
 }
 
+public func random(min: Int, max: Int) -> Int {
+    if min > max {
+        print("Error: Invalid random number range: min=\(min), max=\(max)")
+    }
+    return Int(arc4random()) % (max - min + 1) + min
+}
