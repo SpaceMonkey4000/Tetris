@@ -12,7 +12,7 @@ var softdropfallspeed = 2
 
 let garbage = texture(named: "Garbageicon")
 
-var shape: Shape = tNorth
+var shape: Shape = zWest
 
 var fallCounter = 0
 var tX = 0
@@ -29,16 +29,16 @@ var dirCounter2 = 0
 
 
 var stRefreshes = 0
-let stMaxRefreshes = 15
+let stMaxRefreshes = 99999
 
-createTpieces()
+createAllPieces()
 
 // This function is called once, before the game starts.
 func first() {
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<0 {
+    for a in 0..<10 {
         setTexture(garbage, x: a, y: 0)
     }
 
