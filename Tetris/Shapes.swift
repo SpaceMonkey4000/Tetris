@@ -45,6 +45,16 @@ let oSouth = Shape()
 let oEast = Shape()
 let oWest = Shape()
 
+func createAllPieces() {
+    createLpieces()
+    createIpieces()
+    createJpieces()
+    createOpieces()
+    createTpieces()
+    createZpieces()
+    createSpieces()
+}
+
 func createLpieces() {
     createLnorth()
     createLsouth()
