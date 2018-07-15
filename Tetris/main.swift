@@ -7,13 +7,13 @@ let gridSizeY = 24
 let hiddenMatrixRows = 3.8
 
 let garbage = texture(named: "Garbageicon")
-var fallspeed = 5
+var fallspeed = 40
 
 var fallCounter = 0
 var pantsX = 0
 var pantsY = 0
 var slidetimer = 0
-
+var stickdelay = 60
 
 // This function is called once, before the game starts.
 func first() {
@@ -39,7 +39,7 @@ func update() {
 }
 
 func spawnMino(){
-    slidetimer = 350
+    slidetimer = stickdelay
     pantsX = 5
     pantsY = gridSizeY - 3
 }
@@ -50,7 +50,6 @@ func fallMino() {
         fallCounter = fallspeed
         
         if hasTextureAt(x: pantsX, y: pantsY - 1) {
-            
             if slidetimer == 1 {
                 spawnMino()
             }
