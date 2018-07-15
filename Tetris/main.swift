@@ -10,6 +10,8 @@ let garbage = texture(named: "Garbageicon")
 var fallspeed = 30
 var softdropfallspeed = 1
 
+let lNorth = Shape()
+
 var fallCounter = 0
 var pantsX = 0
 var pantsY = 0
@@ -28,15 +30,26 @@ func first() {
     for a in 0..<5 {
         setTexture(garbage, x: a, y: 0)
     }
-    
-    
+
+    createShapes()
+
+    lNorth.draw(x: 0, y: 10)
+    lNorth.draw(x: 1, y: 14)
+}
+
+func createShapes() {
+    lNorth.texture = garbage
+    lNorth.addMino(mx: 0, my: 1)
+    lNorth.addMino(mx: 1, my: 1)
+    lNorth.addMino(mx: 2, my: 1)
+    lNorth.addMino(mx: 2, my: 2)
 }
 
 // This function is called 60 times per second.
 func update() {
     fallMino()
     softFall()
-    
+
     if keyIsPressed(123) {
         if !hasTextureAt(x: pantsX - 1, y: pantsY){
             if pantsX > 0 {
@@ -53,7 +66,7 @@ func update() {
             }
         }
     }
-    
+
     if keyIsPressed(124) {
         if !hasTextureAt(x: pantsX + 1, y: pantsY){
             if pantsX < 9 {
@@ -103,14 +116,14 @@ func fallMino() {
         if !keyIsPressed(125){
             fallCounter = fallspeed
         }
-        
+
         if hasTextureAt(x: pantsX, y: pantsY - 1) || pantsY == 0{
             if slidetimer == 1 {
                 linecheck()
             }
             return
         }
-        
+
         clearTexture(x: pantsX, y: pantsY)
         pantsY -= 1
         setTexture(garbage, x: pantsX, y: pantsY)
@@ -123,7 +136,7 @@ func clearline(y: Int) {
         for x in 0..<gridSizeX {
             let texture = textureAt(x: x, y: ye + 1)
             setTexture(texture, x: x, y: ye)
-            
+
         }
     }
 }
@@ -136,7 +149,7 @@ func linecheck() {
             if hasTextureAt (x: x, y: y) {
                 tilesinline += 1
             }
-            
+
         }
         if tilesinline == gridSizeX {
             clearline(y: y)

@@ -23,6 +23,7 @@
 		3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F520FA7D9E00A43C21 /* main.swift */; };
 		3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */; };
 		3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F920FA843100A43C21 /* Matrix.swift */; };
+		3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD3FE120FB8D6900D9EEDB /* Shape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		3A5F13F520FA7D9E00A43C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "2009 Tetris Design Guideline.pdf"; sourceTree = "<group>"; };
 		3A5F13F920FA843100A43C21 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		3AAD3FE120FB8D6900D9EEDB /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
 				3A5F13F520FA7D9E00A43C21 /* main.swift */,
+				3AAD3FE120FB8D6900D9EEDB /* Shape.swift */,
 				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
 			);
 			path = Tetris;
@@ -187,6 +190,7 @@
 				3A5F13E520FA78B900A43C21 /* Scene.swift in Sources */,
 				3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */,
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,
+				3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */,
 				3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */,
 				3A5F13DF20FA78B900A43C21 /* AppDelegate.swift in Sources */,
 				3A2FB98720FADE6A00AF6592 /* KeyController.swift in Sources */,
