@@ -26,7 +26,7 @@ var softdropCounter = 0
 
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
-
+var nextItem: Shape = iEast
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
@@ -35,10 +35,13 @@ let debugTools = 1
 
 var rng1 = 0
 
+
 createAllPieces()
 
 // This function is called once, before the game starts.
 func first() {
+    generateNextItem()
+    print("Next mino is: ",nextItem)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
@@ -111,11 +114,10 @@ func softFall(){
     }
 }
 func spawnMino(){
-    generateRandomPiece()
-    rng1 = random(min: 0, max: 6)
-    if rng1 == 0 {
-        
-    }
+    shape = nextItem
+    generateNextItem()
+    print("Next mino is: ",nextItem)
+    
 
     slidetimer = stickdelay
     tX = 3
@@ -233,27 +235,28 @@ func keyPress(key: Int) {
         }
     }
 }
-func generateRandomPiece() {
+func generateNextItem() {
+    rng1 = random(min: 0, max: 6)
     if rng1 == 0 {
-        shape = lNorth
+        nextItem = lNorth
     }
     if rng1 == 1 {
-        shape = jNorth
+        nextItem = jNorth
     }
     if rng1 == 2 {
-        shape = tNorth
+        nextItem = tNorth
     }
     if rng1 == 3 {
-        shape = sNorth
+        nextItem = sNorth
     }
     if rng1 == 4 {
-        shape = zNorth
+        nextItem = zNorth
     }
     if rng1 == 5 {
-        shape = oNorth
+        nextItem = oNorth
     }
     if rng1 == 6 {
-        shape = iNorth
+        nextItem = iNorth
     }
     
 }
