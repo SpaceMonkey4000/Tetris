@@ -78,7 +78,7 @@ func update() {
         if dirCounter > 14 {
             dirCounter2 += 1
             if dirCounter2 > autoRepeatSpeed {
-                tetromino.moveBy(dx: -1, dy: 0, dir: 0)
+                tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
                 refreshSlideTimer()
                 dirCounter2 = 0
             }
@@ -90,7 +90,7 @@ func update() {
         if dirCounter > 14 {
             dirCounter2 += 1
             if dirCounter2 > autoRepeatSpeed {
-                tetromino.moveBy(dx: 1, dy: 0, dir: 0)
+                tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
                 dirCounter2 = 0
             }
         }
@@ -113,7 +113,7 @@ func spawnMino(){
     
 
     slidetimer = stickdelay
-    tetromino.addToGridAt(x: 3, y: gridSizeY - 7, direction: 0)
+    tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     stRefreshes = stMaxRefreshes
 }
 
@@ -140,7 +140,7 @@ func fallMino() {
             return
         }
         
-        tetromino.moveBy(dx: 0, dy: -1, dir: 0)
+        tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
     }
     
 }
@@ -191,7 +191,7 @@ func keyPress(key: Int) {
     if keyIsPressed(123) {
         dirCounter = 0
         if !tetromino.blockLeft(){
-            tetromino.moveBy(dx: -1, dy: 0, dir: 0)
+            tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
             refreshSlideTimer()
         }
 
@@ -200,10 +200,19 @@ func keyPress(key: Int) {
     if keyIsPressed(124) {
         dirCounter = 0
         if !tetromino.blockRight(){
-            tetromino.moveBy(dx: 1, dy: 0, dir: 0)
+            tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
             refreshSlideTimer()
         }
 
+    }
+    
+    //rotateright   UP                   X
+    if keyIsPressed(126) || keyIsPressed(7){
+        tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
+    }
+    //rotateleft    Z
+    if keyIsPressed(6){
+        tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
     }
     
 //    if debugTools == 1 {

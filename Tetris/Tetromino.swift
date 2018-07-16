@@ -130,20 +130,20 @@ class Tetromino {
     }
 
     // Move the tetromino.
-    func moveBy(dx: Int, dy: Int, dir: Int) {
-        //assert(canMoveBy(dx: dx, dy: dy, dir: dir))
-        if canMoveBy(dx: dx, dy: dy, dir: dir) {
-            self.erase(x: self.x, y: self.y, direction: dir)
+    func moveBy(dx: Int, dy: Int, ddirection: Int) {
+//        assert(canMoveBy(dx: dx, dy: dy, ddir: ddir))
+        if canMoveBy(dx: dx, dy: dy, dir: ddirection) {
+            self.erase(x: self.x, y: self.y, direction: self.direction)
             
-            if dir == 1 {
+            if ddirection == 1 {
                 direction = getClockwiseDirection()
             }
-            if dir == -1 {
+            if ddirection == -1 {
                 direction = getCounterclockwiseDirection()
             }
             self.x += dx
             self.y += dy
-            self.draw(x: self.x, y: self.y, direction: dir)
+            self.draw(x: self.x, y: self.y, direction: self.direction)
         }
     }
 
