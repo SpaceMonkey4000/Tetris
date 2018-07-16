@@ -388,28 +388,28 @@ func keyPress(key: Int) {
             //SRS
             if tetromino.direction == 0 {
                 //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
+                if tetromino.canMoveBy(dx: 0, dy: 0, dir: -1) {
+                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
                     return
                 } else {
                     //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
+                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: -1) {
+                        tetromino.moveBy(dx: 1, dy: 0, ddirection: -1)
                         return
                     } else {
                         //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: 1, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: 1, ddirection: 1)
+                        if tetromino.canMoveBy(dx: 1, dy: 1, dir: -1) {
+                            tetromino.moveBy(dx: 1, dy: 1, ddirection: -1)
                             return
                         } else {
                             //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: 1)
+                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: -1) {
+                                tetromino.moveBy(dx: 0, dy: -2, ddirection: -1)
                                 return
                             } else {
                                 //check5
-                                if tetromino.canMoveBy(dx: 1, dy: -2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: -2, ddirection: 1)
+                                if tetromino.canMoveBy(dx: 1, dy: -2, dir: -1) {
+                                    tetromino.moveBy(dx: 1, dy: -2, ddirection: -1)
                                     return
                                 } else {
                                     print("All rotation checks were invalid.")
@@ -428,22 +428,22 @@ func keyPress(key: Int) {
                 } else {
                     //Check2
                     if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
+                        tetromino.moveBy(dx: 1, dy: 0, ddirection: -1)
                         return
                     } else {
                         //Check3
                         if tetromino.canMoveBy(dx: 1, dy: -1, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: -1, ddirection: 1)
+                            tetromino.moveBy(dx: 1, dy: -1, ddirection: -1)
                             return
                         } else {
                             //check4
                             if tetromino.canMoveBy(dx: 0, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: 1)
+                                tetromino.moveBy(dx: 0, dy: 2, ddirection: -1)
                                 return
                             } else {
                                 //check5
                                 if tetromino.canMoveBy(dx: 1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: 2, ddirection: 1)
+                                    tetromino.moveBy(dx: 1, dy: 2, ddirection: -1)
                                     return
                                 } else {
                                     print("All rotation checks were invalid.")
@@ -457,27 +457,27 @@ func keyPress(key: Int) {
             if tetromino.direction == 2 {
                 //Check1
                 if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
+                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
                     return
                 } else {
                     //Check2
                     if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
+                        tetromino.moveBy(dx: -1, dy: 0, ddirection: -1)
                         return
                     } else {
                         //Check3
                         if tetromino.canMoveBy(dx: -1, dy: 1, dir: 1) {
-                            tetromino.moveBy(dx: -1, dy: 1, ddirection: 1)
+                            tetromino.moveBy(dx: -1, dy: 1, ddirection: -1)
                             return
                         } else {
                             //check4
                             if tetromino.canMoveBy(dx: 0, dy: -2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: 1)
+                                tetromino.moveBy(dx: 0, dy: -2, ddirection: -1)
                                 return
                             } else {
                                 //check5
                                 if tetromino.canMoveBy(dx: -1, dy: -2, dir: 1) {
-                                    tetromino.moveBy(dx: -1, dy: -2, ddirection: 1)
+                                    tetromino.moveBy(dx: -1, dy: -2, ddirection: -1)
                                     return
                                 } else {
                                     print("All rotation checks were invalid.")
@@ -491,27 +491,27 @@ func keyPress(key: Int) {
             if tetromino.direction == 3 {
                 //Check1
                 if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
+                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
                     return
                 } else {
                     //Check2
                     if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
+                        tetromino.moveBy(dx: -1, dy: 0, ddirection: -1)
                         return
                     } else {
                         //Check3
                         if tetromino.canMoveBy(dx: -1, dy: -1, dir: 1) {
-                            tetromino.moveBy(dx: -1, dy: -1, ddirection: 1)
+                            tetromino.moveBy(dx: -1, dy: -1, ddirection: -1)
                             return
                         } else {
                             //check4
                             if tetromino.canMoveBy(dx: 0, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: 1)
+                                tetromino.moveBy(dx: 0, dy: 2, ddirection: -1)
                                 return
                             } else {
                                 //check5
                                 if tetromino.canMoveBy(dx: -1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: -1, dy: 2, ddirection: 1)
+                                    tetromino.moveBy(dx: -1, dy: 2, ddirection: -1)
                                     return
                                 } else {
                                     print("All rotation checks were invalid.")
