@@ -163,5 +163,5 @@ class Tetromino {
     func blockRight() -> Bool {
         return !canMoveBy(dx: 1, dy: 0, dir: 0)
     }
-    
+
 }
