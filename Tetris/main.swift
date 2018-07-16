@@ -12,13 +12,11 @@ var softdropfallspeed = 2
 
 let garbage = texture(named: "Garbageicon")
 
-var shape: Shape = iEast
 
 
 
 var fallCounter = 0
-var tX = 0
-var tY = 0
+
 var slidetimer = 0
 var stickdelay = 30
 var tilesinline = 0
@@ -28,7 +26,7 @@ var softdropCounter = 0
 
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
-var nextItem: Shape = monomino
+var nextItem: Tetromino = createOTetromino()
 
 var stRefreshes = 0
 let stMaxRefreshes = 99999
@@ -80,15 +78,10 @@ func update() {
         if dirCounter > 14 {
             dirCounter2 += 1
             if dirCounter2 > autoRepeatSpeed {
-        shape.erase(x: tX, y: tY)
-        
-        if !tetromino.blockLeft(){
-            tX = tX - 1
-            refreshSlideTimer()
-            }
-            shape.draw(x: tX, y: tY)
+                tetromino.moveBy(dx: -1, dy: 0, dir: 0)
+                refreshSlideTimer()
                 dirCounter2 = 0
-        }
+            }
         }
     }
     //rightarrow
@@ -97,14 +90,7 @@ func update() {
         if dirCounter > 14 {
             dirCounter2 += 1
             if dirCounter2 > autoRepeatSpeed {
-                shape.erase(x: tX, y: tY)
-                
-                if !tetromino.blockRight(){
-                    tX = tX + 1
-                    refreshSlideTimer()
-                }
-                
-                shape.draw(x: tX, y: tY)
+                tetromino.moveBy(dx: 1, dy: 0, dir: 0)
                 dirCounter2 = 0
             }
         }
@@ -121,20 +107,17 @@ func softFall(){
     }
 }
 func spawnMino(){
-    shape = nextItem
+    tetromino = nextItem
     generateNextItem()
     print("Next mino is: ",nextItem)
     
 
     slidetimer = stickdelay
-    tX = 3
-    tY = gridSizeY - 4
+    tetromino.addToGridAt(x: 3, y: gridSizeY - 7, direction: 0)
     stRefreshes = stMaxRefreshes
 }
 
 func fallMino() {
-    shape.erase(x: tX, y: tY)
-
     if tetromino.onGround(){
         if slidetimer>1 {
             slidetimer = slidetimer - 1
@@ -150,8 +133,6 @@ func fallMino() {
         }
 
         if tetromino.onGround(){
-            shape.draw(x: tX, y: tY)
-            
             if slidetimer < 2 {
                 linecheck()
                 spawnMino()
@@ -159,10 +140,9 @@ func fallMino() {
             return
         }
         
-        tY -= 1
+        tetromino.moveBy(dx: 0, dy: -1, dir: 0)
     }
     
-    shape.draw(x: tX, y: tY)
 }
 
 //line clear
@@ -210,100 +190,73 @@ func keyPress(key: Int) {
     //leftarrow
     if keyIsPressed(123) {
         dirCounter = 0
-        shape.erase(x: tX, y: tY)
-        
         if !tetromino.blockLeft(){
-            tX = tX - 1
+            tetromino.moveBy(dx: -1, dy: 0, dir: 0)
             refreshSlideTimer()
         }
-        shape.draw(x: tX, y: tY)
+
     }
     //rightarrow
     if keyIsPressed(124) {
         dirCounter = 0
-        shape.erase(x: tX, y: tY)
-        
         if !tetromino.blockRight(){
-            tX = tX + 1
+            tetromino.moveBy(dx: 1, dy: 0, dir: 0)
             refreshSlideTimer()
         }
-        
-        shape.draw(x: tX, y: tY)
-        
+
     }
-    }
-    if debugTools == 1 {
-        if keyIsPressed(0) {
-            shape.erase(x: tX, y: tY)
-                spawnMino()
-        }
-        if keyIsPressed(1) {
-            shape.erase(x: tX, y: tY)
-            shape = monomino
-            shape.draw (x: tX, y: tY)
-        }
-        if keyIsPressed(2) {
-            shape.erase(x: tX, y: tY)
-            shape = instaClear
-            shape.draw (x: tX, y: tY)
-        }
-        if keyIsPressed(3) {
-            shape.erase(x: tX, y: tY)
-            shape = tetrisplus
-            shape.draw (x: tX, y: tY)
-        }
-        if keyIsPressed(4) {
-            shape.erase(x: tX, y: tY)
-            shape = xPiece
-            shape.draw (x: tX, y: tY)
-        }
-    }
+    
+//    if debugTools == 1 {
+//        if keyIsPressed(0) {
+//            shape.erase(x: tX, y: tY)
+//            spawnMino()
+//        }
+//        if keyIsPressed(1) {
+//            shape.erase(x: tX, y: tY)
+//            shape = monomino
+//            shape.draw (x: tX, y: tY)
+//        }
+//        if keyIsPressed(2) {
+//            shape.erase(x: tX, y: tY)
+//            shape = instaClear
+//            shape.draw (x: tX, y: tY)
+//        }
+//        if keyIsPressed(3) {
+//            shape.erase(x: tX, y: tY)
+//            shape = tetrisplus
+//            shape.draw (x: tX, y: tY)
+//        }
+//        if keyIsPressed(4) {
+//            shape.erase(x: tX, y: tY)
+//            shape = xPiece
+//            shape.draw (x: tX, y: tY)
+//        }
+//    }
 }
 func generateNextItem() {
     rng1 = random(min: 0, max: 6)
         switch rng1 {
         case 0:
-            nextItem = iNorth
+            nextItem = createOTetromino()
         case 1:
-            nextItem = tNorth
+            nextItem = createTTetromino()
         case 2:
-            nextItem = oNorth
+            nextItem = createITetromino()
         case 3:
-            nextItem = lNorth
+            nextItem = createSTetromino()
         case 4:
-            nextItem = jNorth
+            nextItem = createZTetromino()
         case 5:
-            nextItem = sNorth
+            nextItem = createJTetromino()
         case 6:
-            nextItem = zNorth
+            nextItem = createLTetromino()
         default:
-            nextItem = monomino
+            nextItem = createOTetromino()
     }
 
-    
-}
 
+
+}
 // This function starts the game and must be called at the end of the file.
 start()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//hello

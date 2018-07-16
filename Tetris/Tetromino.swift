@@ -76,7 +76,7 @@ class Tetromino {
     }
     
     private func collides(x: Int, y: Int, direction: Int) -> Bool {
-        return collidesWithMinos(x: x, y: y, direction: self.direction) || collidesWithEdgeOfGrid(x: x, y: y, direction: self.direction)
+        return collidesWithMinos(x: x, y: y, direction: direction) || collidesWithEdgeOfGrid(x: x, y: y, direction: direction)
     }
 
     // Returns the tetromino's direction, rotated clockwise one direction.
@@ -99,7 +99,6 @@ class Tetromino {
         self.direction = direction
         let shape = shapes[direction]
         shape.draw(x: self.x, y: self.y)
-        
     }
 
     // Removes the tetromino from the grid. We'll call this if we want to
@@ -132,9 +131,16 @@ class Tetromino {
 
     // Move the tetromino.
     func moveBy(dx: Int, dy: Int, dir: Int) {
-        assert(canMoveBy(dx: dx, dy: dy, dir: dir))
+        //assert(canMoveBy(dx: dx, dy: dy, dir: dir))
         if canMoveBy(dx: dx, dy: dy, dir: dir) {
             self.erase(x: self.x, y: self.y, direction: dir)
+            
+            if dir == 1 {
+                direction = getClockwiseDirection()
+            }
+            if dir == -1 {
+                direction = getCounterclockwiseDirection()
+            }
             self.x += dx
             self.y += dy
             self.draw(x: self.x, y: self.y, direction: dir)
@@ -143,15 +149,15 @@ class Tetromino {
 
     // Checks if the tetromino is colliding with the ground.
     func onGround() -> Bool {
-        return canMoveBy(dx: 0, dy: -1, dir: 0)
+        return !canMoveBy(dx: 0, dy: -1, dir: 0)
     }
     // Checks if the tetromino is colliding to the left.
     func blockLeft() -> Bool {
-        return canMoveBy(dx: -1, dy: 0, dir: 0)
+        return !canMoveBy(dx: -1, dy: 0, dir: 0)
     }
     // Checks if the tetromino is colliding to the right.
     func blockRight() -> Bool {
-        return canMoveBy(dx: 1, dy: 0, dir: 0)
+        return !canMoveBy(dx: 1, dy: 0, dir: 0)
     }
     
 }
