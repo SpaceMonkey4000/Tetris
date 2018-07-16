@@ -14,6 +14,8 @@ let garbage = texture(named: "Garbageicon")
 
 var shape: Shape = iEast
 
+
+
 var fallCounter = 0
 var tX = 0
 var tY = 0
@@ -35,8 +37,13 @@ let debugTools = 1
 
 var rng1 = 0
 
-
 createAllPieces()
+
+// The current tetromino that will appear in the grid.
+var tetromino: Tetromino = Tetromino()
+// Create a new J tetromino.
+tetromino = createJTetromino()
+
 
 // This function is called once, before the game starts.
 func first() {
@@ -54,7 +61,7 @@ func first() {
 }
 
 func refreshSlideTimer() {
-    if hasTextureAt(x: tX, y: tY - 1) || tY == 0{
+    if tetromino.onGround(){
         stRefreshes -= 1
         slidetimer = stickdelay
         if stRefreshes < 1 {
@@ -75,7 +82,7 @@ func update() {
             if dirCounter2 > autoRepeatSpeed {
         shape.erase(x: tX, y: tY)
         
-        if !shape.collides(x: tX - 1, y: tY) && !shape.collidesWithEdgeOfGrid(x: tX - 1, y: tY){
+        if !tetromino.blockLeft(){
             tX = tX - 1
             refreshSlideTimer()
             }
@@ -92,7 +99,7 @@ func update() {
             if dirCounter2 > autoRepeatSpeed {
                 shape.erase(x: tX, y: tY)
                 
-                if !shape.collides(x: tX + 1, y: tY) && !shape.collidesWithEdgeOfGrid(x: tX + 1, y: tY){
+                if !tetromino.blockRight(){
                     tX = tX + 1
                     refreshSlideTimer()
                 }
@@ -128,7 +135,7 @@ func spawnMino(){
 func fallMino() {
     shape.erase(x: tX, y: tY)
 
-    if shape.collides(x: tX, y: tY - 1) || shape.collidesWithEdgeOfGrid(x: tX, y: tY - 1){
+    if tetromino.onGround(){
         if slidetimer>1 {
             slidetimer = slidetimer - 1
         }
@@ -142,7 +149,7 @@ func fallMino() {
             fallCounter = fallspeed
         }
 
-        if shape.collides(x: tX, y: tY - 1) || shape.collidesWithEdgeOfGrid(x: tX, y: tY - 1){
+        if tetromino.onGround(){
             shape.draw(x: tX, y: tY)
             
             if slidetimer < 2 {
@@ -205,7 +212,7 @@ func keyPress(key: Int) {
         dirCounter = 0
         shape.erase(x: tX, y: tY)
         
-        if !shape.collides(x: tX - 1, y: tY) && !shape.collidesWithEdgeOfGrid(x: tX - 1, y: tY){
+        if !tetromino.blockLeft(){
             tX = tX - 1
             refreshSlideTimer()
         }
@@ -216,7 +223,7 @@ func keyPress(key: Int) {
         dirCounter = 0
         shape.erase(x: tX, y: tY)
         
-        if !shape.collides(x: tX + 1, y: tY) && !shape.collidesWithEdgeOfGrid(x: tX + 1, y: tY){
+        if !tetromino.blockRight(){
             tX = tX + 1
             refreshSlideTimer()
         }
@@ -224,15 +231,6 @@ func keyPress(key: Int) {
         shape.draw(x: tX, y: tY)
         
     }
-    //spacebar (harddrop)
-    if keyIsPressed(49) {
-        shape.erase(x: tX, y: tY)
-        while !shape.collides(x: tX, y: tY - 1) && !shape.collidesWithEdgeOfGrid(x: tX, y: tY - 1){
-            tY = tY - 1
-        }
-        shape.draw(x: tX, y: tY)
-        slidetimer = 0
-        stRefreshes = 0
     }
     if debugTools == 1 {
         if keyIsPressed(0) {

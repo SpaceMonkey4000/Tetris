@@ -42,7 +42,7 @@ class Shape {
     // Returns true if the mino collides with any non-blank textures
     // that already exist in the grid. x and y are the position of the
     // lower left corner of the mino in the grid.
-    func collides(x: Int, y: Int) -> Bool {
+    func collidesWithMinos(x: Int, y: Int) -> Bool {
         for mino in minos {
             if hasTextureAt(x: mino.mx + x, y: mino.my + y) {
                 return true

@@ -61,33 +61,34 @@ class Tetromino {
     }
 
     private func erase(x: Int, y: Int, direction: Int) {
-        // TODO
+        let shape = shapes[direction]
+        shape.erase(x: x, y: y)
     }
 
-    private func collides(x: Int, y: Int, direction: Int) -> Bool {
-        // TODO
-        return false
+    private func collidesWithMinos(x: Int, y: Int, direction: Int) -> Bool {
+        let shape = shapes[direction]
+        return shape.collidesWithMinos(x: x, y: y)
     }
 
     private func collidesWithEdgeOfGrid(x: Int, y: Int, direction: Int) -> Bool {
-        // TODO
-        return false
+        let shape = shapes[direction]
+        return shape.collidesWithEdgeOfGrid(x: x, y: y)
     }
-
-    // Implement the following function in terms of the ones above:
+    
+    private func collides(x: Int, y: Int, direction: Int) -> Bool {
+        return collidesWithMinos(x: x, y: y, direction: self.direction) || collidesWithEdgeOfGrid(x: x, y: y, direction: self.direction)
+    }
 
     // Returns the tetromino's direction, rotated clockwise one direction.
     // If the direction is 3, the function should return 0.
     func getClockwiseDirection() -> Int {
-        // TODO
-        return 0
+        return (self.direction + 1) % 4
     }
 
     // Returns the tetromino's direction, rotated counterclockwise one direction.
     // If the direction is 0, the function should return 3.
     func getCounterclockwiseDirection() -> Int {
-        // TODO
-        return 0
+        return (self.direction + 3) % 4
     }
 
     // Adds the tetromino to the grid at a location.
@@ -96,56 +97,61 @@ class Tetromino {
         self.x = x
         self.y = y
         self.direction = direction
-        // TODO: Draw the tetromino.
+        let shape = shapes[direction]
+        shape.draw(x: self.x, y: self.y)
+        
     }
 
     // Removes the tetromino from the grid. We'll call this if we want to
     // remove the tetromino from the grid and replace it with a new one,
     // for testing. We do not expect to call this during regular game play.
     func removeFromGrid() {
-        // TODO
+        let shape = shapes[direction]
+        shape.erase(x: self.x, y: self.y)
     }
 
     // Returns true if the tetromino can be moved by an offset
     // without colliding with other minos or with the edge of the grid.
-    func canMoveBy(dx: Int, dy: Int) -> Bool {
-        // TODO: This function should first erase the tetromino, then test
-        // if the tetromino can be moved, then draw the tetromino,
-        // then return the result.
-        return false
+    func canMoveBy(dx: Int, dy: Int, dir: Int) -> Bool {
+        defer {
+            self.draw(x: self.x, y: self.y, direction: self.direction)
+        }
+        var newDirection = 0
+        if dir == 1 {
+            newDirection = getClockwiseDirection()
+        }
+        if dir == -1 {
+            newDirection = getCounterclockwiseDirection()
+        }
+        if dir == 0 {
+            newDirection = self.direction
+        }
+        self.erase(x: self.x, y: self.y, direction: self.direction)
+        return !collides(x: self.x + dx, y: self.y + dy, direction: newDirection)
     }
 
     // Move the tetromino.
-    func moveBy(dx: Int, dy: Int) {
-        // TODO: This function should first erase the tetromino, then
-        // then move the tetromino, then draw the tetromino in its new location.
+    func moveBy(dx: Int, dy: Int, dir: Int) {
+        assert(canMoveBy(dx: dx, dy: dy, dir: dir))
+        if canMoveBy(dx: dx, dy: dy, dir: dir) {
+            self.erase(x: self.x, y: self.y, direction: dir)
+            self.x += dx
+            self.y += dy
+            self.draw(x: self.x, y: self.y, direction: dir)
+        }
     }
 
-    // Returns true if the tetromino can be rotated clockwise
-    // without colliding with other minos or with the edge of the grid.
-    func canRotateClockwise() -> Bool {
-        let newDirection = getClockwiseDirection()
-        // TODO: This function should first erase the tetromino,
-        // then test if it collides with anything when rotated to
-        // its new direction, then draw the tetromino with its original direction.
-        return false
+    // Checks if the tetromino is colliding with the ground.
+    func onGround() -> Bool {
+        return canMoveBy(dx: 0, dy: -1, dir: 0)
     }
-
-    // Returns true if the tetromino can be rotated counterclockwise
-    // without colliding with other minos or with the edge of the grid.
-    func canRotateCounterclockwise() -> Bool {
-        // TODO
-        return false
+    // Checks if the tetromino is colliding to the left.
+    func blockLeft() -> Bool {
+        return canMoveBy(dx: -1, dy: 0, dir: 0)
     }
-
-    // Rotate the tetromino clockwise.
-    func rotateClockwise() {
-        // TODO: Erase the tetromino, rotate it clockwise, then draw it.
+    // Checks if the tetromino is colliding to the right.
+    func blockRight() -> Bool {
+        return canMoveBy(dx: 1, dy: 0, dir: 0)
     }
-
-    // Rotate the tetromino counterclockwise.
-    func rotateCounterclockwise() {
-        // TODO
-    }
-
+    
 }
