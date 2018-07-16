@@ -346,7 +346,7 @@ func createTetrisPlus() {
 //X
 
 func createXpiece() {
-    xPiece.texture = blackbasic
+    xPiece.texture = brownbasic
     xPiece.addMino(mx: 1, my: 1)
     xPiece.addMino(mx: 1, my: 2)
     xPiece.addMino(mx: 0, my: 1)

@@ -29,6 +29,8 @@ import Foundation
 
 class Tetromino {
 
+    public let name: String
+    
     // The position of the Tetromino. We'll used this instead of tX and tY
     // from now on.
     private var x: Int = 0
@@ -38,17 +40,19 @@ class Tetromino {
     private var shapes: [Shape] = []
 
     // A number between 0 and 3, corresponding to north, east, south, west.
-    private var direction: Int = 0
+    public var direction: Int = 0
 
     // Creates an empty tetromino with no shapes.
     init() {
         self.shapes = []
+        self.name = ""
     }
 
     // Creates a tetromino with an array of shapes.
-    init(shapes: [Shape]) {
+    init(name: String, shapes: [Shape]) {
         assert(shapes.count == 4)
         self.shapes = shapes
+        self.name = ""
     }
 
     // The next four functions should call the function

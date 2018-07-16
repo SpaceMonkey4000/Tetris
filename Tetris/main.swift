@@ -13,7 +13,8 @@ var softdropfallspeed = 2
 let garbage = texture(named: "Garbageicon")
 
 
-
+var hold: Tetromino = createOTetromino()
+var hold2: Tetromino = createOTetromino()
 
 var fallCounter = 0
 
@@ -51,7 +52,7 @@ func first() {
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<10 {
+    for a in 0..<0 {
         setTexture(garbage, x: a, y: 0)
     }
 
@@ -209,40 +210,74 @@ func keyPress(key: Int) {
     
     //rotateright   UP                   X
     if keyIsPressed(126) || keyIsPressed(7){
+        if tetromino.onGround() {
+            refreshSlideTimer()
+        }
         tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
     }
     //rotateleft    Z
     if keyIsPressed(6){
+        if tetromino.onGround() {
+            refreshSlideTimer()
+        }
         tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
     }
     
-//    if debugTools == 1 {
-//        if keyIsPressed(0) {
-//            shape.erase(x: tX, y: tY)
+//    //holdfunction  C
+//    if keyIsPressed(8){
+//        if hold === createMiscTetromino(){
+//            hold = tetromino
+//            tetromino.removeFromGrid()
 //            spawnMino()
+//        } else {
+//            hold2 = hold
+//            hold = tetromino
+//            tetromino.removeFromGrid()
+//            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+//            tetromino = hold2
 //        }
-//        if keyIsPressed(1) {
-//            shape.erase(x: tX, y: tY)
-//            shape = monomino
-//            shape.draw (x: tX, y: tY)
-//        }
-//        if keyIsPressed(2) {
-//            shape.erase(x: tX, y: tY)
-//            shape = instaClear
-//            shape.draw (x: tX, y: tY)
-//        }
-//        if keyIsPressed(3) {
-//            shape.erase(x: tX, y: tY)
-//            shape = tetrisplus
-//            shape.draw (x: tX, y: tY)
-//        }
-//        if keyIsPressed(4) {
-//            shape.erase(x: tX, y: tY)
-//            shape = xPiece
-//            shape.draw (x: tX, y: tY)
-//        }
+//
 //    }
+    //debug
+    if keyIsPressed(12) {
+        tetromino.removeFromGrid()
+        tetromino = createLTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(13) {
+        tetromino.removeFromGrid()
+        tetromino = createJTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(14) {
+        tetromino.removeFromGrid()
+        tetromino = createITetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(15) {
+        tetromino.removeFromGrid()
+        tetromino = createOTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(17) {
+        tetromino.removeFromGrid()
+        tetromino = createTTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(16) {
+        tetromino.removeFromGrid()
+        tetromino = createZTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(32) {
+        tetromino.removeFromGrid()
+        tetromino = createSTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    
 }
+
+
 func generateNextItem() {
     rng1 = random(min: 0, max: 6)
         switch rng1 {

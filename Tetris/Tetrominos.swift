@@ -2,25 +2,25 @@
 import Foundation
 
 func createJTetromino() -> Tetromino {
-    return Tetromino(shapes: [jNorth, jEast, jSouth, jWest])
+    return Tetromino(name: "J", shapes: [jNorth, jEast, jSouth, jWest])
 }
 func createLTetromino() -> Tetromino {
-    return Tetromino(shapes: [lNorth, lEast, lSouth, lWest])
+    return Tetromino(name: "L", shapes: [lNorth, lEast, lSouth, lWest])
 }
 func createTTetromino() -> Tetromino {
-    return Tetromino(shapes: [tNorth, tEast, tSouth, tWest])
+    return Tetromino(name: "T", shapes: [tNorth, tEast, tSouth, tWest])
 }
 func createITetromino() -> Tetromino {
-    return Tetromino(shapes: [iNorth, iEast, iSouth, iWest])
+    return Tetromino(name: "I", shapes: [iNorth, iEast, iSouth, iWest])
 }
 func createOTetromino() -> Tetromino {
-    return Tetromino(shapes: [oNorth, oEast, oSouth, oWest])
+    return Tetromino(name: "O", shapes: [oNorth, oEast, oSouth, oWest])
 }
 func createSTetromino() -> Tetromino {
-    return Tetromino(shapes: [sNorth, sEast, sSouth, sWest])
+    return Tetromino(name: "S", shapes: [sNorth, sEast, sSouth, sWest])
 }
 func createZTetromino() -> Tetromino {
-    return Tetromino(shapes: [zNorth, zEast, zSouth, zWest])
+    return Tetromino(name: "Z", shapes: [zNorth, zEast, zSouth, zWest])
 }
 
 
