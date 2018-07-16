@@ -27,9 +27,10 @@ var softdropCounter = 0
 var autoRepeatSpeed = 2
 var dirCounter2 = 0
 var nextItem: Tetromino = createOTetromino()
+var nextSayer = "0"
 
 var stRefreshes = 0
-let stMaxRefreshes = 99999
+let stMaxRefreshes = 15
 
 let debugTools = 1
 
@@ -46,7 +47,7 @@ tetromino = createJTetromino()
 // This function is called once, before the game starts.
 func first() {
     generateNextItem()
-    print("Next mino is: ",nextItem)
+    print("Next mino is: ",nextSayer)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
     // This makes a row of tiles appear at the bottom of the screen.
@@ -109,7 +110,7 @@ func softFall(){
 func spawnMino(){
     tetromino = nextItem
     generateNextItem()
-    print("Next mino is: ",nextItem)
+    print("Next mino is: ",nextSayer)
     
 
     slidetimer = stickdelay
@@ -247,20 +248,28 @@ func generateNextItem() {
         switch rng1 {
         case 0:
             nextItem = createOTetromino()
+            nextSayer = "O"
         case 1:
             nextItem = createTTetromino()
+            nextSayer = "T"
         case 2:
             nextItem = createITetromino()
+            nextSayer = "I"
         case 3:
             nextItem = createSTetromino()
+            nextSayer = "S"
         case 4:
             nextItem = createZTetromino()
+            nextSayer = "Z"
         case 5:
             nextItem = createJTetromino()
+            nextSayer = "J"
         case 6:
             nextItem = createLTetromino()
+            nextSayer = "L"
         default:
             nextItem = createOTetromino()
+            nextSayer = "O is for oops!"
     }
 
 
