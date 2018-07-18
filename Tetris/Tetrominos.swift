@@ -22,5 +22,19 @@ func createSTetromino() -> Tetromino {
 func createZTetromino() -> Tetromino {
     return Tetromino(name: "Z", shapes: [zNorth, zEast, zSouth, zWest])
 }
+func createMonominoTetromino() -> Tetromino {
+    return Tetromino(name: "MM", shapes: [monomino, monomino, monomino, monomino])
+}
+func createInstaclearTetromino() -> Tetromino {
+    return Tetromino(name: "IC", shapes: [instaClear, instaClear, instaClear, instaClear])
+}
+func createTetrisplusTetromino() -> Tetromino {
+    return Tetromino(name: "TP", shapes: [tetrisplus, tetrisplus, tetrisplus, tetrisplus])
+}
+func createXtetromino() -> Tetromino {
+    return Tetromino(name: "X", shapes: [xPiece, xPiece, xPiece, xPiece])
+}
+
+
 
 

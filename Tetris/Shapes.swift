@@ -8,18 +8,20 @@
 
 import Foundation
 
-let orangebasic = texture(named: "Orangebasic")
-let redbasic = texture(named: "Redbasic")
-let greenbasic = texture(named: "Greenbasic")
-let bluebasic = texture(named: "Bluebasic")
-let yellowbasic = texture(named: "Yellowbasic")
-let cyanbasic = texture(named: "Cyanbasic")
-let purplebasic = texture(named: "Purplebasic")
-let pinkbasic = texture(named: "Pinkbasic")
-let blackbasic = texture(named: "Blackbasic")
-let whitebasic = texture(named: "Whitebasic")
+
+    let orangebasic = texture(named: "Orangebasic")
+    let redbasic = texture(named: "Redbasic")
+    let greenbasic = texture(named: "Greenbasic")
+    let bluebasic = texture(named: "Bluebasic")
+    let yellowbasic = texture(named: "Yellowbasic")
+    let cyanbasic = texture(named: "Cyanbasic")
+    let purplebasic = texture(named: "Purplebasic")
 let bloodbasic = texture(named: "Bloodbasic")
+let whitebasic = texture(named: "Whitebasic")
 let brownbasic = texture(named: "Brownbasic")
+
+
+
 
 let lNorth = Shape()
 let lSouth = Shape()
@@ -323,14 +325,14 @@ func createIwest() {
 //monomino
 func createMonoMino() {
     monomino.texture = garbage
-    monomino.addMino(mx: 0, my: 0)
+    monomino.addMino(mx: 1, my: 1)
 }
 //instaclear
 func createInstaClear() {
     instaClear.texture = whitebasic
     for y in 0..<20 {
         for x in 0..<30 {
-            instaClear.addMino(mx: x - 15, my: y - 10)
+            instaClear.addMino(mx: x - 15, my: y - 20)
         }
     }
 }
@@ -343,14 +345,14 @@ func createTetrisPlus() {
     tetrisplus.addMino(mx: 1, my: 3)
     tetrisplus.addMino(mx: 1, my: 4)
 }
-//X
 
+//X
 func createXpiece() {
     xPiece.texture = brownbasic
     xPiece.addMino(mx: 1, my: 1)
-    xPiece.addMino(mx: 1, my: 2)
     xPiece.addMino(mx: 0, my: 1)
     xPiece.addMino(mx: 2, my: 1)
+    xPiece.addMino(mx: 1, my: 2)
     xPiece.addMino(mx: 1, my: 0)
 }
 

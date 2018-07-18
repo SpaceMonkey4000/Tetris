@@ -145,6 +145,7 @@ class Tetromino {
             if ddirection == -1 {
                 direction = getCounterclockwiseDirection()
             }
+
             self.x += dx
             self.y += dy
             self.draw(x: self.x, y: self.y, direction: self.direction)
