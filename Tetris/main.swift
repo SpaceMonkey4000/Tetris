@@ -36,6 +36,8 @@ let debugTools = 1
 
 var rng1 = 0
 
+var hardDropInstantLock = 1
+
 var rotationSystem = "SRS"
 
 createAllPieces()
@@ -208,6 +210,8 @@ func keyPress(key: Int) {
         }
         if rotationSystem == "SRS" {
             superRotationSystemRightRot()
+        } else if rotationSystem == "broken" {
+            brokenRotationSystemRightRot()
         } else {
             simpleRotationSystemRightRot()
         }
@@ -222,8 +226,10 @@ func keyPress(key: Int) {
         }
         if rotationSystem == "SRS" {
             superRotationSystemLeftRot()
+        } else if rotationSystem == "broken" {
+            brokenRotationSystemLeftRot()
         } else {
-            simpleRotationSystemLeftRot()
+            simpleRotationSystemRightRot()
         }
         return
     }
@@ -252,12 +258,14 @@ func keyPress(key: Int) {
         while !tetromino.onGround() {
             tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
         }
-        slidetimer = 0
-        stRefreshes = 0
-        fallCounter = -1
+        if hardDropInstantLock == 1{
+            slidetimer = 0
+            stRefreshes = 0
+            fallCounter = -1
+        }
     }
     
-
+    
     //debug
     if keyIsPressed(12) {
         tetromino.removeFromGrid()
