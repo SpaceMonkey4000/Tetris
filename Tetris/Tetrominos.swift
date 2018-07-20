@@ -34,7 +34,9 @@ func createTetrisplusTetromino() -> Tetromino {
 func createXtetromino() -> Tetromino {
     return Tetromino(name: "X", shapes: [xPiece, xPiece, xPiece, xPiece])
 }
-
+func createOwoTetromino() -> Tetromino {
+    return Tetromino(name: "OWO", shapes: [owoPiece, owoPiece, owoPiece, owoPiece])
+}
 
 
 

@@ -163,5 +163,8 @@ class Tetromino {
     func blockRight() -> Bool {
         return !canMoveBy(dx: 1, dy: 0, ddirection: 0)
     }
-
+    // Checks if the tetromino is just below a ceiling.
+    func blockUp() -> Bool {
+        return !canMoveBy(dx: 0, dy: 1, ddirection: 0)
+    }
 }

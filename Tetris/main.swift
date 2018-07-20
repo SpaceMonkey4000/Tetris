@@ -38,7 +38,7 @@ var rng1 = 0
 
 var hardDropInstantLock = 1
 
-var rotationSystem = "SRS"
+var rotationSystem = "OSSRS"
 
 createAllPieces()
 
@@ -54,13 +54,7 @@ func first() {
     print("Next mino is: ",nextSayer)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
-    // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<0 {
-        setTexture(garbage, x: a, y: 0)
-    }
 
-//    lNorth.draw(x: 0, y: 10)
-//    lNorth.draw(x: 1, y: 14)
 }
 
 func refreshSlideTimer() {
@@ -210,10 +204,10 @@ func keyPress(key: Int) {
         }
         if rotationSystem == "SRS" {
             superRotationSystemRightRot()
-        } else if rotationSystem == "broken" {
-            brokenRotationSystemRightRot()
+        } else if rotationSystem == "OSSRS"{
+            oSpinSuperRotationSystemRightRot()
         } else {
-            simpleRotationSystemRightRot()
+            simpleRotationSystemRot()
         }
         return
     }
@@ -226,10 +220,10 @@ func keyPress(key: Int) {
         }
         if rotationSystem == "SRS" {
             superRotationSystemLeftRot()
-        } else if rotationSystem == "broken" {
-            brokenRotationSystemLeftRot()
+        } else if rotationSystem == "OSSRS"{
+            oSpinSuperRotationSystemLeftRot()
         } else {
-            simpleRotationSystemRightRot()
+            simpleRotationSystemRot()
         }
         return
     }
@@ -320,6 +314,11 @@ func keyPress(key: Int) {
     if keyIsPressed(3) {
         tetromino.removeFromGrid()
         tetromino = createXtetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(5) {
+        tetromino.removeFromGrid()
+        tetromino = createOwoTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
     

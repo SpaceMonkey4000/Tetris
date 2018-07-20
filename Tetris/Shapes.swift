@@ -19,6 +19,8 @@ import Foundation
 let bloodbasic = texture(named: "Bloodbasic")
 let whitebasic = texture(named: "Whitebasic")
 let brownbasic = texture(named: "Brownbasic")
+let pinkbasic = texture(named: "Pinkbasic")
+let blackbasic = texture(named: "Blackbasic")
 
 
 
@@ -57,6 +59,7 @@ let monomino = Shape()
 let instaClear = Shape()
 let tetrisplus = Shape()
 let xPiece = Shape()
+let owoPiece = Shape()
 
 func createAllPieces() {
     createLpieces()
@@ -116,6 +119,7 @@ func createMiscpieces() {
     createInstaClear()
     createTetrisPlus()
     createXpiece()
+    createOwoPiece()
 }
 //L pieces
 func createLnorth() {
@@ -327,6 +331,21 @@ func createMonoMino() {
     monomino.texture = garbage
     monomino.addMino(mx: 1, my: 1)
 }
+
+//owo
+func createOwoPiece() {
+    owoPiece.texture = pinkbasic
+    owoPiece.addMino(mx: 0, my: 0)
+    owoPiece.addMino(mx: 0, my: 1)
+    owoPiece.addMino(mx: 0, my: 2)
+    owoPiece.addMino(mx: 1, my: 0)
+    owoPiece.addMino(mx: 1, my: 1)
+    owoPiece.addMino(mx: 1, my: 2)
+    owoPiece.addMino(mx: 2, my: 0)
+    owoPiece.addMino(mx: 2, my: 1)
+    owoPiece.addMino(mx: 2, my: 2)
+}
+
 //instaclear
 func createInstaClear() {
     instaClear.texture = whitebasic
