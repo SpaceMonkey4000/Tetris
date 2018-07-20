@@ -27,6 +27,7 @@
 		3AB47A2620FBFCF000779E6D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2520FBFCF000779E6D /* Tetromino.swift */; };
 		3AB47A2820FC00B800779E6D /* Tetrominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2720FC00B800779E6D /* Tetrominos.swift */; };
 		7769072F20FBBE70003F4C57 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7769072E20FBBE70003F4C57 /* Shapes.swift */; };
+		77A2983D2101330800E30011 /* RotationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983C2101330800E30011 /* RotationSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		3AB47A2520FBFCF000779E6D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		3AB47A2720FC00B800779E6D /* Tetrominos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrominos.swift; sourceTree = "<group>"; };
 		7769072E20FBBE70003F4C57 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		77A2983C2101330800E30011 /* RotationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				7769072E20FBBE70003F4C57 /* Shapes.swift */,
 				3AB47A2520FBFCF000779E6D /* Tetromino.swift */,
 				3AB47A2720FC00B800779E6D /* Tetrominos.swift */,
+				77A2983C2101330800E30011 /* RotationSystem.swift */,
 				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
 			);
 			path = Tetris;
@@ -196,6 +199,7 @@
 				3A2FB98520FABE6400AF6592 /* NSImage+Resized.swift in Sources */,
 				3A5F13E720FA78B900A43C21 /* ViewController.swift in Sources */,
 				3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */,
+				77A2983D2101330800E30011 /* RotationSystem.swift in Sources */,
 				3A5F13E520FA78B900A43C21 /* Scene.swift in Sources */,
 				3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */,
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,
