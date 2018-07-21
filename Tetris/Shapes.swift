@@ -59,7 +59,7 @@ let monomino = Shape()
 let instaClear = Shape()
 let tetrisplus = Shape()
 let xPiece = Shape()
-let owoPiece = Shape()
+let eDifPiece = Shape()
 
 func createAllPieces() {
     createLpieces()
@@ -119,7 +119,7 @@ func createMiscpieces() {
     createInstaClear()
     createTetrisPlus()
     createXpiece()
-    createOwoPiece()
+    createEdifPiece()
 }
 //L pieces
 func createLnorth() {
@@ -332,18 +332,13 @@ func createMonoMino() {
     monomino.addMino(mx: 1, my: 1)
 }
 
-//owo
-func createOwoPiece() {
-    owoPiece.texture = pinkbasic
-    owoPiece.addMino(mx: 0, my: 0)
-    owoPiece.addMino(mx: 0, my: 1)
-    owoPiece.addMino(mx: 0, my: 2)
-    owoPiece.addMino(mx: 1, my: 0)
-    owoPiece.addMino(mx: 1, my: 1)
-    owoPiece.addMino(mx: 1, my: 2)
-    owoPiece.addMino(mx: 2, my: 0)
-    owoPiece.addMino(mx: 2, my: 1)
-    owoPiece.addMino(mx: 2, my: 2)
+//Edif
+func createEdifPiece() {
+    eDifPiece.texture = pinkbasic
+    eDifPiece.addMino(mx: 0, my: 1)
+    eDifPiece.addMino(mx: 0, my: 2)
+    eDifPiece.addMino(mx: 1, my: 0)
+    eDifPiece.addMino(mx: 1, my: 2)
 }
 
 //instaclear

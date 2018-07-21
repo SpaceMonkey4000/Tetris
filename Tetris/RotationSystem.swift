@@ -1,5 +1,6 @@
 import Foundation
 
+//SRS
 func superRotationSystemRightRot() {
     normalSrsRightRot()
 }
@@ -7,16 +8,17 @@ func superRotationSystemRightRot() {
 func superRotationSystemLeftRot() {
     normalSrsLeftRot()
 }
-
+//SimpleRS
 func simpleRotationSystemRot() {
     rotationSystem(ddirection: 1, offsets: [(0,0)])
     return
 }
+//OSSRS
 
 func oSpinSuperRotationSystemRightRot(){
     if tetromino.name == "O" {
         if tetromino.blockUp() {
-            rotationSystem(ddirection: 1, offsets: [(1,-1),(1,-2),(2,-1),(2,-2)])
+            rotationSystem(ddirection: 1, offsets: [(1,-1),(1,-2),(2,-1),(-1,1)])
         }
     } else {
         normalSrsRightRot()
@@ -26,7 +28,7 @@ func oSpinSuperRotationSystemRightRot(){
 func oSpinSuperRotationSystemLeftRot(){
     if tetromino.name == "O" {
         if tetromino.blockUp() {
-            rotationSystem(ddirection: 1, offsets: [(-1,-1),(-1,-2),(-2,-1),(-2,-2)])
+            rotationSystem(ddirection: 1, offsets: [(-1,-1),(-1,-2),(-2,-1),(1,1)])
         }
     } else {
         normalSrsLeftRot()
@@ -130,7 +132,9 @@ func normalSrsLeftRot() {
 }
 
 func rotationSystem(ddirection: Int, offsets: [(Int, Int)]) {
+    wallKicks = 0
     for offset in offsets {
+        wallKicks += 1
         if tetromino.canMoveBy(dx: offset.0, dy: offset.1, ddirection: ddirection) {
             tetromino.moveBy(dx: offset.0, dy: offset.1, ddirection: ddirection)
             return

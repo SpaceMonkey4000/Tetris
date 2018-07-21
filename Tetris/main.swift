@@ -15,7 +15,9 @@ let garbage = texture(named: "Garbageicon")
 
 var fallCounter = 0
 
+var wallKicks = 0
 
+var lineScore = 0
 
 var slidetimer = 0
 var stickdelay = 30
@@ -38,7 +40,17 @@ var rng1 = 0
 
 var hardDropInstantLock = 1
 
+//spin rewards
+var tSpinRewards = true
+var sSpinRewards = true
+var zSpinRewards = true
+var lSpinRewards = true
+var jSpinRewards = true
+var iSpinRewards = true
+var oSpinRewards = true
+
 var rotationSystem = "OSSRS"
+
 
 createAllPieces()
 
@@ -115,11 +127,10 @@ func spawnMino(){
     tetromino = nextItem
     generateNextItem()
     print("Next mino is: ",nextSayer)
-    
-
     slidetimer = stickdelay
     tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     stRefreshes = stMaxRefreshes
+    wallKicks = 0
 }
 
 func fallMino() {
@@ -164,7 +175,7 @@ func clearline(y: Int) {
 // check for lines
 func linecheck() {
     var y = 0
-    var lineScore = 0
+    lineScore = 0
     while y < gridSizeY {
         tilesinline = 0
         for x in 0..<gridSizeX {
@@ -179,20 +190,7 @@ func linecheck() {
             y += 1
         }
     }
-    if lineScore > 0 {
-
-        if lineScore == 1 {
-            print("Single")
-        } else if lineScore == 2 {
-            print("Double")
-        } else if lineScore == 3 {
-            print("Triple")
-        } else if lineScore == 4 {
-            print("Tetris!")
-        } else if lineScore == 5 {
-            print("Tetris plus!")
-        }
-    }
+        scoreLines()
 }
 
 // This function is called whenever the user presses a key.
@@ -306,7 +304,7 @@ func keyPress(key: Int) {
         tetromino = createTetrisplusTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
-    if keyIsPressed(2) {
+    if keyIsPressed(51) {
         tetromino.removeFromGrid()
         tetromino = createInstaclearTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
@@ -316,10 +314,13 @@ func keyPress(key: Int) {
         tetromino = createXtetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
-    if keyIsPressed(5) {
+    if keyIsPressed(2) {
         tetromino.removeFromGrid()
-        tetromino = createOwoTetromino()
+        tetromino = createEDifTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(4) {
+        //debug piece goes here
     }
     
 }
