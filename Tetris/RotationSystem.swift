@@ -16,9 +16,9 @@ func simpleRotationSystemRot() {
 //OSSRS
 
 func oSpinSuperRotationSystemRightRot(){
-    if tetromino.name == "O" {
+    if tetromino.name == "O" || tetromino.name == "MM"{
         if tetromino.blockUp() {
-            rotationSystem(ddirection: 1, offsets: [(1,-1),(1,-2),(2,-1),(-1,1)])
+            rotationSystem(ddirection: 1, offsets: [(1,-1),(1,-2),(2,-1)])
         }
     } else {
         normalSrsRightRot()
@@ -26,9 +26,9 @@ func oSpinSuperRotationSystemRightRot(){
 }
 
 func oSpinSuperRotationSystemLeftRot(){
-    if tetromino.name == "O" {
+    if tetromino.name == "O" || tetromino.name == "MM"{
         if tetromino.blockUp() {
-            rotationSystem(ddirection: 1, offsets: [(-1,-1),(-1,-2),(-2,-1),(1,1)])
+            rotationSystem(ddirection: 1, offsets: [(-1,-1),(-1,-2),(-2,-1)])
         }
     } else {
         normalSrsLeftRot()

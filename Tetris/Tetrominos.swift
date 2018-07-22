@@ -37,6 +37,9 @@ func createXtetromino() -> Tetromino {
 func createEDifTetromino() -> Tetromino {
     return Tetromino(name: "E", shapes: [eDifPiece, eDifPiece, eDifPiece, eDifPiece])
 }
+func createDomino() -> Tetromino {
+    return Tetromino(name: "I2", shapes: [dominoNorth, dominoWest, dominoNorth, dominoWest])
+}
 
 
 

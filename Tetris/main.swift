@@ -23,34 +23,54 @@ var slidetimer = 0
 var stickdelay = 30
 var tilesinline = 0
 
-var dirCounter = 0
+var shiftAutoRepeatCounter = 0
 var softdropCounter = 0
 
+// DAS.
 var autoRepeatSpeed = 2
-var dirCounter2 = 0
+
+var shiftAutoRepeatCounter2 = 0
 var nextItem: Tetromino = createOTetromino()
 var nextSayer = "0"
 
-var stRefreshes = 0
-let stMaxRefreshes = 15
+//Rotating or moving a piece when it is on the ground will refresh the slide timer.
+    // The current amount of refreshes the player has left.
+    var stRefreshes = 0
+    // The amount of refreshes the player gets upon piece spawning.
+    var stMaxRefreshes = 15
 
-let debugTools = 1
+var debugTools = 1
 
 var rng1 = 0
 
+//If the piece instantly locks down when hard dropped.
 var hardDropInstantLock = 1
 
+//If the game is over, in a menu, or in play. (over, menu, play)
+var gameState = "play"
+
+// This variable is used to sense if the game should end.
+    /* When the piece is spawned, this variable is set to 1.
+    if the mino moves, the variable is set to 0.
+    if the piece lands when the variable is 1, the game will end. */
+var gameOverCheck = 1
+//NOTE: At this time, this variable is not implemented. This means the game STILL doesn't end.
+
 //spin rewards
-var tSpinRewards = true
-var sSpinRewards = true
-var zSpinRewards = true
-var lSpinRewards = true
-var jSpinRewards = true
-var iSpinRewards = true
-var oSpinRewards = true
+var tSpinsRewarded = true
+var sSpinsRewarded = true
+var zSpinsRewarded = true
+var lSpinsRewarded = true
+var jSpinsRewarded = true
+var iSpinsRewarded = true
+var oSpinsRewarded = true
 
 var rotationSystem = "OSSRS"
 
+//This variable is just for laughs.
+var My_Amazing_Variable = "int"
+
+createStyleColors()
 
 createAllPieces()
 
@@ -88,13 +108,13 @@ func update() {
     //leftarrow
     if keyIsPressed(123) {
         if !keyIsPressed(124) {
-            dirCounter += 1
-            if dirCounter > 14 {
-                dirCounter2 += 1
-                if dirCounter2 > autoRepeatSpeed {
+            shiftAutoRepeatCounter += 1
+            if shiftAutoRepeatCounter > 14 {
+                shiftAutoRepeatCounter2 += 1
+                if shiftAutoRepeatCounter2 > autoRepeatSpeed {
                     tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
                     refreshSlideTimer()
-                    dirCounter2 = 0
+                    shiftAutoRepeatCounter2 = 0
                 }
             }
         }
@@ -102,12 +122,12 @@ func update() {
     //rightarrow
     if keyIsPressed(124) {
         if !keyIsPressed(123) {
-            dirCounter += 1
-            if dirCounter > 14 {
-                dirCounter2 += 1
-                if dirCounter2 > autoRepeatSpeed {
+            shiftAutoRepeatCounter += 1
+            if shiftAutoRepeatCounter > 14 {
+                shiftAutoRepeatCounter2 += 1
+                if shiftAutoRepeatCounter2 > autoRepeatSpeed {
                     tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
-                    dirCounter2 = 0
+                    shiftAutoRepeatCounter2 = 0
                 }
             }
         }
@@ -124,13 +144,20 @@ func softFall(){
     }
 }
 func spawnMino(){
+    fallCounter = 0
+    softdropCounter = 0
     tetromino = nextItem
     generateNextItem()
     print("Next mino is: ",nextSayer)
     slidetimer = stickdelay
-    tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    if tetromino.name == "I" {
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    } else {
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 4, direction: 0)
+    }
     stRefreshes = stMaxRefreshes
     wallKicks = 0
+    
 }
 
 func fallMino() {
@@ -228,7 +255,7 @@ func keyPress(key: Int) {
 
     //leftarrow
     if key == (123) {
-        dirCounter = 0
+        shiftAutoRepeatCounter = 0
         if !tetromino.blockLeft(){
             tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
             refreshSlideTimer()
@@ -237,7 +264,7 @@ func keyPress(key: Int) {
     }
     //rightarrow
     if key == (124) {
-        dirCounter = 0
+        shiftAutoRepeatCounter = 0
         if !tetromino.blockRight(){
             tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
             refreshSlideTimer()
@@ -320,7 +347,9 @@ func keyPress(key: Int) {
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
     if keyIsPressed(4) {
-        //debug piece goes here
+        tetromino.removeFromGrid()
+        tetromino = createDomino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
     
 }

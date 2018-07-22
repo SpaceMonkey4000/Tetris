@@ -28,27 +28,27 @@ func noSpinScore() {
         print("Tetris")
     } else if lineScore == 5 {
         print("Tetris plus")
-    }
+    } 
 }
 
 //Handles scoring if spins other than T have been performed.
 func spinScore() {
-    if sSpinRewards{
+    if sSpinsRewarded{
         
     }
-    if zSpinRewards{
+    if zSpinsRewarded{
         
     }
-    if lSpinRewards{
+    if lSpinsRewarded{
         
     }
-    if jSpinRewards{
+    if jSpinsRewarded{
         
     }
-    if iSpinRewards{
+    if iSpinsRewarded{
         
     }
-    if oSpinRewards{
+    if oSpinsRewarded{
         if tetromino.name == "O"{
             if lineScore == 0 {
                 print("O-spin")
