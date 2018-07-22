@@ -54,7 +54,6 @@ var gameState = "play"
     if the mino moves, the variable is set to 0.
     if the piece lands when the variable is 1, the game will end. */
 var gameOverCheck = 1
-//NOTE: At this time, this variable is not implemented. This means the game STILL doesn't end.
 
 //spin rewards
 var tSpinsRewarded = true
@@ -66,9 +65,6 @@ var iSpinsRewarded = true
 var oSpinsRewarded = true
 
 var rotationSystem = "OSSRS"
-
-//This variable is just for laughs.
-var My_Amazing_Variable = "int"
 
 createStyleColors()
 
@@ -83,7 +79,6 @@ tetromino = createJTetromino()
 // This function is called once, before the game starts.
 func first() {
     generateNextItem()
-    print("Next mino is: ",nextSayer)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
 
@@ -91,7 +86,6 @@ func first() {
 
 func refreshSlideTimer() {
     if tetromino.onGround(){
-        print(stRefreshes)
         stRefreshes -= 1
         if stRefreshes < 1 {
             slidetimer = 1
@@ -103,31 +97,34 @@ func refreshSlideTimer() {
 
 // This function is called 60 times per second.
 func update() {
-    fallMino()
-    softFall()
-    //leftarrow
-    if keyIsPressed(123) {
-        if !keyIsPressed(124) {
-            shiftAutoRepeatCounter += 1
-            if shiftAutoRepeatCounter > 14 {
-                shiftAutoRepeatCounter2 += 1
-                if shiftAutoRepeatCounter2 > autoRepeatSpeed {
-                    tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
-                    refreshSlideTimer()
-                    shiftAutoRepeatCounter2 = 0
+    if gameState == "play" {
+        fallMino()
+        softFall()
+        checkForGameOver()
+        //leftarrow
+        if keyIsPressed(123) {
+            if !keyIsPressed(124) {
+                shiftAutoRepeatCounter += 1
+                if shiftAutoRepeatCounter > 14 {
+                    shiftAutoRepeatCounter2 += 1
+                    if shiftAutoRepeatCounter2 > autoRepeatSpeed {
+                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
+                        refreshSlideTimer()
+                        shiftAutoRepeatCounter2 = 0
+                    }
                 }
             }
         }
-    }
-    //rightarrow
-    if keyIsPressed(124) {
-        if !keyIsPressed(123) {
-            shiftAutoRepeatCounter += 1
-            if shiftAutoRepeatCounter > 14 {
-                shiftAutoRepeatCounter2 += 1
-                if shiftAutoRepeatCounter2 > autoRepeatSpeed {
-                    tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
-                    shiftAutoRepeatCounter2 = 0
+        //rightarrow
+        if keyIsPressed(124) {
+            if !keyIsPressed(123) {
+                shiftAutoRepeatCounter += 1
+                if shiftAutoRepeatCounter > 14 {
+                    shiftAutoRepeatCounter2 += 1
+                    if shiftAutoRepeatCounter2 > autoRepeatSpeed {
+                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
+                        shiftAutoRepeatCounter2 = 0
+                    }
                 }
             }
         }
@@ -144,20 +141,21 @@ func softFall(){
     }
 }
 func spawnMino(){
-    fallCounter = 0
-    softdropCounter = 0
-    tetromino = nextItem
-    generateNextItem()
-    print("Next mino is: ",nextSayer)
-    slidetimer = stickdelay
-    if tetromino.name == "I" {
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    } else {
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 4, direction: 0)
+    if gameState == "play" {
+        fallCounter = 0
+        softdropCounter = 0
+        tetromino = nextItem
+        generateNextItem()
+        slidetimer = stickdelay
+        gameOverCheck = 1
+        if tetromino.name == "I" {
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        } else {
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 4, direction: 0)
+        }
+        stRefreshes = stMaxRefreshes
+        wallKicks = 0
     }
-    stRefreshes = stMaxRefreshes
-    wallKicks = 0
-    
 }
 
 func fallMino() {
@@ -182,8 +180,10 @@ func fallMino() {
             }
             return
         }
-        
-        tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+        if !tetromino.onGround() {
+            gameOverCheck = 0
+            tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+        }
     }
     
 }
@@ -218,6 +218,12 @@ func linecheck() {
         }
     }
         scoreLines()
+}
+
+func checkForGameOver() {
+    if gameOverCheck == 1 && tetromino.onGround() {
+        gameState = "over"
+    }
 }
 
 // This function is called whenever the user presses a key.
@@ -351,18 +357,23 @@ func keyPress(key: Int) {
         tetromino = createDomino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
-    
+    if keyIsPressed(5) {
+        print("gamestate:",gameState)
+        print("gameovercheck:",gameOverCheck)
+        print("tetrominoonground:",tetromino.onGround())
+}
+
 }
 
 
 func generateNextItem() {
-    rng1 = random(min: 0, max: 6)
-        switch rng1 {
-        case 0:
-            nextItem = createOTetromino()
-            nextSayer = "O"
-        case 1:
-            nextItem = createTTetromino()
+rng1 = random(min: 0, max: 6)
+    switch rng1 {
+    case 0:
+        nextItem = createOTetromino()
+        nextSayer = "O"
+    case 1:
+        nextItem = createTTetromino()
             nextSayer = "T"
         case 2:
             nextItem = createITetromino()

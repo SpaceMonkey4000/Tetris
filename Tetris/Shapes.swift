@@ -8,7 +8,7 @@
 
 import Foundation
 
-var textureStyle = "nes"
+var textureStyle = "default"
 
     var orangebasic = texture(named: "Orangebasic")
     var redbasic = texture(named: "Redbasic")

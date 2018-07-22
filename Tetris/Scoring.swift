@@ -1,7 +1,7 @@
 import Foundation
 
 func scoreLines(){
-    print("wallkicks:",wallKicks)
+//    print("wallkicks:",wallKicks)
     if wallKicks < 2 {
         if tetromino.name == "T" {
             tSpinScore()
