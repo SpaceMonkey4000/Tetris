@@ -1,4 +1,6 @@
-// The long list of variables starts here.
+//-------------------------------------------------------------------------------------------------------------//
+//                                      Start of the variable list                                             //
+//-------------------------------------------------------------------------------------------------------------//
 
     //TRUE LETS: these are lets. Let let let let let let let let
         //This defines the garbage icon.
@@ -45,60 +47,48 @@
         craft == It looks like minecraft!
         puyo == Based on the puyos in the puyo puyo games.
         invisible == You can't see anything... it will work when background texture is implemented.*/
-        var textureStyle = "puyo"
- 
+        var textureStyle = "default"
+        //How fast holding left/right autorepeats.
+        var autoRepeatSpeed = 2
+    //VARS: True variables that will change outside of menus.
+        // How fast naturally falling and softdropping will be. They will change as the player progresses.
+        var fallspeed = 30
+        var softdropfallspeed = 2
+        // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
+        var softdropcounter = 0
+        var fallCounter = 0
+        // This variable is used to check if a player performs an amount of wallkicks when the piece drops.
+        var wallKicks = 0
+        // This variable is used to take in how many lines were cleared.
+        var lineScore = 0
+        // This variable is used to count the amount of frames left for the player to move. When the piece touches the ground, the slidetimer starts counting down from stickdelay to 0. When it reaches zero, the piece will lock.
+        var slidetimer = 0
+        // This variable is used to check if a line should be cleared or not. If the tilesinline variable is equal to gridsizeX, the line will clear.
+        var tilesinline = 0
+        // This variable is used to delay the autorepeat of the piece shifting.
+        var shiftAutoRepeatCounter = 0
+        // This variable is used to count if the piece should autorepeat. This acts similarly to the slidetimer and fallconter variables.
+        var shiftAutoRepeatCounter2 = 0
+        // This variable sets which piece will come next. Changes upon piece generation.
+        var nextItem: Tetromino = createOTetromino()
+        // This variable is purely debug, but it is used to print the nextItem.
+        var nextSayer = "0"
+        // The current amount of refreshes the player has left. Upon piece generation, it will be set to stmaxrefreshes. If it reaches zero, the piece will instantly lock down.
+        var stRefreshes = 0
+        // RNG VALUES
+            // This value is used to define the nextItem variable.
+            var rngPieceGen = 0
+        //If the game is over, in a menu, or in play. (over, menu, play)
+        var gameState = "play"
+        // This variable is used to sense if the game should end.
+        /* When the piece is spawned, this variable is set to 1.
+        if the mino moves, the variable is set to 0.
+        if the piece lands when the variable is 1, the game will end. */
+        var gameOverCheck = 1
 
-
-    var softfallcounter = 0
-
-    var fallspeed = 30
-    var softdropfallspeed = 2
-
-
-
-var fallCounter = 0
-
-var wallKicks = 0
-
-var lineScore = 0
-
-var slidetimer = 0
-
-var tilesinline = 0
-
-var shiftAutoRepeatCounter = 0
-var softdropCounter = 0
-
-// DAS.
-var autoRepeatSpeed = 2
-
-var shiftAutoRepeatCounter2 = 0
-var nextItem: Tetromino = createOTetromino()
-var nextSayer = "0"
-
-//Rotating or moving a piece when it is on the ground will refresh the slide timer.
-    // The current amount of refreshes the player has left.
-    var stRefreshes = 0
-
-
-
-
-var rng1 = 0
-
-
-
-//If the game is over, in a menu, or in play. (over, menu, play)
-var gameState = "play"
-
-// This variable is used to sense if the game should end.
-    /* When the piece is spawned, this variable is set to 1.
-    if the mino moves, the variable is set to 0.
-    if the piece lands when the variable is 1, the game will end. */
-var gameOverCheck = 1
-
-
-
-//The long list of variables ends here.
+//-------------------------------------------------------------------------------------------------------------//
+//                                        End of the variable list                                             //
+//-------------------------------------------------------------------------------------------------------------//
 createStyleColors()
 
 createAllPieces()
@@ -165,18 +155,17 @@ func update() {
     
 }
 func softFall(){
-    softfallcounter -= 1
-    if softfallcounter < 0 {
+    softdropcounter -= 1
+    if softdropcounter < 0 {
         if keyIsPressed(125){
             fallCounter = softdropfallspeed
-            softfallcounter = softdropfallspeed
+            softdropcounter = softdropfallspeed
         }
     }
 }
 func spawnMino(){
     if gameState == "play" {
         fallCounter = 0
-        softdropCounter = 0
         tetromino = nextItem
         generateNextItem()
         slidetimer = stickdelay
@@ -405,8 +394,8 @@ func keyPress(key: Int) {
 
 
 func generateNextItem() {
-rng1 = random(min: 0, max: 6)
-    switch rng1 {
+rngPieceGen = random(min: 0, max: 6)
+    switch rngPieceGen {
     case 0:
         nextItem = createOTetromino()
         nextSayer = "O"

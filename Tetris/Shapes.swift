@@ -17,7 +17,7 @@ import Foundation
     var cyanbasic = texture(named: "Cyanbasic")
     var purplebasic = texture(named: "Purplebasic")
     var bloodbasic = texture(named: "Bloodbasic")
-    var whitebasic = texture(named: "Backgroundtexture")
+    var whitebasic = texture(named: "Whitebasic")
     var brownbasic = texture(named: "Brownbasic")
     var pinkbasic = texture(named: "Pinkbasic")
     var blackbasic = texture(named: "Blackbasic")
@@ -94,6 +94,16 @@ func createStyleColors() {
         yellowbasic = texture(named: "Yellownes")
         cyanbasic = texture(named: "Cyannes")
         purplebasic = texture(named: "Purplenes")
+    }
+    //Changes the textures to fit the invisible style.
+    if  textureStyle == "invisible" {
+        orangebasic = texture(named: "Backgroundtexture")
+        redbasic = texture(named: "Backgroundtexture")
+        greenbasic = texture(named: "Backgroundtexture")
+        bluebasic = texture(named: "Backgroundtexture")
+        yellowbasic = texture(named: "Backgroundtexture")
+        cyanbasic = texture(named: "Backgroundtexture")
+        purplebasic = texture(named: "Backgroundtexture")
     }
     
 }
