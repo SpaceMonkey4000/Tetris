@@ -10,10 +10,19 @@ import SpriteKit
 
 class Cell {
 
-    let spriteNode = SKSpriteNode()
+    private let spriteNode = SKSpriteNode()
 
-    var row: Int = -1
-    var column: Int = -1
+    private var row: Int = -1
+    private var column: Int = -1
+
+    // If textureIndex is nil, this texture is assigned to the sprite.    
+    public var defaultTextureIndex: Int? = nil {
+        didSet {
+            // This has the side effect of updating the sprite's texture
+            // to the default texture, if necessary.
+            textureIndex = textureIndex
+        }
+    }
 
     // Width and height of each cell, in pixels.
     // The textures are assembled into a texture atlas, so a power of two here is probably advantageous.
@@ -21,7 +30,7 @@ class Cell {
 
     public var textureIndex: Int? {
         didSet {
-            guard let textureIndex = textureIndex else {
+            guard let textureIndex = textureIndex ?? defaultTextureIndex else {
                 spriteNode.texture = nil
                 return
             }

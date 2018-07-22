@@ -13,6 +13,20 @@ public func start() {
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 }
 
+private func createTextureAtlasControllerIfNecessary() {
+    let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
+    textureAtlasController.createIfNecessary()
+}
+
+/// Assigns a background texture that appears in each cell when it is cleared
+/// with clearTexture, or with setTexture with an argument of 0.
+public func setBackgroundTexture(_ backgroundTexture: Int) {
+    createTextureAtlasControllerIfNecessary()
+    matrix.foreach { _, _, cell in 
+        cell.defaultTextureIndex = backgroundTexture
+    }
+}
+
 /// Adds a texture with a name of an image in the asset catalog.
 public func texture(named name: String) -> Int {
     guard TetrisManager.shared.matrix == nil else {
@@ -36,8 +50,7 @@ public func setTexture(_ index: Int, x: Int, y: Int) {
         fatalError()
     }
 
-    let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
-    textureAtlasController.createIfNecessary()
+    createTextureAtlasControllerIfNecessary()
 
     let cell = matrix.cellAt(x: x, y: y)
     if cell == nil {
