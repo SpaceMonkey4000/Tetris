@@ -14,24 +14,31 @@ class Shape {
     // The array of minos that make up the shape.
     var minos: [Mino] = []
 
-    // Add a mino to the shape. mx and my are coordinates within the mino.
-    // 0, 0 is at the lower left corner of the mino.
+    // Add a mino to the shape. mx and my are coordinates within the shape.
+    // 0, 0 is at the lower left corner of the shape.
     func addMino(mx: Int, my: Int) {
         let mino = Mino(mx: mx, my: my)
         minos.append(mino)
     }
 
-    // Draw a mino. x and y are the position of the lower left corner
-    // of the mino in the grid.
+    // Draw the shape. x and y are the position of the lower left corner
+    // of the shape in the grid.
     func draw(x: Int, y: Int) {
         // Loop over all the minos that make up the shape.
         for mino in minos {
             setTexture(texture, x: x + mino.mx, y: y + mino.my)
         }
     }
+    
+    // Draw a shape, using a different texture.
+    func drawWithTexture(_ texture: Int, x: Int, y: Int) {
+        for mino in minos {
+            setTexture(texture, x: x + mino.mx, y: y + mino.my)
+        }
+    }
 
-    // Erase the mino. x and y are the position of the lower left corner
-    // of the mino in the grid.
+    // Erase the shape. x and y are the position of the lower left corner
+    // of the shape in the grid.
     // look to the ways of the tiny potato
     func erase(x: Int, y: Int) {
         for mino in minos {
@@ -39,9 +46,9 @@ class Shape {
         }
     }
 
-    // Returns true if the mino collides with any non-blank textures
+    // Returns true if the shape collides with any non-blank textures
     // that already exist in the grid. x and y are the position of the
-    // lower left corner of the mino in the grid.
+    // lower left corner of the shape in the grid.
     func collidesWithMinos(x: Int, y: Int) -> Bool {
         for mino in minos {
             if hasTextureAt(x: mino.mx + x, y: mino.my + y) {
@@ -51,9 +58,9 @@ class Shape {
         return false
     }
 
-    // Returns true if the mino collides with the edge of the grid.
+    // Returns true if the shape collides with the edge of the grid.
     // x and y are the position of the
-    // lower left corner of the mino in the grid.
+    // lower left corner of the shape in the grid.
     func collidesWithEdgeOfGrid(x: Int, y: Int) -> Bool {
         for mino in minos {
             if mino.mx + x > gridSizeX - 1 || mino.mx + x < 0 || mino.my + y < 0 {
