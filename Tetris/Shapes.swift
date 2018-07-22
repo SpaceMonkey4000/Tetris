@@ -9,18 +9,6 @@
 import Foundation
 
 
-    var orangebasic = texture(named: "Orangebasic")
-    var redbasic = texture(named: "Redbasic")
-    var greenbasic = texture(named: "Greenbasic")
-    var bluebasic = texture(named: "Bluebasic")
-    var yellowbasic = texture(named: "Yellowbasic")
-    var cyanbasic = texture(named: "Cyanbasic")
-    var purplebasic = texture(named: "Purplebasic")
-    var bloodbasic = texture(named: "Bloodbasic")
-    var whitebasic = texture(named: "Whitebasic")
-    var brownbasic = texture(named: "Brownbasic")
-    var pinkbasic = texture(named: "Pinkbasic")
-    var blackbasic = texture(named: "Blackbasic")
 
 
 //Changes the textures to fit the current style.
