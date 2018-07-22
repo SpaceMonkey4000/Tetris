@@ -21,10 +21,14 @@ private func createTextureAtlasControllerIfNecessary() {
 /// Assigns a background texture that appears in each cell when it is cleared
 /// with clearTexture, or with setTexture with an argument of 0.
 public func setBackgroundTexture(_ backgroundTexture: Int) {
-    createTextureAtlasControllerIfNecessary()
-    matrix.foreach { _, _, cell in 
-        cell.defaultTextureIndex = backgroundTexture
+    guard let matrix = TetrisManager.shared.matrix else {
+        print("Error: setBackgroundTexture must only be called in the start or update functions.")
+        fatalError()
     }
+
+    createTextureAtlasControllerIfNecessary()
+    
+    matrix.defaultTextureIndex = backgroundTexture
 }
 
 /// Adds a texture with a name of an image in the asset catalog.

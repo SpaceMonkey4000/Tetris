@@ -64,5 +64,14 @@ class Matrix {
             cell.layout(x: x, y: y)
         }
     }
+    
+    // When a cell's textureIndex is nil, this texture is assigned to its sprite.
+    public var defaultTextureIndex: Int? = nil {
+        didSet {
+            foreach { _, _, cell in
+                cell.defaultTextureIndex = defaultTextureIndex
+            }
+        }
+    }
 
 }

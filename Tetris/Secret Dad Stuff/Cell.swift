@@ -20,7 +20,8 @@ class Cell {
         didSet {
             // This has the side effect of updating the sprite's texture
             // to the default texture, if necessary.
-            textureIndex = textureIndex
+            let temp = textureIndex
+            self.textureIndex = temp
         }
     }
 
