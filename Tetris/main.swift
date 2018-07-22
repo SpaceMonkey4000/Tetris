@@ -1,16 +1,59 @@
+// The long list of variables starts here.
 
-// Size of the grid in cells.
-let gridSizeX = 10
-let gridSizeY = 24
+    //TRUE LETS: these are lets. Let let let let let let let let
+        //This defines the garbage icon.
+        let garbage = texture(named: "Garbageicon")
+        //This is the amount of rows that are hidden from the player. It is a float value.
+        let hiddenMatrixRows = 3.8
 
-// The number of rows that are hidden beyond the top of the screen.
-let hiddenMatrixRows = 3.8
-var softfallcounter = 0
+    //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
+        // Size of the grid in cells.
+        var gridSizeX = 10
+        var gridSizeY = 24
+        // The amount of frames that the player has before the piece locks down.
+        var stickdelay = 30
+        // Allows the player to use special keys to make tetrominos and debug pieces.
+        var debugTools = 1
+        // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
+        var stMaxRefreshes = 15
+        //If the piece instantly locks down when hard dropped.
+        var hardDropInstantLock = 1
+        //SPINS:
+            //If the player gets rewarded for doing spin moves for certain blocks.
+            var tSpinsRewarded = true
+            var sSpinsRewarded = false
+            var zSpinsRewarded = false
+            var lSpinsRewarded = false
+            var jSpinsRewarded = false
+            var iSpinsRewarded = false
+            var oSpinsRewarded = false
+        /*The rotation system the game uses.
+        SRS == The super rotation system. The standard RS that the tetris guideline uses.
+        OSSRS == The O-spin super rotation system. Like SRS, but it allows for O-spins.
+        Simple == The simple rotation system. Uses no wall kicks. */
+        var rotationSystem = "OSSRS"
+        /*The visual style the game uses.
+        default == The default visual style. Based off of the default style in Tetris Friends.
+        solid == Solid colors. Based off of... solid colors. Not implemented yet.
+        nes == The style of the tetris game on the NES.
+        nblox == The style used in N-blox. It even comes with matching colors! Not implemented yet.
+        GB == The style used in the game boy tetris.
+        shiny == It's shiny!
+        effect == Based off of Tetris Effect. All blocks use the same texture.
+        garbage == Everything is a garbage tile. Not implemented yet.
+        rune == Everything looks like ancient runes.
+        craft == It looks like minecraft!
+        puyo == Based on the puyos in the puyo puyo games.
+        invisible == You can't see anything... it will work when background texture is implemented.*/
+        var textureStyle = "puyo"
+ 
 
-var fallspeed = 30
-var softdropfallspeed = 2
 
-let garbage = texture(named: "Garbageicon")
+    var softfallcounter = 0
+
+    var fallspeed = 30
+    var softdropfallspeed = 2
+
 
 
 var fallCounter = 0
@@ -20,7 +63,7 @@ var wallKicks = 0
 var lineScore = 0
 
 var slidetimer = 0
-var stickdelay = 30
+
 var tilesinline = 0
 
 var shiftAutoRepeatCounter = 0
@@ -36,15 +79,13 @@ var nextSayer = "0"
 //Rotating or moving a piece when it is on the ground will refresh the slide timer.
     // The current amount of refreshes the player has left.
     var stRefreshes = 0
-    // The amount of refreshes the player gets upon piece spawning.
-    var stMaxRefreshes = 15
 
-var debugTools = 1
+
+
 
 var rng1 = 0
 
-//If the piece instantly locks down when hard dropped.
-var hardDropInstantLock = 1
+
 
 //If the game is over, in a menu, or in play. (over, menu, play)
 var gameState = "play"
@@ -55,17 +96,9 @@ var gameState = "play"
     if the piece lands when the variable is 1, the game will end. */
 var gameOverCheck = 1
 
-//spin rewards
-var tSpinsRewarded = true
-var sSpinsRewarded = true
-var zSpinsRewarded = true
-var lSpinsRewarded = true
-var jSpinsRewarded = true
-var iSpinsRewarded = true
-var oSpinsRewarded = true
 
-var rotationSystem = "OSSRS"
 
+//The long list of variables ends here.
 createStyleColors()
 
 createAllPieces()
@@ -149,9 +182,9 @@ func spawnMino(){
         slidetimer = stickdelay
         gameOverCheck = 1
         if tetromino.name == "I" {
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
         } else {
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 4, direction: 0)
+            tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
         }
         stRefreshes = stMaxRefreshes
         wallKicks = 0
@@ -226,6 +259,7 @@ func checkForGameOver() {
         tetromino.removeFromGrid()
         tetromino = createInstaclearTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        print("Game over!")
     }
 }
 

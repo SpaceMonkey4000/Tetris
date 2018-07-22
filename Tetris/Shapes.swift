@@ -8,7 +8,6 @@
 
 import Foundation
 
-var textureStyle = "default"
 
     var orangebasic = texture(named: "Orangebasic")
     var redbasic = texture(named: "Redbasic")
@@ -18,10 +17,11 @@ var textureStyle = "default"
     var cyanbasic = texture(named: "Cyanbasic")
     var purplebasic = texture(named: "Purplebasic")
     var bloodbasic = texture(named: "Bloodbasic")
-    var whitebasic = texture(named: "Whitebasic")
+    var whitebasic = texture(named: "Backgroundtexture")
     var brownbasic = texture(named: "Brownbasic")
     var pinkbasic = texture(named: "Pinkbasic")
     var blackbasic = texture(named: "Blackbasic")
+
 
 //Changes the textures to fit the current style.
 func createStyleColors() {
@@ -462,4 +462,5 @@ func createXpiece() {
     xPiece.addMino(mx: 1, my: 2)
     xPiece.addMino(mx: 1, my: 0)
 }
+
 
