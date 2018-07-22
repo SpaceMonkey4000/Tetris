@@ -22,7 +22,7 @@ private func createTextureAtlasControllerIfNecessary() {
 /// with clearTexture, or with setTexture with an argument of 0.
 public func setBackgroundTexture(_ backgroundTexture: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: setBackgroundTexture must only be called in the start or update functions.")
+        print("Error: setBackgroundTexture must only be called in the first or update functions.")
         fatalError()
     }
 
@@ -34,7 +34,7 @@ public func setBackgroundTexture(_ backgroundTexture: Int) {
 /// Adds a texture with a name of an image in the asset catalog.
 public func texture(named name: String) -> Int {
     guard TetrisManager.shared.matrix == nil else {
-        print("Error: setTexture must not be called in the start or update functions.")
+        print("Error: texture(named:) must not be called in the first or update functions.")
         fatalError()
     }
 
@@ -50,7 +50,7 @@ public func texture(named name: String) -> Int {
 /// the cell's texture is cleared.
 public func setTexture(_ index: Int, x: Int, y: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: setTexture must only be called in the start or update functions.")
+        print("Error: setTexture must only be called in the first or update functions.")
         fatalError()
     }
 
@@ -72,7 +72,7 @@ public func setTexture(_ index: Int, x: Int, y: Int) {
 /// Clears the texture at a grid cell.
 public func clearTexture(x: Int, y: Int) {
     guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: clearTexture must only be called in the start or update functions.")
+        print("Error: clearTexture must only be called in the first or update functions.")
         fatalError()
     }
 
@@ -87,7 +87,7 @@ public func clearTexture(x: Int, y: Int) {
 /// Returns true if a texture exists at a grid cell.
 public func hasTextureAt(x: Int, y: Int) -> Bool {
     guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: textureAt must only be called in the start or update functions.")
+        print("Error: textureAt must only be called in the first or update functions.")
         fatalError()
     }
 
@@ -101,7 +101,7 @@ public func hasTextureAt(x: Int, y: Int) -> Bool {
 /// Returns the texture at a grid cell. Returns 0 if the cell has no texture.
 public func textureAt(x: Int, y: Int) -> Int {
     guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: textureAt must only be called in the start or update functions.")
+        print("Error: textureAt must only be called in the first or update functions.")
         fatalError()
     }
 
