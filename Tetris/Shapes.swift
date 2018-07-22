@@ -437,9 +437,9 @@ func createEdifPiece() {
 //instaclear
 func createInstaClear() {
     instaClear.texture = whitebasic
-    for y in 0..<20 {
+    for y in 0..<23 {
         for x in 0..<30 {
-            instaClear.addMino(mx: x - 15, my: y - 20)
+            instaClear.addMino(mx: x - 15, my: y - 19)
         }
     }
 }

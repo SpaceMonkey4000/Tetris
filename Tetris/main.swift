@@ -223,6 +223,9 @@ func linecheck() {
 func checkForGameOver() {
     if gameOverCheck == 1 && tetromino.onGround() {
         gameState = "over"
+        tetromino.removeFromGrid()
+        tetromino = createInstaclearTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
 }
 
@@ -361,6 +364,7 @@ func keyPress(key: Int) {
         print("gamestate:",gameState)
         print("gameovercheck:",gameOverCheck)
         print("tetrominoonground:",tetromino.onGround())
+        
 }
 
 }
