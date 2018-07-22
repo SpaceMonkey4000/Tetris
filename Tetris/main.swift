@@ -57,6 +57,8 @@ var autoRepeatSpeed = 2
    bright == ghost is white.
    color == the ghost uses the color of the current tetromino. */
 var ghostStyle = "color"
+//If DAS can be preserved.
+var diagonalMove = true
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -205,6 +207,9 @@ func softFall(){
 }
 func spawnMino(){
     if gameState == "play" {
+        if !diagonalMove {
+            shiftAutoRepeatCounter = 0
+        }
         fallCounter = 0
         tetromino = nextItem
         generateNextItem()
