@@ -1,7 +1,6 @@
 import Foundation
 
 func scoreLines(){
-//    print("wallkicks:",wallKicks)
     if wallKicks < 2 {
         if tetromino.name == "T" {
             tSpinScore()
@@ -63,5 +62,35 @@ func spinScore() {
 }
 
 func tSpinScore () {
-    
+    threeCornerTest()
+}
+//3corner test
+func threeCornerTest() {
+    var cornersFull = 0
+    cornersFull = 0
+    if tetromino.relativeBlockAt(dx: 1, dy: 1) {
+        cornersFull += 1
+    }
+    if tetromino.relativeBlockAt(dx: -1, dy: 1) {
+        cornersFull += 1
+    }
+    if tetromino.relativeBlockAt(dx: -1, dy: -1) {
+        cornersFull += 1
+    }
+    if tetromino.relativeBlockAt(dx: 1, dy: -1) {
+        cornersFull += 1
+    }
+    if cornersFull > 2 {
+        if lineScore == 0 {
+            print ("T spin")
+        }
+        if lineScore == 1 {
+            print ("T spin single")
+        }
+        if lineScore == 2 {
+            print ("T spin double")
+        }
+    } else {
+        
+    }
 }

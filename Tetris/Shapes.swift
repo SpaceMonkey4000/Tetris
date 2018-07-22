@@ -93,6 +93,16 @@ func createStyleColors() {
         cyanbasic = texture(named: "Backgroundtexture")
         purplebasic = texture(named: "Backgroundtexture")
     }
+    //Changes the textures to fit the garbage style.
+    if  textureStyle == "garbage" {
+        orangebasic = texture(named: "Garbageicon")
+        redbasic = texture(named: "Garbageicon")
+        greenbasic = texture(named: "Garbageicon")
+        bluebasic = texture(named: "Garbageicon")
+        yellowbasic = texture(named: "Garbageicon")
+        cyanbasic = texture(named: "Garbageicon")
+        purplebasic = texture(named: "Garbageicon")
+    }
     
 }
 

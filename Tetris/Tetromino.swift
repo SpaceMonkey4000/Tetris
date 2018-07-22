@@ -36,6 +36,7 @@ class Tetromino {
     private var x: Int = 0
     private var y: Int = 0
 
+
     // An array of 4 shapes.
     private var shapes: [Shape] = []
 
@@ -166,5 +167,11 @@ class Tetromino {
     // Checks if the tetromino is just below a ceiling.
     func blockUp() -> Bool {
         return !canMoveBy(dx: 0, dy: 1, ddirection: 0)
+    }
+    
+    
+    // Checks if there is a block in a specified location relative to the center of the tetromino.
+    func relativeBlockAt(dx: Int, dy: Int) -> Bool {
+        return hasTextureAt(x: self.x + 1 + dx, y: self.y + 1 + dx)
     }
 }

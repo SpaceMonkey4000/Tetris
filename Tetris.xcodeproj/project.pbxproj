@@ -29,6 +29,7 @@
 		7769072F20FBBE70003F4C57 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7769072E20FBBE70003F4C57 /* Shapes.swift */; };
 		77A2983D2101330800E30011 /* RotationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983C2101330800E30011 /* RotationSystem.swift */; };
 		77A2983F2102AEDC00E30011 /* Scoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983E2102AEDC00E30011 /* Scoring.swift */; };
+		77D1D1262105259100CBB46A /* Ghostpiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1D1252105259100CBB46A /* Ghostpiece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		7769072E20FBBE70003F4C57 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		77A2983C2101330800E30011 /* RotationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationSystem.swift; sourceTree = "<group>"; };
 		77A2983E2102AEDC00E30011 /* Scoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoring.swift; sourceTree = "<group>"; };
+		77D1D1252105259100CBB46A /* Ghostpiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghostpiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3AB47A2720FC00B800779E6D /* Tetrominos.swift */,
 				77A2983C2101330800E30011 /* RotationSystem.swift */,
 				77A2983E2102AEDC00E30011 /* Scoring.swift */,
+				77D1D1252105259100CBB46A /* Ghostpiece.swift */,
 				3A5F13F420FA7D5A00A43C21 /* Secret Dad Stuff */,
 			);
 			path = Tetris;
@@ -204,6 +207,7 @@
 				3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */,
 				77A2983D2101330800E30011 /* RotationSystem.swift in Sources */,
 				3A5F13E520FA78B900A43C21 /* Scene.swift in Sources */,
+				77D1D1262105259100CBB46A /* Ghostpiece.swift in Sources */,
 				3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */,
 				77A2983F2102AEDC00E30011 /* Scoring.swift in Sources */,
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,

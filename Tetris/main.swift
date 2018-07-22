@@ -6,21 +6,6 @@
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
 
-var orangebasic = texture(named: "Orangebasic")
-var redbasic = texture(named: "Redbasic")
-var greenbasic = texture(named: "Greenbasic")
-var bluebasic = texture(named: "Bluebasic")
-var yellowbasic = texture(named: "Yellowbasic")
-var cyanbasic = texture(named: "Cyanbasic")
-var purplebasic = texture(named: "Purplebasic")
-var bloodbasic = texture(named: "Bloodbasic")
-var whitebasic = texture(named: "Whitebasic")
-var brownbasic = texture(named: "Brownbasic")
-var pinkbasic = texture(named: "Pinkbasic")
-var blackbasic = texture(named: "Blackbasic")
-var backgroundtexture = texture(named: "Backgroundtexture")
-
-
 //This is the amount of rows that are hidden from the player. It is a float value.
 let hiddenMatrixRows = 3.8
 
@@ -58,21 +43,38 @@ var rotationSystem = "OSSRS"
  GB == The style used in the game boy tetris.
  shiny == It's shiny!
  effect == Based off of Tetris Effect. All blocks use the same texture.
- garbage == Everything is a garbage tile. Not implemented yet.
+ garbage == Everything is a garbage tile.
  rune == Everything looks like ancient runes.
  craft == It looks like minecraft!
  puyo == Based on the puyos in the puyo puyo games.
- invisible == You can't see anything... it will work when background texture is implemented.*/
+ invisible == You can't see anything.*/
 var textureStyle = "default"
 //How fast holding left/right autorepeats.
 var autoRepeatSpeed = 2
 //VARS: True variables that will change outside of menus.
+//These variables are used to define textures.
+var orangebasic = texture(named: "Orangebasic")
+var redbasic = texture(named: "Redbasic")
+var greenbasic = texture(named: "Greenbasic")
+var bluebasic = texture(named: "Bluebasic")
+var yellowbasic = texture(named: "Yellowbasic")
+var cyanbasic = texture(named: "Cyanbasic")
+var purplebasic = texture(named: "Purplebasic")
+var bloodbasic = texture(named: "Bloodbasic")
+var whitebasic = texture(named: "Whitebasic")
+var brownbasic = texture(named: "Brownbasic")
+var pinkbasic = texture(named: "Pinkbasic")
+var blackbasic = texture(named: "Blackbasic")
+var backgroundtexture = texture(named: "Backgroundtexture")
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
 var fallspeed = 30
 var softdropfallspeed = 2
 // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
 var softdropcounter = 0
 var fallCounter = 0
+// These variables define how many tiles the piece will fall per fall/softdrop.
+var fallTiles = 1
+var softDropTiles = 1
 // This variable is used to check if a player performs an amount of wallkicks when the piece drops.
 var wallKicks = 0
 // This variable is used to take in how many lines were cleared.
@@ -101,6 +103,8 @@ var gameState = "play"
  if the mino moves, the variable is set to 0.
  if the piece lands when the variable is 1, the game will end. */
 var gameOverCheck = 1
+// an array for the line check
+var linesToClear: [Int] = []
 
 //-------------------------------------------------------------------------------------------------------------//
 //                                        End of the variable list                                             //
@@ -219,7 +223,15 @@ func fallMino() {
         }
         if !tetromino.onGround() {
             gameOverCheck = 0
-            tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+            if keyIsPressed(125) {
+                for _ in 0..<softDropTiles {
+                    tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+                }
+            } else {
+                for _ in 0..<fallTiles {
+                    tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+                }
+            }
         }
     }
     
@@ -238,6 +250,7 @@ func clearline(y: Int) {
 
 // check for lines
 func linecheck() {
+    linesToClear = []
     var y = 0
     lineScore = 0
     while y < gridSizeY {
@@ -248,13 +261,21 @@ func linecheck() {
             }
         }
         if tilesinline == gridSizeX {
-            clearline(y: y)
             lineScore += 1
-        } else {
-            y += 1
+            linesToClear.append(y)
+            
         }
+        y += 1
     }
-        scoreLines()
+    scoreLines()
+    clearLines()
+}
+func clearLines() {
+    var linesCleared = 0
+    for y in linesToClear {
+        clearline(y: y - linesCleared)
+        linesCleared += 1
+    }
 }
 
 func checkForGameOver() {
@@ -333,79 +354,81 @@ func keyPress(key: Int) {
     
     
     //debug
-    if keyIsPressed(12) {
-        tetromino.removeFromGrid()
-        tetromino = createLTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    if debugTools == 1 {
+        if keyIsPressed(12) {
+            tetromino.removeFromGrid()
+            tetromino = createLTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(13) {
+            tetromino.removeFromGrid()
+            tetromino = createJTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(14) {
+            tetromino.removeFromGrid()
+            tetromino = createITetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(15) {
+            tetromino.removeFromGrid()
+            tetromino = createOTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(17) {
+            tetromino.removeFromGrid()
+            tetromino = createTTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(16) {
+            tetromino.removeFromGrid()
+            tetromino = createZTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(32) {
+            tetromino.removeFromGrid()
+            tetromino = createSTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(0) {
+            tetromino.removeFromGrid()
+            tetromino = createMonominoTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(1) {
+            tetromino.removeFromGrid()
+            tetromino = createTetrisplusTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(51) {
+            tetromino.removeFromGrid()
+            tetromino = createInstaclearTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(3) {
+            tetromino.removeFromGrid()
+            tetromino = createXtetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(2) {
+            tetromino.removeFromGrid()
+            tetromino = createEDifTetromino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(4) {
+            tetromino.removeFromGrid()
+            tetromino = createDomino()
+            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        }
+        if keyIsPressed(5) {
+            print("cornerattopright:",tetromino.relativeBlockAt(dx: 1, dy: 1))
+        }
     }
-    if keyIsPressed(13) {
-        tetromino.removeFromGrid()
-        tetromino = createJTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(14) {
-        tetromino.removeFromGrid()
-        tetromino = createITetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(15) {
-        tetromino.removeFromGrid()
-        tetromino = createOTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(17) {
-        tetromino.removeFromGrid()
-        tetromino = createTTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(16) {
-        tetromino.removeFromGrid()
-        tetromino = createZTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(32) {
-        tetromino.removeFromGrid()
-        tetromino = createSTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(0) {
-        tetromino.removeFromGrid()
-        tetromino = createMonominoTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(1) {
-        tetromino.removeFromGrid()
-        tetromino = createTetrisplusTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(51) {
-        tetromino.removeFromGrid()
-        tetromino = createInstaclearTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(3) {
-        tetromino.removeFromGrid()
-        tetromino = createXtetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(2) {
-        tetromino.removeFromGrid()
-        tetromino = createEDifTetromino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(4) {
-        tetromino.removeFromGrid()
-        tetromino = createDomino()
-        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    }
-    if keyIsPressed(5) {
-        print("gamestate:",gameState)
-        print("gameovercheck:",gameOverCheck)
-        print("tetrominoonground:",tetromino.onGround())
-        
 }
 
-}
+
+
+
 
 
 func generateNextItem() {

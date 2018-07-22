@@ -62,4 +62,9 @@ class Shape {
         }
         return false
     }
+    func collidesWithAnything(x: Int, y: Int) -> Bool {
+        return collidesWithMinos(x: x, y: y) || collidesWithEdgeOfGrid(x: x, y: y)
+    }
+
 }
+
