@@ -112,9 +112,6 @@ var nextItem: Tetromino = createOTetromino()
 var nextSayer = "0"
 // The current amount of refreshes the player has left. Upon piece generation, it will be set to stmaxrefreshes. If it reaches zero, the piece will instantly lock down.
 var stRefreshes = 0
-// RNG VALUES
-// This value is used to define the nextItem variable.
-var rngPieceGen = 0
 //If the game is over, in a menu, or in play. (over, menu, play)
 var gameState = "play"
 // This variable is used to sense if the game should end.
@@ -124,6 +121,10 @@ var gameState = "play"
 var gameOverCheck = 1
 // an array for the line check
 var linesToClear: [Int] = []
+// The first "bag".
+var bag1: [Tetromino] = []
+// The second "bag".
+var bag2: [Tetromino] = []
 
 //-------------------------------------------------------------------------------------------------------------//
 //                                        End of the variable list                                             //
@@ -140,7 +141,8 @@ tetromino = createJTetromino()
 // This function is called once, before the game starts.
 func first() {
     setBackgroundTexture(backgroundtexture)
-    
+    fillBag(bag: 1)
+    fillBag(bag: 2)
     generateNextItem()
     spawnMino()
 }
@@ -307,6 +309,33 @@ func checkForGameOver() {
     }
 }
 
+func fillBag(bag: Int) {
+    if bag == 1 {
+        bag1.append(createOTetromino())
+        bag1.append(createITetromino())
+        bag1.append(createTTetromino())
+        bag1.append(createSTetromino())
+        bag1.append(createZTetromino())
+        bag1.append(createJTetromino())
+        bag1.append(createLTetromino())
+    }
+    if bag == 2 {
+        bag2.append(createOTetromino())
+        bag2.append(createITetromino())
+        bag2.append(createTTetromino())
+        bag2.append(createSTetromino())
+        bag2.append(createZTetromino())
+        bag2.append(createJTetromino())
+        bag2.append(createLTetromino())
+    }
+}
+
+//This moves the bags down one.
+func swapBags() {
+    bag1 = bag2
+    fillBag(bag: 2)
+}
+
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
     //rotateright   UP                   X
@@ -446,39 +475,13 @@ func keyPress(key: Int) {
 }
 
 
-
-
-
-
 func generateNextItem() {
-rngPieceGen = random(min: 0, max: 6)
-    switch rngPieceGen {
-    case 0:
-        nextItem = createOTetromino()
-        nextSayer = "O"
-    case 1:
-        nextItem = createTTetromino()
-            nextSayer = "T"
-        case 2:
-            nextItem = createITetromino()
-            nextSayer = "I"
-        case 3:
-            nextItem = createSTetromino()
-            nextSayer = "S"
-        case 4:
-            nextItem = createZTetromino()
-            nextSayer = "Z"
-        case 5:
-            nextItem = createJTetromino()
-            nextSayer = "J"
-        case 6:
-            nextItem = createLTetromino()
-            nextSayer = "L"
-        default:
-            nextItem = createOTetromino()
-            nextSayer = "O is for oops!"
+    if bag1.count == 0 {
+        swapBags()
     }
-
+    bag1.shuffle()
+    nextItem = bag1[0]
+    bag1.removeFirst()
 
 
 }
