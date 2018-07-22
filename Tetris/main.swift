@@ -51,6 +51,12 @@ var rotationSystem = "OSSRS"
 var textureStyle = "default"
 //How fast holding left/right autorepeats.
 var autoRepeatSpeed = 2
+//The ghost style.
+/* default == ghost is gray.
+   off == No ghost.
+   bright == ghost is white.
+   color == the ghost uses the color of the current tetromino. */
+var ghostStyle = "color"
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -60,12 +66,25 @@ var bluebasic = texture(named: "Bluebasic")
 var yellowbasic = texture(named: "Yellowbasic")
 var cyanbasic = texture(named: "Cyanbasic")
 var purplebasic = texture(named: "Purplebasic")
+
 var bloodbasic = texture(named: "Bloodbasic")
 var whitebasic = texture(named: "Whitebasic")
 var brownbasic = texture(named: "Brownbasic")
 var pinkbasic = texture(named: "Pinkbasic")
 var blackbasic = texture(named: "Blackbasic")
+
 var backgroundtexture = texture(named: "Backgroundtexture")
+
+var ghostwhite = texture(named: "Ghostwhite")
+var ghostgray = texture(named: "Ghostgray")
+var ghostorange = texture(named: "Ghostorange")
+var ghostblue = texture(named: "Ghostblue")
+var ghostyellow = texture(named: "Ghostyellow")
+var ghostcyan = texture(named: "Ghostcyan")
+var ghostpurple = texture(named: "Ghostpurple")
+var ghostred = texture(named: "Ghostred")
+var ghostgreen = texture(named: "Ghostgreen")
+
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
 var fallspeed = 30
 var softdropfallspeed = 2

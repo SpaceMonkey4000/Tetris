@@ -60,14 +60,18 @@ class Tetromino {
     // of the same name on the shape in the shapes array
     // corresponding to the value of direction.
 
+    let ghostPiece = GhostPiece()
+    
     private func draw(x: Int, y: Int, direction: Int) {
         let shape = shapes[direction]
+        ghostPiece.draw(shape: shape, x: x, y: y)
         shape.draw(x: x, y: y)
     }
 
     private func erase(x: Int, y: Int, direction: Int) {
         let shape = shapes[direction]
         shape.erase(x: x, y: y)
+        ghostPiece.erase()
     }
 
     private func collidesWithMinos(x: Int, y: Int, direction: Int) -> Bool {
@@ -102,16 +106,14 @@ class Tetromino {
         self.x = x
         self.y = y
         self.direction = direction
-        let shape = shapes[direction]
-        shape.draw(x: self.x, y: self.y)
+        draw(x: x, y: y, direction: direction)
     }
 
     // Removes the tetromino from the grid. We'll call this if we want to
     // remove the tetromino from the grid and replace it with a new one,
     // for testing. We do not expect to call this during regular game play.
     func removeFromGrid() {
-        let shape = shapes[direction]
-        shape.erase(x: self.x, y: self.y)
+        erase(x: x, y: y, direction: direction)
     }
 
     // Returns true if the tetromino can be moved by an offset
