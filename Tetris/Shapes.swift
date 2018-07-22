@@ -9,18 +9,94 @@
 import Foundation
 
 
-    let orangebasic = texture(named: "Orangebasic")
-    let redbasic = texture(named: "Redbasic")
-    let greenbasic = texture(named: "Greenbasic")
-    let bluebasic = texture(named: "Bluebasic")
-    let yellowbasic = texture(named: "Yellowbasic")
-    let cyanbasic = texture(named: "Cyanbasic")
-    let purplebasic = texture(named: "Purplebasic")
-let bloodbasic = texture(named: "Bloodbasic")
-let whitebasic = texture(named: "Whitebasic")
-let brownbasic = texture(named: "Brownbasic")
+    var orangebasic = texture(named: "Orangebasic")
+    var redbasic = texture(named: "Redbasic")
+    var greenbasic = texture(named: "Greenbasic")
+    var bluebasic = texture(named: "Bluebasic")
+    var yellowbasic = texture(named: "Yellowbasic")
+    var cyanbasic = texture(named: "Cyanbasic")
+    var purplebasic = texture(named: "Purplebasic")
+    var bloodbasic = texture(named: "Bloodbasic")
+    var whitebasic = texture(named: "Backgroundtexture")
+    var brownbasic = texture(named: "Brownbasic")
+    var pinkbasic = texture(named: "Pinkbasic")
+    var blackbasic = texture(named: "Blackbasic")
 
 
+//Changes the textures to fit the current style.
+func createStyleColors() {
+    //Changes the textures to fit the shiny style.
+    if  textureStyle == "shiny" {
+        orangebasic = texture(named: "Orangeshiny")
+        redbasic = texture(named: "Redshiny")
+        greenbasic = texture(named: "Greenshiny")
+        bluebasic = texture(named: "Blueshiny")
+        yellowbasic = texture(named: "Yellowshiny")
+        cyanbasic = texture(named: "Cyanshiny")
+        purplebasic = texture(named: "Purpleshiny")
+    }
+    //Changes the textures to fit the effect style.
+    if textureStyle == "effect" {
+        orangebasic = texture(named: "Effect")
+        redbasic = texture(named: "Effect")
+        greenbasic = texture(named: "Effect")
+        bluebasic = texture(named: "Effect")
+        yellowbasic = texture(named: "Effect")
+        cyanbasic = texture(named: "Effect")
+        purplebasic = texture(named: "Effect")
+    }
+    //Changes the textures to fit the minecraft style.
+    if  textureStyle == "craft" {
+        orangebasic = texture(named: "Orangecraft")
+        redbasic = texture(named: "Redcraft")
+        greenbasic = texture(named: "Greencraft")
+        bluebasic = texture(named: "Bluecraft")
+        yellowbasic = texture(named: "Yellowcraft")
+        cyanbasic = texture(named: "Cyancraft")
+        purplebasic = texture(named: "Purplecraft")
+    }
+    //Changes the textures to fit the rune style.
+    if  textureStyle == "rune" {
+        orangebasic = texture(named: "Orangerune")
+        redbasic = texture(named: "Redrune")
+        greenbasic = texture(named: "Greenrune")
+        bluebasic = texture(named: "Bluerune")
+        yellowbasic = texture(named: "Yellowrune")
+        cyanbasic = texture(named: "Cyanrune")
+        purplebasic = texture(named: "Purplerune")
+    }
+    //Changes the textures to fit the GB style.
+    if  textureStyle == "GB" {
+        orangebasic = texture(named: "OrangeGB")
+        redbasic = texture(named: "RedBlueGB")
+        greenbasic = texture(named: "GreenGB")
+        bluebasic = texture(named: "RedBlueGB")
+        yellowbasic = texture(named: "YellowGB")
+        cyanbasic = texture(named: "CyanGB")
+        purplebasic = texture(named: "PurpleGB")
+    }
+    //Changes the textures to fit the puyo style.
+    if  textureStyle == "puyo" {
+        orangebasic = texture(named: "Orangepuyo")
+        redbasic = texture(named: "Redpuyo")
+        greenbasic = texture(named: "Greenpuyo")
+        bluebasic = texture(named: "Bluepuyo")
+        yellowbasic = texture(named: "Yellowpuyo")
+        cyanbasic = texture(named: "Cyanpuyo")
+        purplebasic = texture(named: "Purplepuyo")
+    }
+    //Changes the textures to fit the NES style.
+    if  textureStyle == "nes" {
+        orangebasic = texture(named: "Orangenes")
+        redbasic = texture(named: "Rednes")
+        greenbasic = texture(named: "Greennes")
+        bluebasic = texture(named: "Bluenes")
+        yellowbasic = texture(named: "Yellownes")
+        cyanbasic = texture(named: "Cyannes")
+        purplebasic = texture(named: "Purplenes")
+    }
+    
+}
 
 
 let lNorth = Shape()
@@ -52,11 +128,16 @@ let oSouth = Shape()
 let oEast = Shape()
 let oWest = Shape()
 
+
 //debug pieces
 let monomino = Shape()
 let instaClear = Shape()
 let tetrisplus = Shape()
 let xPiece = Shape()
+let eDifPiece = Shape()
+    //dominoes
+    let dominoNorth = Shape()
+    let dominoWest = Shape()
 
 func createAllPieces() {
     createLpieces()
@@ -68,6 +149,7 @@ func createAllPieces() {
     createSpieces()
     createMiscpieces()
 }
+
 
 func createLpieces() {
     createLnorth()
@@ -116,6 +198,10 @@ func createMiscpieces() {
     createInstaClear()
     createTetrisPlus()
     createXpiece()
+    createEdifPiece()
+    //Dominoes
+    createDominoNorth()
+    createDominoWest()
 }
 //L pieces
 func createLnorth() {
@@ -327,12 +413,33 @@ func createMonoMino() {
     monomino.texture = garbage
     monomino.addMino(mx: 1, my: 1)
 }
+
+//domino
+func createDominoNorth() {
+    dominoNorth.texture = brownbasic
+    dominoNorth.addMino(mx: 1, my: 2)
+    dominoNorth.addMino(mx: 1, my: 1)
+}
+func createDominoWest() {
+    dominoWest.texture = brownbasic
+    dominoWest.addMino(mx:  2, my: 1)
+    dominoWest.addMino(mx: 1, my: 1)
+}
+//Edif
+func createEdifPiece() {
+    eDifPiece.texture = pinkbasic
+    eDifPiece.addMino(mx: 0, my: 1)
+    eDifPiece.addMino(mx: 0, my: 2)
+    eDifPiece.addMino(mx: 1, my: 0)
+    eDifPiece.addMino(mx: 1, my: 2)
+}
+
 //instaclear
 func createInstaClear() {
     instaClear.texture = whitebasic
-    for y in 0..<20 {
+    for y in 0..<23 {
         for x in 0..<30 {
-            instaClear.addMino(mx: x - 15, my: y - 20)
+            instaClear.addMino(mx: x - 15, my: y - 19)
         }
     }
 }
@@ -355,4 +462,5 @@ func createXpiece() {
     xPiece.addMino(mx: 1, my: 2)
     xPiece.addMino(mx: 1, my: 0)
 }
+
 

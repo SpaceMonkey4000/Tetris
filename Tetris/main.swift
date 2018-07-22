@@ -1,41 +1,105 @@
+// The long list of variables starts here.
 
-// Size of the grid in cells.
-let gridSizeX = 10
-let gridSizeY = 24
+    //TRUE LETS: these are lets. Let let let let let let let let
+        //This defines the garbage icon.
+        let garbage = texture(named: "Garbageicon")
+        //This is the amount of rows that are hidden from the player. It is a float value.
+        let hiddenMatrixRows = 3.8
 
-// The number of rows that are hidden beyond the top of the screen.
-let hiddenMatrixRows = 3.8
-var softfallcounter = 0
+    //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
+        // Size of the grid in cells.
+        var gridSizeX = 10
+        var gridSizeY = 24
+        // The amount of frames that the player has before the piece locks down.
+        var stickdelay = 30
+        // Allows the player to use special keys to make tetrominos and debug pieces.
+        var debugTools = 1
+        // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
+        var stMaxRefreshes = 15
+        //If the piece instantly locks down when hard dropped.
+        var hardDropInstantLock = 1
+        //SPINS:
+            //If the player gets rewarded for doing spin moves for certain blocks.
+            var tSpinsRewarded = true
+            var sSpinsRewarded = false
+            var zSpinsRewarded = false
+            var lSpinsRewarded = false
+            var jSpinsRewarded = false
+            var iSpinsRewarded = false
+            var oSpinsRewarded = false
+        /*The rotation system the game uses.
+        SRS == The super rotation system. The standard RS that the tetris guideline uses.
+        OSSRS == The O-spin super rotation system. Like SRS, but it allows for O-spins.
+        Simple == The simple rotation system. Uses no wall kicks. */
+        var rotationSystem = "OSSRS"
+        /*The visual style the game uses.
+        default == The default visual style. Based off of the default style in Tetris Friends.
+        solid == Solid colors. Based off of... solid colors. Not implemented yet.
+        nes == The style of the tetris game on the NES.
+        nblox == The style used in N-blox. It even comes with matching colors! Not implemented yet.
+        GB == The style used in the game boy tetris.
+        shiny == It's shiny!
+        effect == Based off of Tetris Effect. All blocks use the same texture.
+        garbage == Everything is a garbage tile. Not implemented yet.
+        rune == Everything looks like ancient runes.
+        craft == It looks like minecraft!
+        puyo == Based on the puyos in the puyo puyo games.
+        invisible == You can't see anything... it will work when background texture is implemented.*/
+        var textureStyle = "puyo"
+ 
 
-var fallspeed = 30
-var softdropfallspeed = 2
 
-let garbage = texture(named: "Garbageicon")
+    var softfallcounter = 0
+
+    var fallspeed = 30
+    var softdropfallspeed = 2
 
 
-var hold: Tetromino = createOTetromino()
-var hold2: Tetromino = createOTetromino()
 
 var fallCounter = 0
 
+var wallKicks = 0
+
+var lineScore = 0
+
 var slidetimer = 0
-var stickdelay = 30
+
 var tilesinline = 0
 
-var dirCounter = 0
+var shiftAutoRepeatCounter = 0
 var softdropCounter = 0
 
+// DAS.
 var autoRepeatSpeed = 2
-var dirCounter2 = 0
+
+var shiftAutoRepeatCounter2 = 0
 var nextItem: Tetromino = createOTetromino()
 var nextSayer = "0"
 
-var stRefreshes = 0
-let stMaxRefreshes = 15
+//Rotating or moving a piece when it is on the ground will refresh the slide timer.
+    // The current amount of refreshes the player has left.
+    var stRefreshes = 0
 
-let debugTools = 1
+
+
 
 var rng1 = 0
+
+
+
+//If the game is over, in a menu, or in play. (over, menu, play)
+var gameState = "play"
+
+// This variable is used to sense if the game should end.
+    /* When the piece is spawned, this variable is set to 1.
+    if the mino moves, the variable is set to 0.
+    if the piece lands when the variable is 1, the game will end. */
+var gameOverCheck = 1
+
+
+
+//The long list of variables ends here.
+createStyleColors()
 
 createAllPieces()
 
@@ -48,52 +112,53 @@ tetromino = createJTetromino()
 // This function is called once, before the game starts.
 func first() {
     generateNextItem()
-    print("Next mino is: ",nextSayer)
     spawnMino()
     // The lower left corner of the grid is coordinate 0, 0.
-    // This makes a row of tiles appear at the bottom of the screen.
-    for a in 0..<0 {
-        setTexture(garbage, x: a, y: 0)
-    }
 
-//    lNorth.draw(x: 0, y: 10)
-//    lNorth.draw(x: 1, y: 14)
 }
 
 func refreshSlideTimer() {
     if tetromino.onGround(){
         stRefreshes -= 1
-        slidetimer = stickdelay
         if stRefreshes < 1 {
             slidetimer = 1
+        } else {
+            slidetimer = stickdelay
         }
     }
 }
 
 // This function is called 60 times per second.
 func update() {
-    fallMino()
-    softFall()
-//leftarrow
-    if keyIsPressed(123) {
-        dirCounter += 1
-        if dirCounter > 14 {
-            dirCounter2 += 1
-            if dirCounter2 > autoRepeatSpeed {
-                tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
-                refreshSlideTimer()
-                dirCounter2 = 0
+    if gameState == "play" {
+        fallMino()
+        softFall()
+        checkForGameOver()
+        //leftarrow
+        if keyIsPressed(123) {
+            if !keyIsPressed(124) {
+                shiftAutoRepeatCounter += 1
+                if shiftAutoRepeatCounter > 14 {
+                    shiftAutoRepeatCounter2 += 1
+                    if shiftAutoRepeatCounter2 > autoRepeatSpeed {
+                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
+                        refreshSlideTimer()
+                        shiftAutoRepeatCounter2 = 0
+                    }
+                }
             }
         }
-    }
-    //rightarrow
-    if keyIsPressed(124) {
-        dirCounter += 1
-        if dirCounter > 14 {
-            dirCounter2 += 1
-            if dirCounter2 > autoRepeatSpeed {
-                tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
-                dirCounter2 = 0
+        //rightarrow
+        if keyIsPressed(124) {
+            if !keyIsPressed(123) {
+                shiftAutoRepeatCounter += 1
+                if shiftAutoRepeatCounter > 14 {
+                    shiftAutoRepeatCounter2 += 1
+                    if shiftAutoRepeatCounter2 > autoRepeatSpeed {
+                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
+                        shiftAutoRepeatCounter2 = 0
+                    }
+                }
             }
         }
     }
@@ -109,14 +174,21 @@ func softFall(){
     }
 }
 func spawnMino(){
-    tetromino = nextItem
-    generateNextItem()
-    print("Next mino is: ",nextSayer)
-    
-
-    slidetimer = stickdelay
-    tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-    stRefreshes = stMaxRefreshes
+    if gameState == "play" {
+        fallCounter = 0
+        softdropCounter = 0
+        tetromino = nextItem
+        generateNextItem()
+        slidetimer = stickdelay
+        gameOverCheck = 1
+        if tetromino.name == "I" {
+            tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
+        } else {
+            tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
+        }
+        stRefreshes = stMaxRefreshes
+        wallKicks = 0
+    }
 }
 
 func fallMino() {
@@ -141,8 +213,10 @@ func fallMino() {
             }
             return
         }
-        
-        tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+        if !tetromino.onGround() {
+            gameOverCheck = 0
+            tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+        }
     }
     
 }
@@ -161,7 +235,7 @@ func clearline(y: Int) {
 // check for lines
 func linecheck() {
     var y = 0
-    var lineScore = 0
+    lineScore = 0
     while y < gridSizeY {
         tilesinline = 0
         for x in 0..<gridSizeX {
@@ -176,14 +250,16 @@ func linecheck() {
             y += 1
         }
     }
-    if lineScore > 0 {
-        print("you cleared ",lineScore," lines!")
-        if lineScore == 4 {
-            print("Tetris!")
-        }
-        if lineScore == 5 {
-            print("Tetris plus!")
-        }
+        scoreLines()
+}
+
+func checkForGameOver() {
+    if gameOverCheck == 1 && tetromino.onGround() {
+        gameState = "over"
+        tetromino.removeFromGrid()
+        tetromino = createInstaclearTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+        print("Game over!")
     }
 }
 
@@ -192,282 +268,14 @@ func keyPress(key: Int) {
     //rotateright   UP                   X
     if key == (126) || key == (7){
         if tetromino.onGround() {
-            refreshSlideTimer()
+             refreshSlideTimer()
         }
-        print(tetromino.name)
-        if tetromino.name == "I"{
-            if tetromino.direction == 0 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -2, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -2, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: -2, dy: -1, dir: 1) {
-                                tetromino.moveBy(dx: -2, dy: -1, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: 2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 1 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 2, dy: 0, dir: 1) {
-                            tetromino.moveBy(dx: 2, dy: 0, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: -1, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: -1, dy: 2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 2, dy: -1, dir: 1) {
-                                    tetromino.moveBy(dx: 2, dy: -1, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 2 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: 1, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: 1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: -2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: -2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 3 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: -1, dy: -1, dir: 1) {
-                            tetromino.moveBy(dx: -1, dy: -1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: -1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: -1, dy: 2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if rotationSystem == "SRS" {
+            superRotationSystemRightRot()
+        } else if rotationSystem == "OSSRS"{
+            oSpinSuperRotationSystemRightRot()
         } else {
-            //SRS
-            if tetromino.direction == 0 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: -1, dy: 1, dir: 1) {
-                            tetromino.moveBy(dx: -1, dy: 1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: -1, dy: -2, dir: 1) {
-                                    tetromino.moveBy(dx: -1, dy: -2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 1 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: -1, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: -1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: 2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 2 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: 1, dir: 1) {
-                            tetromino.moveBy(dx: 1, dy: 1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: -2, dir: 1) {
-                                    tetromino.moveBy(dx: 1, dy: -2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 3 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: 1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: 1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: 1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: -1, dy: -1, dir: 1) {
-                            tetromino.moveBy(dx: -1, dy: -1, ddirection: 1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: 2, dir: 1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: 1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: -1, dy: 2, dir: 1) {
-                                    tetromino.moveBy(dx: -1, dy: 2, ddirection: 1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            simpleRotationSystemRot()
         }
         return
     }
@@ -478,152 +286,19 @@ func keyPress(key: Int) {
         if tetromino.onGround() {
             refreshSlideTimer()
         }
-        if tetromino.name == "I"{
-            //TODO
+        if rotationSystem == "SRS" {
+            superRotationSystemLeftRot()
+        } else if rotationSystem == "OSSRS"{
+            oSpinSuperRotationSystemLeftRot()
         } else {
-            //SRS
-            if tetromino.direction == 0 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: -1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: -1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: -1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: 1, dir: -1) {
-                            tetromino.moveBy(dx: 1, dy: 1, ddirection: -1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: -1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: -1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: -2, dir: -1) {
-                                    tetromino.moveBy(dx: 1, dy: -2, ddirection: -1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 1 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: -1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: 1, dy: 0, dir: -1) {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: -1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: 1, dy: -1, dir: -1) {
-                            tetromino.moveBy(dx: 1, dy: -1, ddirection: -1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: 2, dir: -1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: -1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: 1, dy: 2, dir: -1) {
-                                    tetromino.moveBy(dx: 1, dy: 2, ddirection: -1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 2 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: -1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: -1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: -1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: -1, dy: 1, dir: -1) {
-                            tetromino.moveBy(dx: -1, dy: 1, ddirection: -1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: -2, dir: -1) {
-                                tetromino.moveBy(dx: 0, dy: -2, ddirection: -1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: -1, dy: -2, dir: -1) {
-                                    tetromino.moveBy(dx: -1, dy: -2, ddirection: -1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if tetromino.direction == 3 {
-                //Check1
-                if tetromino.canMoveBy(dx: 0, dy: 0, dir: -1) {
-                    tetromino.moveBy(dx: 0, dy: 0, ddirection: -1)
-                    return
-                } else {
-                    //Check2
-                    if tetromino.canMoveBy(dx: -1, dy: 0, dir: -1) {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: -1)
-                        return
-                    } else {
-                        //Check3
-                        if tetromino.canMoveBy(dx: -1, dy: -1, dir: -1) {
-                            tetromino.moveBy(dx: -1, dy: -1, ddirection: -1)
-                            return
-                        } else {
-                            //check4
-                            if tetromino.canMoveBy(dx: 0, dy: 2, dir: -1) {
-                                tetromino.moveBy(dx: 0, dy: 2, ddirection: -1)
-                                return
-                            } else {
-                                //check5
-                                if tetromino.canMoveBy(dx: -1, dy: 2, dir: -1) {
-                                    tetromino.moveBy(dx: -1, dy: 2, ddirection: -1)
-                                    return
-                                } else {
-                                    print("All rotation checks were invalid.")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            simpleRotationSystemRot()
         }
         return
     }
 
     //leftarrow
     if key == (123) {
-        dirCounter = 0
+        shiftAutoRepeatCounter = 0
         if !tetromino.blockLeft(){
             tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
             refreshSlideTimer()
@@ -632,15 +307,27 @@ func keyPress(key: Int) {
     }
     //rightarrow
     if key == (124) {
-        dirCounter = 0
+        shiftAutoRepeatCounter = 0
         if !tetromino.blockRight(){
             tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
             refreshSlideTimer()
         }
 
     }
-
-
+    
+    //harddrop
+    if key == (49) {
+        while !tetromino.onGround() {
+            tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+        }
+        if hardDropInstantLock == 1{
+            slidetimer = 0
+            stRefreshes = 0
+            fallCounter = -1
+        }
+    }
+    
+    
     //debug
     if keyIsPressed(12) {
         tetromino.removeFromGrid()
@@ -687,7 +374,7 @@ func keyPress(key: Int) {
         tetromino = createTetrisplusTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
-    if keyIsPressed(2) {
+    if keyIsPressed(51) {
         tetromino.removeFromGrid()
         tetromino = createInstaclearTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
@@ -697,18 +384,34 @@ func keyPress(key: Int) {
         tetromino = createXtetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
     }
-    
+    if keyIsPressed(2) {
+        tetromino.removeFromGrid()
+        tetromino = createEDifTetromino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(4) {
+        tetromino.removeFromGrid()
+        tetromino = createDomino()
+        tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+    }
+    if keyIsPressed(5) {
+        print("gamestate:",gameState)
+        print("gameovercheck:",gameOverCheck)
+        print("tetrominoonground:",tetromino.onGround())
+        
+}
+
 }
 
 
 func generateNextItem() {
-    rng1 = random(min: 0, max: 6)
-        switch rng1 {
-        case 0:
-            nextItem = createOTetromino()
-            nextSayer = "O"
-        case 1:
-            nextItem = createTTetromino()
+rng1 = random(min: 0, max: 6)
+    switch rng1 {
+    case 0:
+        nextItem = createOTetromino()
+        nextSayer = "O"
+    case 1:
+        nextItem = createTTetromino()
             nextSayer = "T"
         case 2:
             nextItem = createITetromino()

@@ -52,7 +52,7 @@ class Tetromino {
     init(name: String, shapes: [Shape]) {
         assert(shapes.count == 4)
         self.shapes = shapes
-        self.name = ""
+        self.name = name
     }
 
     // The next four functions should call the function
@@ -115,18 +115,18 @@ class Tetromino {
 
     // Returns true if the tetromino can be moved by an offset
     // without colliding with other minos or with the edge of the grid.
-    func canMoveBy(dx: Int, dy: Int, dir: Int) -> Bool {
+    func canMoveBy(dx: Int, dy: Int, ddirection: Int) -> Bool {
         defer {
             self.draw(x: self.x, y: self.y, direction: self.direction)
         }
         var newDirection = 0
-        if dir == 1 {
+        if ddirection == 1 {
             newDirection = getClockwiseDirection()
         }
-        if dir == -1 {
+        if ddirection == -1 {
             newDirection = getCounterclockwiseDirection()
         }
-        if dir == 0 {
+        if ddirection == 0 {
             newDirection = self.direction
         }
         self.erase(x: self.x, y: self.y, direction: self.direction)
@@ -135,8 +135,7 @@ class Tetromino {
 
     // Move the tetromino.
     func moveBy(dx: Int, dy: Int, ddirection: Int) {
-//        assert(canMoveBy(dx: dx, dy: dy, ddir: ddir))
-        if canMoveBy(dx: dx, dy: dy, dir: ddirection) {
+        if canMoveBy(dx: dx, dy: dy, ddirection: ddirection) {
             self.erase(x: self.x, y: self.y, direction: self.direction)
             
             if ddirection == 1 {
@@ -154,15 +153,18 @@ class Tetromino {
 
     // Checks if the tetromino is colliding with the ground.
     func onGround() -> Bool {
-        return !canMoveBy(dx: 0, dy: -1, dir: 0)
+        return !canMoveBy(dx: 0, dy: -1, ddirection: 0)
     }
     // Checks if the tetromino is colliding to the left.
     func blockLeft() -> Bool {
-        return !canMoveBy(dx: -1, dy: 0, dir: 0)
+        return !canMoveBy(dx: -1, dy: 0, ddirection: 0)
     }
     // Checks if the tetromino is colliding to the right.
     func blockRight() -> Bool {
-        return !canMoveBy(dx: 1, dy: 0, dir: 0)
+        return !canMoveBy(dx: 1, dy: 0, ddirection: 0)
     }
-
+    // Checks if the tetromino is just below a ceiling.
+    func blockUp() -> Bool {
+        return !canMoveBy(dx: 0, dy: 1, ddirection: 0)
+    }
 }

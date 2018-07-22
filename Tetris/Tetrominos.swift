@@ -34,7 +34,12 @@ func createTetrisplusTetromino() -> Tetromino {
 func createXtetromino() -> Tetromino {
     return Tetromino(name: "X", shapes: [xPiece, xPiece, xPiece, xPiece])
 }
-
+func createEDifTetromino() -> Tetromino {
+    return Tetromino(name: "E", shapes: [eDifPiece, eDifPiece, eDifPiece, eDifPiece])
+}
+func createDomino() -> Tetromino {
+    return Tetromino(name: "I2", shapes: [dominoNorth, dominoWest, dominoNorth, dominoWest])
+}
 
 
 
