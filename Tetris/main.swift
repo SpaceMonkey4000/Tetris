@@ -311,6 +311,7 @@ func checkForGameOver() {
 
 func fillBag(bag: Int) {
     if bag == 1 {
+        bag1.removeAll()
         bag1.append(createOTetromino())
         bag1.append(createITetromino())
         bag1.append(createTTetromino())
@@ -320,6 +321,7 @@ func fillBag(bag: Int) {
         bag1.append(createLTetromino())
     }
     if bag == 2 {
+        bag2.removeAll()
         bag2.append(createOTetromino())
         bag2.append(createITetromino())
         bag2.append(createTTetromino())
@@ -469,7 +471,8 @@ func keyPress(key: Int) {
             tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
         }
         if keyIsPressed(5) {
-            print("cornerattopright:",tetromino.relativeBlockAt(dx: 1, dy: 1))
+            print("Bag 1 length:",bag1.count)
+            print("Bag 2 length:",bag2.count)
         }
     }
 }
