@@ -22,12 +22,12 @@ class Matrix {
     
     // Scale of the matrix, relative to the size of the scene as defined in grid cells.
     // If scale is 1, the size of the grid's cells will match those of the scene.
-    private let scale: CGPoint
+    public let scale: CGFloat
     
     private typealias Row = [Cell]
     private var cells: [Row] = []
 
-    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: GGFloat) {
+    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) {
         self.columns = cellsX
         self.rows = cellsY
         self.center = center
@@ -41,7 +41,7 @@ class Matrix {
         for _ in 0..<rows {
             var row = Row()
             for _ in 0..<columns {
-                let cell = Cell(matrix: self)
+                let cell = Cell()
                 row.append(cell)
             }
             cells.append(row)
@@ -95,7 +95,7 @@ class Matrix {
         // which is measured in scene points.
         
         // The size of the matrix cells in the scene, measured in points.
-        let cellSize = CGSize(Cell.size.width*scale, Cell.size.height*scale)
+        let cellSize = CGSize(width: Cell.size.width*scale, height: Cell.size.height*scale)
 
         // columns, rows represents the number of cells in the matrix.
         

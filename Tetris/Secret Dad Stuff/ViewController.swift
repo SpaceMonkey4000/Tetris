@@ -40,7 +40,7 @@ class ViewController: NSViewController {
         // as least as wide as we expect the user to resize the window.
         let sceneAspectRatio: CGFloat = 2.0
         
-        let sceneHeight: CGFloat = CGFloat(gridSizeY) - hiddenMatrixRows
+        let sceneHeight: CGFloat = CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows)
         let sceneWidth: CGFloat = sceneHeight*sceneAspectRatio
         
         let sceneSizeInCells = CGSize(width: sceneWidth, height: sceneHeight)        

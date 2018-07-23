@@ -48,7 +48,7 @@ class Cell {
         spriteNode.size = Cell.size
     }
 
-    public func layout(x: Int, y: Int, inMatrix matrix: Matrix) {
+    public func layoutAt(x: Int, y: Int, inMatrix matrix: Matrix) {
         let scene: Scene = TetrisManager.shared.scene
 
         self.row = y
