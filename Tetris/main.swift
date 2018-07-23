@@ -13,6 +13,7 @@ let hiddenMatrixRows = 3.8
 // Size of the grid in cells.
 var gridSizeX = 10
 var gridSizeY = 24
+
 // The amount of frames that the player has before the piece locks down.
 var stickdelay = 30
 // Allows the player to use special keys to make tetrominos and debug pieces.

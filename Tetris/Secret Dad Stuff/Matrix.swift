@@ -10,15 +10,28 @@ import SpriteKit
 
 class Matrix {
 
-    private let rows: Int
     private let columns: Int
+    private let rows: Int
 
+    // Center of the matrix, in normalized window coordinates, 
+    // with the origin at the center of the window.
+    // The bottom of the window is -1.0 and the top is 1.0.
+    // The horizontal position of the center are defined in terms of
+    // the same scale as the vertical position.
+    private let center: CGPoint
+    
+    // Scale of the matrix, relative to the size of the scene as defined in grid cells.
+    // If scale is 1, the size of the grid's cells will match those of the scene.
+    private let scale: CGPoint
+    
     private typealias Row = [Cell]
     private var cells: [Row] = []
 
-    init() {
-        self.rows = gridSizeY
-        self.columns = gridSizeX
+    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: GGFloat) {
+        self.columns = cellsX
+        self.rows = cellsY
+        self.center = center
+        self.scale = scale
 
         initCells()
     }
@@ -28,7 +41,7 @@ class Matrix {
         for _ in 0..<rows {
             var row = Row()
             for _ in 0..<columns {
-                let cell = Cell()
+                let cell = Cell(matrix: self)
                 row.append(cell)
             }
             cells.append(row)
@@ -55,13 +68,52 @@ class Matrix {
     /// Returns the SceneKit scene location of a cell, given integer coordinates.
     /// (0, 0) is in the lower left.
     public func locationOfCellAt(x: Int, y: Int) -> CGPoint {
-        return CGPoint(x: (CGFloat(x) + 0.5)*Cell.size.width,
-                       y: (CGFloat(y) + 0.5)*Cell.size.height)
-    }
+        // x, y are the coordinates of the cell within the matrix,
+        // with 0, 0 at the lower left.
+        //
+        // We want to return a CGPoint representing the position
+        // of the center of the cell in the coordinate system of the scene,
+        // measured in points, with 0.0, 0.0 at the lower left.
+        //
+        // center.x, center.y represents the normalized position of the center of the
+        // matrix of cells within the scene, relative to the scene's center.
+        // center.y ranges from -1 to 1 vertically across the height of the screen.
+        // center.x has the same scale as center.y, with 0 at the screen center.
+        
+        let sceneSize = TetrisManager.shared.scene.size
 
+        // The center of the matrix of cells in the scene, measured in points.
+        // We intentionally multiply center.y by screenSizeInPoints.height,
+        // not width, to achieve the same relative scale for center.y as for center.x.
+        let matrixCenter = CGPoint(
+            x: center.x*sceneSize.height/2.0 + sceneSize.width*0.5,
+            y: center.y*sceneSize.height/2.0 + sceneSize.height*0.5)
+
+        // scale represents the size of the cells of the matrix, relative to the size 
+        // of the scene as defined in grid cells.
+        // If scale is 1, the size of the grid's cells will be Cell.size,
+        // which is measured in scene points.
+        
+        // The size of the matrix cells in the scene, measured in points.
+        let cellSize = CGSize(Cell.size.width*scale, Cell.size.height*scale)
+
+        // columns, rows represents the number of cells in the matrix.
+        
+        // The position of the lower left corner of the matrix within the scene, 
+        // measured in points.
+        let matrixOrigin = CGPoint(
+            x: matrixCenter.x - CGFloat(columns)/2.0*cellSize.width,
+            y: matrixCenter.y - CGFloat(rows)/2.0*cellSize.height)            
+        
+        // The location of the center of the cell in the scene.
+        return CGPoint(
+            x: matrixOrigin.x + (CGFloat(x) + 0.5)*cellSize.width,
+            y: matrixOrigin.y + (CGFloat(y) + 0.5)*cellSize.height)        
+    }
+    
     public func layoutCells() {
         foreach { (x, y, cell) in
-            cell.layout(x: x, y: y)
+            cell.layoutAt(x: x, y: y, inMatrix: self)
         }
     }
     
