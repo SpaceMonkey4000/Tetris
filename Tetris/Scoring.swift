@@ -1,14 +1,9 @@
 import Foundation
 
 func scoreLines(){
-    if wallKicks < 2 {
-        if tetromino.name == "T" {
-            tSpinScore()
-            return
-        } else {
-            noSpinScore()
-            return
-        }
+    if tetromino.name == "T" {
+        tSpinScore()
+        return
     } else {
         spinScore()
         return
@@ -33,29 +28,46 @@ func noSpinScore() {
 //Handles scoring if spins other than T have been performed.
 func spinScore() {
     if sSpinsRewarded{
-        
+        if tetromino.name == "S" {
+            noSpinScore()
+        }
     }
     if zSpinsRewarded{
-        
+        if tetromino.name == "Z" {
+            noSpinScore()
+        }
     }
     if lSpinsRewarded{
-        
+        if tetromino.name == "L" {
+            noSpinScore()
+        }
     }
     if jSpinsRewarded{
-        
+        if tetromino.name == "J" {
+            noSpinScore()
+        }
     }
     if iSpinsRewarded{
-        
+        if tetromino.name == "I" {
+            noSpinScore()
+        }
     }
     if oSpinsRewarded{
-        if tetromino.name == "O"{
-            if lineScore == 0 {
-                print("O-spin")
-            } else if lineScore == 1 {
-                print("O-spin single")
-            } else if lineScore == 2 {
-                print("O-spin double")
+        if tetromino.blocked() {
+            if tetromino.name == "O"{
+                if lineScore == 0 {
+                    print("O-spin")
+                } else if lineScore == 1 {
+                    print("O-spin single")
+                } else if lineScore == 2 {
+                    print("O-spin double")
+                }
+            } else {
+                noSpinScore()
+                return
             }
+        } else {
+            noSpinScore()
         }
     }
     
@@ -81,16 +93,24 @@ func threeCornerTest() {
         cornersFull += 1
     }
     if cornersFull > 2 {
-        if lineScore == 0 {
-            print ("T spin")
-        }
-        if lineScore == 1 {
-            print ("T spin single")
-        }
-        if lineScore == 2 {
-            print ("T spin double")
+        if tetromino.blocked() {
+            if lineScore == 0 {
+                print ("T spin")
+            }
+            if lineScore == 1 {
+                print ("T spin single")
+            }
+            if lineScore == 2 {
+                print ("T spin double")
+            }
+            if lineScore == 3 {
+                print ("T spin triple")
+            }
+        } else {
+            noSpinScore()
+            return
         }
     } else {
-        
+        noSpinScore()
     }
 }

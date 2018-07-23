@@ -170,10 +170,21 @@ class Tetromino {
     func blockUp() -> Bool {
         return !canMoveBy(dx: 0, dy: 1, ddirection: 0)
     }
+    func blocked() -> Bool {
+        if blockUp() && blockLeft() && blockRight() && onGround() {
+            return true
+        } else {
+            return false
+        }
+    }
     
     
     // Checks if there is a block in a specified location relative to the center of the tetromino.
     func relativeBlockAt(dx: Int, dy: Int) -> Bool {
-        return hasTextureAt(x: self.x + 1 + dx, y: self.y + 1 + dx)
+        if hasTextureAt(x: self.x + 1 + dx, y: self.y + 1 + dx) || dx < 0 || dx > gridSizeX || dy < 0 {
+            return true
+        } else {
+            return false
+        }
     }
 }

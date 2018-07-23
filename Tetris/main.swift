@@ -22,12 +22,12 @@ var hardDropInstantLock = 1
 //SPINS:
 //If the player gets rewarded for doing spin moves for certain blocks.
 var tSpinsRewarded = true
-var sSpinsRewarded = false
-var zSpinsRewarded = false
-var lSpinsRewarded = false
-var jSpinsRewarded = false
-var iSpinsRewarded = false
-var oSpinsRewarded = false
+var sSpinsRewarded = true
+var zSpinsRewarded = true
+var lSpinsRewarded = true
+var jSpinsRewarded = true
+var iSpinsRewarded = true
+var oSpinsRewarded = true
 /*The rotation system the game uses.
  SRS == The super rotation system. The standard RS that the tetris guideline uses.
  OSSRS == The O-spin super rotation system. Like SRS, but it allows for O-spins.
@@ -128,6 +128,10 @@ var bag1: [Tetromino] = []
 var bag2: [Tetromino] = []
 // Score.
 var points = 0
+// This variable is used to check for perfect clears.
+var minosOnScreen = 0
+// This variable is also used to check for perfect clears.
+var tetrominosPlaced = 0
 
 
 createStyleColors()
@@ -141,6 +145,8 @@ tetromino = createJTetromino()
 
 // This function is called once, before the game starts.
 func first() {
+    minosOnScreen = 0
+    tetrominosPlaced = 0
     points = 0
     setBackgroundTexture(backgroundtexture)
     fillBag(bag: 1)
@@ -207,6 +213,9 @@ func softFall(){
 }
 func spawnMino(){
     if gameState == "play" {
+        if minosOnScreen == 0 && tetrominosPlaced != 0 {
+            print("Perfect clear")
+        }
         if !diagonalMove {
             shiftAutoRepeatCounter = 0
         }
@@ -242,6 +251,8 @@ func fallMino() {
 
         if tetromino.onGround(){
             if slidetimer < 2 {
+                minosOnScreen += 4
+                tetrominosPlaced += 1
                 linecheck()
                 spawnMino()
             }
@@ -265,6 +276,7 @@ func fallMino() {
 
 //line clear
 func clearline(y: Int) {
+    minosOnScreen -= gridSizeX
     for ye in y..<gridSizeY {
         for x in 0..<gridSizeX {
             let texture = textureAt(x: x, y: ye + 1)
