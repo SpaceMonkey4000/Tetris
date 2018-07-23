@@ -134,6 +134,7 @@ var minosOnScreen = 0
 var tetrominosPlaced = 0
 
 
+
 createStyleColors()
 
 createAllPieces()
@@ -301,19 +302,20 @@ func linecheck() {
         if tilesinline == gridSizeX {
             lineScore += 1
             linesToClear.append(y)
-            
         }
         y += 1
     }
     scoreLines()
     clearLines()
 }
-func clearLines() {
+func clearLines(){
     var linesCleared = 0
+    print ("linestocear:",linesToClear)
     for y in linesToClear {
         clearline(y: y - linesCleared)
         linesCleared += 1
     }
+    linesToClear = []
 }
 
 func checkForGameOver() {
@@ -488,8 +490,7 @@ func keyPress(key: Int) {
             tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
         }
         if keyIsPressed(5) {
-            print("Bag 1 length:",bag1.count)
-            print("Bag 2 length:",bag2.count)
+            print(linesToClear)
         }
     }
 }

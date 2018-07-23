@@ -14,63 +14,51 @@ func scoreLines(){
 func noSpinScore() {
     if lineScore == 1 {
         print("Single")
+        return
     } else if lineScore == 2 {
         print("Double")
+        return
     } else if lineScore == 3 {
         print("Triple")
+        return
     } else if lineScore == 4 {
         print("Tetris")
-    } else if lineScore == 5 {
-        print("Tetris plus")
-    } 
+        return
+    }
 }
 
 //Handles scoring if spins other than T have been performed.
 func spinScore() {
-    if sSpinsRewarded{
-        if tetromino.name == "S" {
-            noSpinScore()
-        }
-    }
-    if zSpinsRewarded{
-        if tetromino.name == "Z" {
-            noSpinScore()
-        }
-    }
-    if lSpinsRewarded{
-        if tetromino.name == "L" {
-            noSpinScore()
-        }
-    }
-    if jSpinsRewarded{
-        if tetromino.name == "J" {
-            noSpinScore()
-        }
-    }
-    if iSpinsRewarded{
-        if tetromino.name == "I" {
-            noSpinScore()
-        }
-    }
-    if oSpinsRewarded{
+    switch tetromino.name {
+    case "L":
+        noSpinScore()
+    case "J":
+        noSpinScore()
+    case "S":
+        noSpinScore()
+    case "Z":
+        noSpinScore()
+    case "I":
+        noSpinScore()
+    case "O":
         if tetromino.blocked() {
-            if tetromino.name == "O"{
-                if lineScore == 0 {
-                    print("O-spin")
-                } else if lineScore == 1 {
-                    print("O-spin single")
-                } else if lineScore == 2 {
-                    print("O-spin double")
-                }
-            } else {
-                noSpinScore()
-                return
+            if lineScore == 0 {
+                print("O-spin")
+            } else if lineScore == 1 {
+                print("O-spin single")
+            } else if lineScore == 2 {
+                print("O-spin double")
             }
         } else {
             noSpinScore()
         }
+    default:
+        noSpinScore()
     }
-    
+
+
+
+
 }
 
 func tSpinScore () {
