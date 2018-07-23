@@ -103,6 +103,17 @@ func createStyleColors() {
         cyanbasic = texture(named: "Garbageicon")
         purplebasic = texture(named: "Garbageicon")
     }
+    //Changes the textures to fit the ghost style.
+    if  textureStyle == "ghost" {
+        orangebasic = texture(named: "Ghostorange")
+        redbasic = texture(named: "Ghostred")
+        greenbasic = texture(named: "Ghostgreen")
+        bluebasic = texture(named: "Ghostblue")
+        yellowbasic = texture(named: "Ghostyellow")
+        cyanbasic = texture(named: "Ghostcyan")
+        purplebasic = texture(named: "Ghostpurple")
+    }
+    
     
 }
 

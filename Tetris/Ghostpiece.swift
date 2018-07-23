@@ -2,6 +2,7 @@ import Foundation
 
 class GhostPiece {
     
+    var distanceToGround = 0
     private var x = 0
     private var y = 0
     private var shape: Shape = Shape()
@@ -9,8 +10,10 @@ class GhostPiece {
     func draw(shape: Shape, x: Int, y: Int) {
         if ghostStyle != "off" {
             var y = y
+            distanceToGround = 0
             while !shape.collidesWithAnything(x: x, y: y - 1) {
                 y -= 1
+                distanceToGround += 1
             }
             self.x = x
             self.y = y

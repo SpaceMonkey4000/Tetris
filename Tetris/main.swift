@@ -47,6 +47,7 @@ var rotationSystem = "OSSRS"
  rune == Everything looks like ancient runes.
  craft == It looks like minecraft!
  puyo == Based on the puyos in the puyo puyo games.
+ ghost == Looks like the colored ghost tiles.
  invisible == You can't see anything.*/
 var textureStyle = "default"
 //How fast holding left/right autorepeats.
@@ -127,6 +128,8 @@ var linesToClear: [Int] = []
 var bag1: [Tetromino] = []
 // The second "bag".
 var bag2: [Tetromino] = []
+// Score.
+var points = 0
 
 //-------------------------------------------------------------------------------------------------------------//
 //                                        End of the variable list                                             //
@@ -142,6 +145,7 @@ tetromino = createJTetromino()
 
 // This function is called once, before the game starts.
 func first() {
+    points = 0
     setBackgroundTexture(backgroundtexture)
     fillBag(bag: 1)
     fillBag(bag: 2)
