@@ -40,7 +40,7 @@ class ViewController: NSViewController {
         // as least as wide as we expect the user to resize the window.
         let sceneAspectRatio: CGFloat = 2.0
         
-        let sceneHeight: CGFloat = CGFloat(gridSizeY) - hiddenMatrixRows
+        let sceneHeight: CGFloat = CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows)
         let sceneWidth: CGFloat = sceneHeight*sceneAspectRatio
         
         let sceneSizeInCells = CGSize(width: sceneWidth, height: sceneHeight)        
@@ -65,11 +65,15 @@ class ViewController: NSViewController {
     }
 
     private func initMatrix() {
-        assert(TetrisManager.shared.scene != nil)
+        guard let scene = TetrisManager.shared.scene else {
+            assertionFailure()
+            return
+        }
 
         // Shift the matrix up so that its bottom edge (y = 0) is flush with
         // the bottom of the window.
-        let center = CGPoint(x: 0.0, y: hiddenMatrixRows/2.0)
+        let cellsToNormalizedCoordinatesRatio: CGFloat = Cell.size.height/(scene.size.height/2.0)
+        let center = CGPoint(x: 0.0, y: CGFloat(hiddenMatrixRows)/2.0*cellsToNormalizedCoordinatesRatio)
 
         // We use the default matrix to define the base scale of every other matrix in the scene.
         let scale: CGFloat = 1.0
