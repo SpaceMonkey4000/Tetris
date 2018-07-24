@@ -132,8 +132,10 @@ var points = 0
 var minosOnScreen = 0
 // This variable is also used to check for perfect clears.
 var tetrominosPlaced = 0
-
-
+// Level.
+var level = 1
+// This variable is used to check for T-spins.
+var lastSuccessfulAction = "0"
 
 createStyleColors()
 
@@ -180,9 +182,12 @@ func update() {
                 if shiftAutoRepeatCounter > 14 {
                     shiftAutoRepeatCounter2 += 1
                     if shiftAutoRepeatCounter2 > autoRepeatSpeed {
-                        tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
-                        refreshSlideTimer()
-                        shiftAutoRepeatCounter2 = 0
+                        if !tetromino.blockLeft() {
+                            tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
+                            lastSuccessfulAction = "move"
+                            refreshSlideTimer()
+                            shiftAutoRepeatCounter2 = 0
+                        }
                     }
                 }
             }
@@ -194,8 +199,11 @@ func update() {
                 if shiftAutoRepeatCounter > 14 {
                     shiftAutoRepeatCounter2 += 1
                     if shiftAutoRepeatCounter2 > autoRepeatSpeed {
-                        tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
-                        shiftAutoRepeatCounter2 = 0
+                        if !tetromino.blockRight() {
+                            lastSuccessfulAction = "move"
+                            tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
+                            shiftAutoRepeatCounter2 = 0
+                        }
                     }
                 }
             }
@@ -261,6 +269,7 @@ func fallMino() {
         }
         if !tetromino.onGround() {
             gameOverCheck = 0
+            lastSuccessfulAction = "drop"
             if keyIsPressed(125) {
                 for _ in 0..<softDropTiles {
                     tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
@@ -310,7 +319,6 @@ func linecheck() {
 }
 func clearLines(){
     var linesCleared = 0
-    print ("linestocear:",linesToClear)
     for y in linesToClear {
         clearline(y: y - linesCleared)
         linesCleared += 1
@@ -357,6 +365,7 @@ func swapBags() {
     fillBag(bag: 2)
 }
 
+
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
     //rotateright   UP                   X
@@ -394,6 +403,7 @@ func keyPress(key: Int) {
     if key == (123) {
         shiftAutoRepeatCounter = 0
         if !tetromino.blockLeft(){
+            lastSuccessfulAction = "move"
             tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
             refreshSlideTimer()
         }
@@ -403,6 +413,7 @@ func keyPress(key: Int) {
     if key == (124) {
         shiftAutoRepeatCounter = 0
         if !tetromino.blockRight(){
+            lastSuccessfulAction = "move"
             tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
             refreshSlideTimer()
         }
@@ -414,6 +425,7 @@ func keyPress(key: Int) {
         while !tetromino.onGround() {
             tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
         }
+        lastSuccessfulAction = "harddrop"
         if hardDropInstantLock == 1{
             slidetimer = 0
             stRefreshes = 0

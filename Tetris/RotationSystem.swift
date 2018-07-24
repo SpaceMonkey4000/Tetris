@@ -10,6 +10,7 @@ func superRotationSystemLeftRot() {
 }
 //SimpleRS
 func simpleRotationSystemRot() {
+    lastSuccessfulAction = "rotate"
     rotationSystem(ddirection: 1, offsets: [(0,0)])
     return
 }
@@ -136,6 +137,7 @@ func rotationSystem(ddirection: Int, offsets: [(Int, Int)]) {
     for offset in offsets {
         wallKicks += 1
         if tetromino.canMoveBy(dx: offset.0, dy: offset.1, ddirection: ddirection) {
+            lastSuccessfulAction = "rotate"
             tetromino.moveBy(dx: offset.0, dy: offset.1, ddirection: ddirection)
             return
         }

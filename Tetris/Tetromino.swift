@@ -28,7 +28,7 @@
 import Foundation
 
 class Tetromino {
-
+    
     public let name: String
     
     // The position of the Tetromino. We'll used this instead of tX and tY
@@ -36,7 +36,10 @@ class Tetromino {
     private var x: Int = 0
     private var y: Int = 0
 
-
+    public var lastXmovement: Int = 0
+    public var lastYmovement: Int = 0
+    public var lastDirMovement: Int = 0
+    
     // An array of 4 shapes.
     private var shapes: [Shape] = []
 
@@ -150,6 +153,9 @@ class Tetromino {
 
             self.x += dx
             self.y += dy
+            lastXmovement = dx
+            lastYmovement = dy
+            lastDirMovement = ddirection
             self.draw(x: self.x, y: self.y, direction: self.direction)
         }
     }

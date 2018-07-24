@@ -81,12 +81,20 @@ func threeCornerTest() {
         cornersFull += 1
     }
     if cornersFull > 2 {
-        if tetromino.blocked() {
+        if lastSuccessfulAction == "rotate" {
             if lineScore == 0 {
-                print ("T spin")
+                if miniTspin() {
+                    print ("T spin mini")
+                } else {
+                    print ("T spin")
+                }
             }
             if lineScore == 1 {
-                print ("T spin single")
+                if miniTspin() {
+                    print ("T spin mini single")
+                } else {
+                    print ("T spin single")
+                }
             }
             if lineScore == 2 {
                 print ("T spin double")
@@ -102,3 +110,20 @@ func threeCornerTest() {
         noSpinScore()
     }
 }
+func miniTspin() -> Bool {
+    if lastTranslationWas(dx: -1, dy: -1, ddirection: 1) || lastTranslationWas(dx: 1, dy: -1, ddirection: -1){
+        return true
+    } else if lastTranslationWas(dx: -1, dy: 0, ddirection: 1) || lastTranslationWas(dx: 1, dy: 0, ddirection: -1){
+        return true
+    } else {
+        return false
+    }
+}
+func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
+    if tetromino.lastXmovement == dx && tetromino.lastYmovement == dy && tetromino.lastDirMovement == ddirection {
+        return true
+    } else {
+        return false
+    }
+}
+
