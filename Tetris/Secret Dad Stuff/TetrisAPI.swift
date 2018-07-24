@@ -36,85 +36,53 @@ public func texture(named name: String) -> Int {
 /// Assigns a background texture that appears in each cell when it is cleared
 /// with clearTexture, or with setTexture with an argument of 0.
 public func setBackgroundTexture(_ backgroundTexture: Int) {
-    guard let matrix = TetrisManager.shared.matrix else {
+    guard let grid = TetrisManager.shared.grid else {
         print("Error: setBackgroundTexture must only be called in the first or update functions.")
         fatalError()
     }
-
-    createTextureAtlasControllerIfNecessary()
     
-    matrix.defaultTextureIndex = backgroundTexture
+    grid.setBackgroundTexture(backgroundTexture)
 }
 
 /// Sets a texture at a grid cell. If 0 is specified for the texture,
 /// the cell's texture is cleared.
 public func setTexture(_ index: Int, x: Int, y: Int) {
-    guard let matrix = TetrisManager.shared.matrix else {
+    guard let grid = TetrisManager.shared.grid else {
         print("Error: setTexture must only be called in the first or update functions.")
         fatalError()
     }
-
-    createTextureAtlasControllerIfNecessary()
-
-    let cell = matrix.cellAt(x: x, y: y)
-    if cell == nil {
-        // print("Warning: Tried to call setTexture on a cell which is out of range: x=\(x), y=\(y)")
-        return
-    }
-    if index == 0 {
-        // This matches the behavior of clearTexture.
-        cell?.textureIndex = nil
-    } else {
-        cell?.textureIndex = index
-    }
+    
+    grid.setTexture(index, x: x, y: y)
 }
 
 /// Clears the texture at a grid cell.
 public func clearTexture(x: Int, y: Int) {
-    guard let matrix = TetrisManager.shared.matrix else {
+    guard let grid = TetrisManager.shared.grid else {
         print("Error: clearTexture must only be called in the first or update functions.")
         fatalError()
     }
 
-    let cell = matrix.cellAt(x: x, y: y)
-    if cell == nil {
-//        print("Warning: Tried to call clearTexture on a cell which is out of range: x=\(x), y=\(y)")
-        return
-    }
-    cell?.textureIndex = nil
+    grid.clearTexture(x: x, y: y)
 }
 
 /// Returns true if a texture exists at a grid cell.
 public func hasTextureAt(x: Int, y: Int) -> Bool {
-    guard let matrix = TetrisManager.shared.matrix else {
+    guard let grid = TetrisManager.shared.grid else {
         print("Error: textureAt must only be called in the first or update functions.")
         fatalError()
     }
 
-    guard let cell = matrix.cellAt(x: x, y: y) else {
-        return false
-    }
-
-    return cell.textureIndex != nil
+    return grid.hasTexture(x: x, y: y)
 }
 
 /// Returns the texture at a grid cell. Returns 0 if the cell has no texture.
 public func textureAt(x: Int, y: Int) -> Int {
-    guard let matrix = TetrisManager.shared.matrix else {
+    guard let grid = TetrisManager.shared.grid else {
         print("Error: textureAt must only be called in the first or update functions.")
         fatalError()
     }
-
-    guard let cell = matrix.cellAt(x: x, y: y) else {
-        // print("Warning: Tried to call textureAt on a cell which is out of range: x=\(x), y=\(y)")
-        return 0
-    }
-
-    guard let textureIndex = cell.textureIndex else {
-        return 0
-    }
-
-    return textureIndex
+    
+    return textureAt(x: x, y: y)
 }
 
 public func keyIsPressed(_ key: Int) -> Bool {

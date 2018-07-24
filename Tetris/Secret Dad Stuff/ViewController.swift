@@ -23,7 +23,7 @@ class ViewController: NSViewController {
 
         initView()
 
-        initMatrix()
+        initGrid()
     }
 
     override func viewDidAppear() {
@@ -64,7 +64,7 @@ class ViewController: NSViewController {
         skView.showsNodeCount = false
     }
 
-    private func initMatrix() {
+    private func initGrid() {
         guard let scene = TetrisManager.shared.scene else {
             assertionFailure()
             return
@@ -78,10 +78,7 @@ class ViewController: NSViewController {
         // We use the default matrix to define the base scale of every other matrix in the scene.
         let scale: CGFloat = 1.0
 
-        let matrix = Matrix(cellsX: gridSizeX, cellsY: gridSizeY, center: center, scale: scale)
-        TetrisManager.shared.matrix = matrix
-
-        matrix.layoutCells()
+        TetrisManager.shared.grid = createGrid(cellsX: gridSizeX, cellsY: gridSizeY, center: center, scale: scale)
     }
 
 }
