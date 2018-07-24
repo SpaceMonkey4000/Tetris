@@ -117,6 +117,12 @@ class Matrix {
         }
     }
     
+    public func removeCells() {
+        foreach { (_, _, cell) in
+            cell.remove()
+        }
+    }
+    
     // When a cell's textureIndex is nil, this texture is assigned to its sprite.
     public var defaultTextureIndex: Int? = nil {
         didSet {

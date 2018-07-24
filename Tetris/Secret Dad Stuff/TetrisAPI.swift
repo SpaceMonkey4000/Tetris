@@ -13,22 +13,9 @@ public func start() {
     _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 }
 
-private func createTextureAtlasControllerIfNecessary() {
+public func createTextureAtlasControllerIfNecessary() {
     let textureAtlasController: TextureAtlasController = TetrisManager.shared.textureAtlasController
     textureAtlasController.createIfNecessary()
-}
-
-/// Assigns a background texture that appears in each cell when it is cleared
-/// with clearTexture, or with setTexture with an argument of 0.
-public func setBackgroundTexture(_ backgroundTexture: Int) {
-    guard let matrix = TetrisManager.shared.matrix else {
-        print("Error: setBackgroundTexture must only be called in the first or update functions.")
-        fatalError()
-    }
-
-    createTextureAtlasControllerIfNecessary()
-    
-    matrix.defaultTextureIndex = backgroundTexture
 }
 
 /// Adds a texture with a name of an image in the asset catalog.
@@ -44,6 +31,19 @@ public func texture(named name: String) -> Int {
     }
 
     return TetrisManager.shared.textureAtlasController.addTexture(name: name, image: image)
+}
+
+/// Assigns a background texture that appears in each cell when it is cleared
+/// with clearTexture, or with setTexture with an argument of 0.
+public func setBackgroundTexture(_ backgroundTexture: Int) {
+    guard let matrix = TetrisManager.shared.matrix else {
+        print("Error: setBackgroundTexture must only be called in the first or update functions.")
+        fatalError()
+    }
+
+    createTextureAtlasControllerIfNecessary()
+    
+    matrix.defaultTextureIndex = backgroundTexture
 }
 
 /// Sets a texture at a grid cell. If 0 is specified for the texture,
@@ -126,4 +126,16 @@ public func random(min: Int, max: Int) -> Int {
         print("Error: Invalid random number range: min=\(min), max=\(max)")
     }
     return Int(arc4random()) % (max - min + 1) + min
+}
+
+/// Returns a new grid of cells,
+/// - Parameters:
+///     - cellsX: The width of the grid, in cells.
+///     - cellsY: The height of the grid, in cells.
+///     - center: The center of the grid as a CGPoint, in normalized coordinates, where -1 to 1
+///         extends from the bottom of the window to the top of the window.
+///     - scale: The scale of the cells, relative to the default grid. 0.5 indicates
+///         half height cells.
+public func createGrid(cellsX: Int, cellsY: Int, center: CGPoint, scale: GGFloat) -> Grid {
+    return Grid(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
 }

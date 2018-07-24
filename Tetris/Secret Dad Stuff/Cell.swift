@@ -58,5 +58,9 @@ class Cell {
         spriteNode.setScale(matrix.scale)
         scene.addChild(spriteNode)
     }
+    
+    public func remove() {
+        spriteNode.removeFromParent()
+    }
 
 }
