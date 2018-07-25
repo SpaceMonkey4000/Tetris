@@ -138,7 +138,7 @@ var level = 1
 // This variable is used to check for T-spins.
 var lastSuccessfulAction = "0"
 
-// The next queue grid
+// The next queue grid.
 var nextQueueGrid: Grid!
 
 createStyleColors()
