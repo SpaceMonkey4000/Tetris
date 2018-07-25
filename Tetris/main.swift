@@ -139,6 +139,8 @@ var tetrominosPlaced = 0
 var level = 1
 // This variable is used to check for T-spins.
 var lastSuccessfulAction = "0"
+// The item in the hold.
+var holdItem: Tetromino = Tetromino()
 
 createStyleColors()
 
@@ -149,8 +151,9 @@ var tetromino: Tetromino = Tetromino()
 // Create a new J tetromino.
 tetromino = createJTetromino()
 
-// The next queue grid.
+// The next and hold queue grids.
 var nextQueueGrid = Grid()
+var holdQueueGrid = Grid()
 
 // This function is called once, before the game starts.
 func first() {
@@ -162,6 +165,7 @@ func first() {
     fillBag(bag: 2)
     
     createNextQueueGrid()
+    createHoldQueueGrid()
     
     generateNextItem()
     spawnMino()
@@ -178,7 +182,7 @@ func createNextQueueGrid() {
     //         1.0, 0.0 is to the right of the center of the window.
     //     scale: The size of the cells.
     //         1.0 is the same size cells as in the main grid.
-    nextQueueGrid = createGrid(cellsX: 4, cellsY: 22, centerX: 0.8, centerY: 0.15, scale: 2.0/3.0)
+    nextQueueGrid = createGrid(cellsX: 4, cellsY: 22, centerX: 0.8, centerY: 0.05, scale: 2.0/3.0)
     
     // Some example code to show how to update the next queue grid.
     // We would not really execute this code here in the real implementation
@@ -212,6 +216,10 @@ func addNextItemToQueue(pos: Int, shape: Shape, texture: Int) {
     }
 }
 
+func createHoldQueueGrid() {
+    holdQueueGrid = createGrid(cellsX: 4, cellsY: 4, centerX: -0.8, centerY: 0.6, scale: 2.3/3.0)
+    holdQueueGrid.setBackgroundTexture(backgroundtexture)
+}
 func refreshSlideTimer() {
     if tetromino.onGround(){
         stRefreshes -= 1
@@ -284,7 +292,6 @@ func spawnMino(){
         }
         fallCounter = 0
         tetromino = nextItem
-        print(tetromino.name)
         showNextItems()
         generateNextItem()
         slidetimer = stickdelay
@@ -492,7 +499,26 @@ func keyPress(key: Int) {
             }
         }
         
-        
+        //Hold
+        if key == (8) {
+            if holdItem.name != "" {
+                
+                let holdTemp: Tetromino = tetromino
+                tetromino.removeFromGrid()
+                tetromino = holdItem
+                if tetromino.name == "I" {
+                    tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
+                } else {
+                    tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
+                }
+                holdItem = holdTemp
+            } else {
+                tetromino.removeFromGrid()
+                holdItem = tetromino
+                print ("hold item:",holdItem.name)
+                spawnMino()
+            }
+        }
         //debug
         if debugTools == 1 {
             if keyIsPressed(12) {

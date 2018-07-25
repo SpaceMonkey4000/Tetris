@@ -10,7 +10,6 @@ class Shape {
         let mx: Int
         let my: Int
     }
-
     // The array of minos that make up the shape.
     var minos: [Mino] = []
 
@@ -27,6 +26,12 @@ class Shape {
         // Loop over all the minos that make up the shape.
         for mino in minos {
             setTexture(texture, x: x + mino.mx, y: y + mino.my)
+        }
+    }
+    
+    func drawOnGrid(x: Int, y: Int, grid: Grid) {
+        for mino in minos {
+            grid.setTexture(texture, x: x + mino.mx, y: y + mino.my)
         }
     }
     

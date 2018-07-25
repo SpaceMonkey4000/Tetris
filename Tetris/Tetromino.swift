@@ -70,6 +70,11 @@ class Tetromino {
         ghostPiece.draw(shape: shape, x: x, y: y)
         shape.draw(x: x, y: y)
     }
+    
+    public func drawOnGrid(x: Int, y: Int, direction: Int, grid: Grid) {
+        let shape = shapes[direction]
+        shape.drawOnGrid(x: x, y: y, grid: grid)
+    }
 
     private func erase(x: Int, y: Int, direction: Int) {
         let shape = shapes[direction]
