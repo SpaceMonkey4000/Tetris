@@ -13,7 +13,7 @@ var gridSizeX = 10
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
-var stickdelay = 70
+var stickdelay = 30
 // Allows the player to use special keys to make tetrominos and debug pieces.
 var debugTools = 1
 // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
@@ -90,14 +90,14 @@ var ghostred = texture(named: "Ghostred")
 var ghostgreen = texture(named: "Ghostgreen")
 
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
-var fallspeed = 1
-var softdropfallspeed = 1
+var fallspeed = 30
+var softdropfallspeed = 2
 // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
 var softdropcounter = 0
 var fallCounter = 0
 // These variables define how many tiles the piece will fall per fall/softdrop.
-var fallTiles = 2
-var softDropTiles = 5
+var fallTiles = 1
+var softDropTiles = 1
 // This variable is used to check if a player performs an amount of wallkicks when the piece drops.
 var wallKicks = 0
 // This variable is used to take in how many lines were cleared.
@@ -332,6 +332,14 @@ func fallMino() {
         }
 
         if tetromino.onGround(){
+            if keyIsPressed(125) {
+                if hardDropInstantLock == 0 {
+                    slidetimer = 0
+                    stRefreshes = 0
+                    fallCounter = 0
+                    softdropcounter = 0
+                }
+            }
             if slidetimer < 2 {
                 minosOnScreen += 4
                 tetrominosPlaced += 1
