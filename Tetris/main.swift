@@ -138,9 +138,6 @@ var level = 1
 // This variable is used to check for T-spins.
 var lastSuccessfulAction = "0"
 
-// The next queue grid.
-var nextQueueGrid: Grid!
-
 createStyleColors()
 
 createAllPieces()
@@ -149,6 +146,9 @@ createAllPieces()
 var tetromino: Tetromino = Tetromino()
 // Create a new J tetromino.
 tetromino = createJTetromino()
+
+// The next queue grid.
+var nextQueueGrid: Grid!
 
 // This function is called once, before the game starts.
 func first() {
