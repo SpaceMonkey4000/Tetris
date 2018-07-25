@@ -617,23 +617,8 @@ func addNextItem(pos: Int) {
 }
 func showNextItems() {
     clearNextQueue()
-    if nextItems > 0 {
-        addNextItem(pos: 0)
-    }
-    if nextItems > 1 {
-        addNextItem(pos: 1)
-    }
-    if nextItems > 2 {
-        addNextItem(pos: 2)
-    }
-    if nextItems > 3 {
-        addNextItem(pos: 3)
-    }
-    if nextItems > 4 {
-        addNextItem(pos: 4)
-    }
-    if nextItems > 5 {
-        addNextItem(pos: 5)
+    for item in 0..<nextItems {
+        addNextItem(pos: item)
     }
 }
 
