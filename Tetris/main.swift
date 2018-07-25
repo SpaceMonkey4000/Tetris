@@ -346,6 +346,7 @@ func fillBag(bag: Int) {
         bag1.append(createZTetromino())
         bag1.append(createJTetromino())
         bag1.append(createLTetromino())
+        bag1.shuffle()
     }
     if bag == 2 {
         bag2.removeAll()
@@ -356,6 +357,7 @@ func fillBag(bag: Int) {
         bag2.append(createZTetromino())
         bag2.append(createJTetromino())
         bag2.append(createLTetromino())
+        bag2.shuffle()
     }
 }
 
@@ -369,140 +371,142 @@ func swapBags() {
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
     //rotateright   UP                   X
-    if key == (126) || key == (7){
-        if tetromino.onGround() {
-             refreshSlideTimer()
+    if gameState == "play" {
+        if key == (126) || key == (7){
+            if tetromino.onGround() {
+                refreshSlideTimer()
+            }
+            if rotationSystem == "SRS" {
+                superRotationSystemRightRot()
+            } else if rotationSystem == "OSSRS"{
+                oSpinSuperRotationSystemRightRot()
+            } else {
+                simpleRotationSystemRot()
+            }
+            return
         }
-        if rotationSystem == "SRS" {
-            superRotationSystemRightRot()
-        } else if rotationSystem == "OSSRS"{
-            oSpinSuperRotationSystemRightRot()
-        } else {
-            simpleRotationSystemRot()
+        
+        
+        //rotateleft    Z
+        if key == (6){
+            if tetromino.onGround() {
+                refreshSlideTimer()
+            }
+            if rotationSystem == "SRS" {
+                superRotationSystemLeftRot()
+            } else if rotationSystem == "OSSRS"{
+                oSpinSuperRotationSystemLeftRot()
+            } else {
+                simpleRotationSystemRot()
+            }
+            return
         }
-        return
-    }
-    
-    
-    //rotateleft    Z
-    if key == (6){
-        if tetromino.onGround() {
-            refreshSlideTimer()
+        
+        //leftarrow
+        if key == (123) {
+            shiftAutoRepeatCounter = 0
+            if !tetromino.blockLeft(){
+                lastSuccessfulAction = "move"
+                tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
+                refreshSlideTimer()
+            }
+            
         }
-        if rotationSystem == "SRS" {
-            superRotationSystemLeftRot()
-        } else if rotationSystem == "OSSRS"{
-            oSpinSuperRotationSystemLeftRot()
-        } else {
-            simpleRotationSystemRot()
+        //rightarrow
+        if key == (124) {
+            shiftAutoRepeatCounter = 0
+            if !tetromino.blockRight(){
+                lastSuccessfulAction = "move"
+                tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
+                refreshSlideTimer()
+            }
+            
         }
-        return
-    }
-
-    //leftarrow
-    if key == (123) {
-        shiftAutoRepeatCounter = 0
-        if !tetromino.blockLeft(){
-            lastSuccessfulAction = "move"
-            tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
-            refreshSlideTimer()
+        
+        //harddrop
+        if key == (49) {
+            while !tetromino.onGround() {
+                tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+            }
+            lastSuccessfulAction = "harddrop"
+            if hardDropInstantLock == 1{
+                slidetimer = 0
+                stRefreshes = 0
+                fallCounter = -1
+            }
         }
-
-    }
-    //rightarrow
-    if key == (124) {
-        shiftAutoRepeatCounter = 0
-        if !tetromino.blockRight(){
-            lastSuccessfulAction = "move"
-            tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
-            refreshSlideTimer()
-        }
-
-    }
-    
-    //harddrop
-    if key == (49) {
-        while !tetromino.onGround() {
-            tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
-        }
-        lastSuccessfulAction = "harddrop"
-        if hardDropInstantLock == 1{
-            slidetimer = 0
-            stRefreshes = 0
-            fallCounter = -1
-        }
-    }
-    
-    
-    //debug
-    if debugTools == 1 {
-        if keyIsPressed(12) {
-            tetromino.removeFromGrid()
-            tetromino = createLTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(13) {
-            tetromino.removeFromGrid()
-            tetromino = createJTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(14) {
-            tetromino.removeFromGrid()
-            tetromino = createITetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(15) {
-            tetromino.removeFromGrid()
-            tetromino = createOTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(17) {
-            tetromino.removeFromGrid()
-            tetromino = createTTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(16) {
-            tetromino.removeFromGrid()
-            tetromino = createZTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(32) {
-            tetromino.removeFromGrid()
-            tetromino = createSTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(0) {
-            tetromino.removeFromGrid()
-            tetromino = createMonominoTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(1) {
-            tetromino.removeFromGrid()
-            tetromino = createTetrisplusTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(51) {
-            tetromino.removeFromGrid()
-            tetromino = createInstaclearTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(3) {
-            tetromino.removeFromGrid()
-            tetromino = createXtetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(2) {
-            tetromino.removeFromGrid()
-            tetromino = createEDifTetromino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(4) {
-            tetromino.removeFromGrid()
-            tetromino = createDomino()
-            tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-        }
-        if keyIsPressed(5) {
-            print(linesToClear)
+        
+        
+        //debug
+        if debugTools == 1 {
+            if keyIsPressed(12) {
+                tetromino.removeFromGrid()
+                tetromino = createLTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(13) {
+                tetromino.removeFromGrid()
+                tetromino = createJTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(14) {
+                tetromino.removeFromGrid()
+                tetromino = createITetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(15) {
+                tetromino.removeFromGrid()
+                tetromino = createOTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(17) {
+                tetromino.removeFromGrid()
+                tetromino = createTTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(16) {
+                tetromino.removeFromGrid()
+                tetromino = createZTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(32) {
+                tetromino.removeFromGrid()
+                tetromino = createSTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(0) {
+                tetromino.removeFromGrid()
+                tetromino = createMonominoTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(1) {
+                tetromino.removeFromGrid()
+                tetromino = createTetrisplusTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(51) {
+                tetromino.removeFromGrid()
+                tetromino = createInstaclearTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(3) {
+                tetromino.removeFromGrid()
+                tetromino = createXtetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(2) {
+                tetromino.removeFromGrid()
+                tetromino = createEDifTetromino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(4) {
+                tetromino.removeFromGrid()
+                tetromino = createDomino()
+                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
+            }
+            if keyIsPressed(5) {
+                print(linesToClear)
+            }
         }
     }
 }
@@ -512,7 +516,6 @@ func generateNextItem() {
     if bag1.count == 0 {
         swapBags()
     }
-    bag1.shuffle()
     nextItem = bag1[0]
     bag1.removeFirst()
 
