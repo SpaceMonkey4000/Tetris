@@ -148,7 +148,7 @@ var tetromino: Tetromino = Tetromino()
 tetromino = createJTetromino()
 
 // The next queue grid.
-var nextQueueGrid: Grid!
+var nextQueueGrid = Grid()
 
 // This function is called once, before the game starts.
 func first() {

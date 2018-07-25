@@ -4,6 +4,10 @@ public class Grid {
 
     public let matrix: Matrix
     
+    init() {
+        matrix = Matrix(cellsX: 0, cellsY: 0, center: .zero, scale: 1.0)
+    }
+    
     init(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) {
         matrix = Matrix(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
         matrix.layoutCells()
