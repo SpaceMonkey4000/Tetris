@@ -23,7 +23,7 @@ class ViewController: NSViewController {
 
         initView()
 
-        initMatrix()
+        initGrid()
     }
 
     override func viewDidAppear() {
@@ -36,8 +36,21 @@ class ViewController: NSViewController {
     }
 
     private func initScene() {
-        let scene = Scene(size: CGSize(width: CGFloat(gridSizeX)*Cell.size.width, height: (CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows))*Cell.size.height))
-        scene.scaleMode = .aspectFit
+        // The aspect ratio of the scene, as width/height. We want the scene to be
+        // as least as wide as we expect the user to resize the window.
+        let sceneAspectRatio: CGFloat = 2.7
+        
+        let sceneHeight: CGFloat = CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows)
+        let sceneWidth: CGFloat = sceneHeight*sceneAspectRatio
+        
+        let sceneSizeInCells = CGSize(width: sceneWidth, height: sceneHeight)        
+
+        let sceneSizeInPoints = CGSize(width: sceneSizeInCells.width*Cell.size.width, 
+                                      height: sceneSizeInCells.height*Cell.size.height)                          
+                                  
+        let scene = Scene(size: sceneSizeInPoints)
+        scene.scaleMode = .aspectFill
+
         skView.presentScene(scene)
 
         TetrisManager.shared.scene = scene
@@ -51,13 +64,21 @@ class ViewController: NSViewController {
         skView.showsNodeCount = false
     }
 
-    private func initMatrix() {
-        assert(TetrisManager.shared.scene != nil)
+    private func initGrid() {
+        guard let scene = TetrisManager.shared.scene else {
+            assertionFailure()
+            return
+        }
 
-        let matrix = Matrix()
-        TetrisManager.shared.matrix = matrix
+        // Shift the matrix up so that its bottom edge (y = 0) is flush with
+        // the bottom of the window.
+        let cellsToNormalizedCoordinatesRatio: CGFloat = Cell.size.height/(scene.size.height/2.0)
+        let center = CGPoint(x: 0.0, y: CGFloat(hiddenMatrixRows)/2.0*cellsToNormalizedCoordinatesRatio)
 
-        matrix.layoutCells()
+        // We use the default matrix to define the base scale of every other matrix in the scene.
+        let scale: CGFloat = 1.0
+
+        TetrisManager.shared.grid = createGrid(cellsX: gridSizeX, cellsY: gridSizeY, centerX: Float(center.x), centerY: Float(center.y), scale: scale)
     }
 
 }

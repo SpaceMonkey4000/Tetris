@@ -1,23 +1,72 @@
-
 import Foundation
 
-class Grid {
+public class Grid {
 
-    // Size of the grid, in cells. 
-    private let cellsX: Int
-    private let cellsY: Int
+    public let matrix: Matrix
     
-    // Center of the grid, in normalized window coordinates, with the origin at the center of the window.
-    private let center: CGPoint
-    
-    // Size of the grid, in normalized window coordinates.
-    private let size: CGPoint
-        
-    init(cellsX: Int, cellsY: Int, center: CGPoint, height: GGFloat) {
-        self.cellsX = cellsX
-        self.cellsY = cellsY
-        self.center = center
-        self.size = size
+    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) {
+        matrix = Matrix(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
+        matrix.layoutCells()
     }
+    
+    deinit {
+        matrix.removeCells()
+    }
+    
+    /// Assigns a background texture that appears in each cell when it is cleared
+    /// with clearTexture, or with setTexture with an argument of 0.
+    public func setBackgroundTexture(_ backgroundTexture: Int) {
+        createTextureAtlasControllerIfNecessary()
+    
+        matrix.defaultTextureIndex = backgroundTexture
+    }
+
+    /// Sets a texture at a grid cell. If 0 is specified for the texture,
+    /// the cell's texture is cleared.
+    public func setTexture(_ index: Int, x: Int, y: Int) {
+        createTextureAtlasControllerIfNecessary()
+
+        let cell = matrix.cellAt(x: x, y: y)
+        if cell == nil {
+            return
+        }
+        if index == 0 {
+            // This matches the behavior of clearTexture.
+            cell?.textureIndex = nil
+        } else {
+            cell?.textureIndex = index
+        }
+    }
+
+    /// Clears the texture at a grid cell.
+    public func clearTexture(x: Int, y: Int) {
+        let cell = matrix.cellAt(x: x, y: y)
+        if cell == nil {
+            return
+        }
+        cell?.textureIndex = nil
+    }
+
+    /// Returns true if a texture exists at a grid cell.
+    public func hasTextureAt(x: Int, y: Int) -> Bool {
+        guard let cell = matrix.cellAt(x: x, y: y) else {
+            return false
+        }
+
+        return cell.textureIndex != nil
+    }
+
+    /// Returns the texture at a grid cell. Returns 0 if the cell has no texture.
+    public func textureAt(x: Int, y: Int) -> Int {
+        guard let cell = matrix.cellAt(x: x, y: y) else {
+            return 0
+        }
+
+        guard let textureIndex = cell.textureIndex else {
+            return 0
+        }
+
+        return textureIndex
+    }    
 
 }

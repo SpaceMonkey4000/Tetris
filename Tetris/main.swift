@@ -11,6 +11,7 @@ let hiddenMatrixRows = 3.8
 // Size of the grid in cells.
 var gridSizeX = 10
 var gridSizeY = 24
+
 // The amount of frames that the player has before the piece locks down.
 var stickdelay = 30
 // Allows the player to use special keys to make tetrominos and debug pieces.
@@ -137,6 +138,9 @@ var level = 1
 // This variable is used to check for T-spins.
 var lastSuccessfulAction = "0"
 
+// The next queue grid
+var nextQueueGrid: Grid!
+
 createStyleColors()
 
 createAllPieces()
@@ -154,8 +158,43 @@ func first() {
     setBackgroundTexture(backgroundtexture)
     fillBag(bag: 1)
     fillBag(bag: 2)
+    
+    createNextQueueGrid()
+    
     generateNextItem()
     spawnMino()
+}
+
+func createNextQueueGrid() {
+    // Create the next queue grid. The createGrid function must be called in the first function.
+    // Parameters:
+    //     cellsX, cellsY: The width and height of the grid, measured in cells.
+    //     centerX, centerY: The position of the grid relative to the main grid.
+    //         0.0, 0.0 is the center of the window.
+    //         0.0, 1.0 is the top of the window.
+    //         0.0, -1.0 is the bottom of the window.
+    //         1.0, 0.0 is to the right of the center of the window.
+    //     scale: The size of the cells.
+    //         1.0 is the same size cells as in the main grid.
+    nextQueueGrid = createGrid(cellsX: 4, cellsY: 22, centerX: 0.8, centerY: 0.15, scale: 2.0/3.0)
+    
+    // Some example code to show how to update the next queue grid.
+    // We would not really execute this code here in the real implementation
+    // of the next queue.
+
+    // Set the next queue grid's background texture. We could leave this out
+    // to make it blank, but it is useful to show how big the next queue grid is
+    // during development.
+    nextQueueGrid.setBackgroundTexture(backgroundtexture)
+
+    // Clear a cell in the next queue grid.
+    nextQueueGrid.clearTexture(x: 0, y: 0)
+
+    // Set some cells in the next queue grid.
+    nextQueueGrid.setTexture(redbasic, x: 0, y: 21)
+    nextQueueGrid.setTexture(redbasic, x: 1, y: 21)
+    nextQueueGrid.setTexture(redbasic, x: 1, y: 20)
+    nextQueueGrid.setTexture(redbasic, x: 2, y: 20)
 }
 
 func refreshSlideTimer() {
@@ -521,6 +560,7 @@ func generateNextItem() {
 
 
 }
+
 // This function starts the game and must be called at the end of the file.
 start()
 
