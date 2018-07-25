@@ -217,8 +217,15 @@ func addNextItemToQueue(pos: Int, shape: Shape, texture: Int) {
 }
 
 func createHoldQueueGrid() {
-    holdQueueGrid = createGrid(cellsX: 4, cellsY: 4, centerX: -0.8, centerY: 0.6, scale: 2.3/3.0)
-    holdQueueGrid.setBackgroundTexture(backgroundtexture)
+    holdQueueGrid = createGrid(cellsX: 4, cellsY: 4, centerX: -0.8, centerY: 0.6, scale: 2.0/3.0)
+}
+// Clears the ENTIRE hold queue.
+func clearHoldQueue() {
+    for y in 0..<holdQueueGrid.cellsY {
+        for x in 0..<holdQueueGrid.cellsX {
+            holdQueueGrid.clearTexture(x: x, y: y)
+        }
+    }
 }
 func refreshSlideTimer() {
     if tetromino.onGround(){
@@ -502,9 +509,10 @@ func keyPress(key: Int) {
         //Hold
         if key == (8) {
             if holdItem.name != "" {
-                
                 let holdTemp: Tetromino = tetromino
+                clearHoldQueue()
                 tetromino.removeFromGrid()
+                tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
                 tetromino = holdItem
                 if tetromino.name == "I" {
                     tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
@@ -514,6 +522,7 @@ func keyPress(key: Int) {
                 holdItem = holdTemp
             } else {
                 tetromino.removeFromGrid()
+                tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
                 holdItem = tetromino
                 print ("hold item:",holdItem.name)
                 spawnMino()
