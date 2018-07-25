@@ -13,7 +13,7 @@ var gridSizeX = 10
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
-var stickdelay = 30
+var stickdelay = 70
 // Allows the player to use special keys to make tetrominos and debug pieces.
 var debugTools = 1
 // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
@@ -90,14 +90,14 @@ var ghostred = texture(named: "Ghostred")
 var ghostgreen = texture(named: "Ghostgreen")
 
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
-var fallspeed = 30
-var softdropfallspeed = 2
+var fallspeed = 1
+var softdropfallspeed = 1
 // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
 var softdropcounter = 0
 var fallCounter = 0
 // These variables define how many tiles the piece will fall per fall/softdrop.
-var fallTiles = 1
-var softDropTiles = 1
+var fallTiles = 2
+var softDropTiles = 5
 // This variable is used to check if a player performs an amount of wallkicks when the piece drops.
 var wallKicks = 0
 // This variable is used to take in how many lines were cleared.
@@ -142,6 +142,8 @@ var lastSuccessfulAction = "0"
 // The item in the hold.
 var holdItem: Tetromino = Tetromino()
 
+// This variable dissalows the use of hold spamming.
+var holdAllowed = 0
 createStyleColors()
 
 createAllPieces()
@@ -154,6 +156,8 @@ tetromino = createJTetromino()
 // The next and hold queue grids.
 var nextQueueGrid = Grid()
 var holdQueueGrid = Grid()
+
+
 
 // This function is called once, before the game starts.
 func first() {
@@ -210,10 +214,8 @@ func clearNextQueue() {
     }
 }
 // Creates a next item at a specific item position with a specific shape and texture.
-func addNextItemToQueue(pos: Int, shape: Shape, texture: Int) {
-    for mino in shape.minos {
-        nextQueueGrid.setTexture(texture, x: 0 + mino.mx, y: (19 + mino.my) - (pos * 3))
-    }
+func drawTetrominoInNextQueue(pos: Int, tetromino: Tetromino) {
+    tetromino.drawOnGrid(x: 0, y: 19 - (pos * 3), direction: 0, grid: nextQueueGrid)
 }
 
 func createHoldQueueGrid() {
@@ -291,6 +293,7 @@ func softFall(){
 }
 func spawnMino(){
     if gameState == "play" {
+        holdAllowed -= 1
         if minosOnScreen == 0 && tetrominosPlaced != 0 {
             print("Perfect clear")
         }
@@ -509,24 +512,33 @@ func keyPress(key: Int) {
         //Hold
         if key == (8) {
             if holdItem.name != "" {
-                let holdTemp: Tetromino = tetromino
-                clearHoldQueue()
-                tetromino.removeFromGrid()
-                tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
-                tetromino = holdItem
-                if tetromino.name == "I" {
-                    tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
-                } else {
-                    tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
+                if holdAllowed < 1 {
+                    let holdTemp: Tetromino = tetromino
+                    clearHoldQueue()
+                    holdAllowed = 1
+                    tetromino.removeFromGrid()
+                    tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
+                    tetromino = holdItem
+                    stRefreshes = stMaxRefreshes
+                    slidetimer = stickdelay
+                    if tetromino.name == "I" {
+                        tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
+                    } else {
+                        tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
+                    }
+                    holdItem = holdTemp
                 }
-                holdItem = holdTemp
             } else {
                 tetromino.removeFromGrid()
                 tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
                 holdItem = tetromino
+                holdAllowed = 2
+                stRefreshes = stMaxRefreshes
+                slidetimer = stickdelay
                 print ("hold item:",holdItem.name)
                 spawnMino()
             }
+            
         }
         //debug
         if debugTools == 1 {
@@ -596,7 +608,7 @@ func keyPress(key: Int) {
                 tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
             }
             if keyIsPressed(5) {
-                // stuff go here
+                print("relativebloccatggg",tetromino.relativeBlockAt(dx: 1, dy: -1))
             }
         }
     }
@@ -612,43 +624,14 @@ func generateNextItem() {
 }
 
 func addNextItem(pos: Int) {
-    var name = ""
+    var tetromino = Tetromino()
     
     if pos < bag1.count {
-        name = bag1[pos].name
+        tetromino = bag1[pos]
     } else {
-        name = bag2[pos - bag1.count].name
+        tetromino = bag2[pos - bag1.count]
     }
-    
-    if name == "I" {
-        addNextItemToQueue(pos: pos, shape: iNorth, texture: cyanbasic)
-        return
-    }
-    if name == "O" {
-        addNextItemToQueue(pos: pos, shape: oNorth, texture: yellowbasic)
-        return
-    }
-    if name == "T" {
-        addNextItemToQueue(pos: pos, shape: tNorth, texture: purplebasic)
-        return
-    }
-    if name == "S" {
-        addNextItemToQueue(pos: pos, shape: sNorth, texture: greenbasic)
-        return
-    }
-    if name == "Z" {
-        addNextItemToQueue(pos: pos, shape: zNorth, texture: redbasic)
-        return
-    }
-    if name == "J" {
-        addNextItemToQueue(pos: pos, shape: jNorth, texture: bluebasic)
-        return
-    }
-    if name == "L" {
-        addNextItemToQueue(pos: pos, shape: lNorth, texture: orangebasic)
-        return
-    }
-
+    drawTetrominoInNextQueue(pos: pos, tetromino: tetromino)
 }
 func showNextItems() {
     clearNextQueue()

@@ -192,7 +192,11 @@ class Tetromino {
     
     // Checks if there is a block in a specified location relative to the center of the tetromino.
     func relativeBlockAt(dx: Int, dy: Int) -> Bool {
-        if hasTextureAt(x: self.x + 1 + dx, y: self.y + 1 + dx) || dx < 0 || dx > gridSizeX || dy < 0 {
+        defer {
+            tetromino.draw(x: self.x, y: self.y, direction: self.direction)
+        }
+        tetromino.erase(x: self.x, y: self.y, direction: self.direction)
+        if hasTextureAt(x: self.x + 1 + dx, y: self.y + 1 + dy) || self.x + 1 + dx > gridSizeX || self.x + 1 + dx < 0 || self.y + 1 + dy < 0 {
             return true
         } else {
             return false

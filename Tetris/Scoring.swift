@@ -67,7 +67,6 @@ func tSpinScore () {
 //3corner test
 func threeCornerTest() {
     var cornersFull = 0
-    cornersFull = 0
     if tetromino.relativeBlockAt(dx: 1, dy: 1) {
         cornersFull += 1
     }
