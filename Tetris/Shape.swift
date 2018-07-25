@@ -39,7 +39,6 @@ class Shape {
 
     // Erase the shape. x and y are the position of the lower left corner
     // of the shape in the grid.
-    // look to the ways of the tiny potato
     func erase(x: Int, y: Int) {
         for mino in minos {
             clearTexture(x: x + mino.mx, y: y + mino.my)

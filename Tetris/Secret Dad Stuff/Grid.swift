@@ -4,6 +4,14 @@ public class Grid {
 
     public let matrix: Matrix
     
+    public var cellsX: Int {
+        return matrix.columns
+    }
+    
+    public var cellsY: Int {
+        return matrix.rows
+    }
+    
     init() {
         matrix = Matrix(cellsX: 0, cellsY: 0, center: .zero, scale: 1.0)
     }

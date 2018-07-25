@@ -10,8 +10,8 @@ import SpriteKit
 
 public class Matrix {
 
-    private let columns: Int
-    private let rows: Int
+    public let columns: Int
+    public let rows: Int
 
     // Center of the matrix, in normalized window coordinates, 
     // with the origin at the center of the window.

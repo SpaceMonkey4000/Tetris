@@ -191,10 +191,23 @@ func createNextQueueGrid() {
     nextQueueGrid.clearTexture(x: 0, y: 0)
 
     // Set some cells in the next queue grid.
-    nextQueueGrid.setTexture(redbasic, x: 0, y: 21)
-    nextQueueGrid.setTexture(redbasic, x: 1, y: 21)
-    nextQueueGrid.setTexture(redbasic, x: 1, y: 20)
-    nextQueueGrid.setTexture(redbasic, x: 2, y: 20)
+    // nextQueueGrid.setTexture(redbasic, x: 0, y: 21)
+    
+    // Clears all next queueueue grid cells.
+}
+// Clears the ENTIRE next queueueue.
+func clearNextQueue() {
+    for y in 0..<nextQueueGrid.cellsY {
+        for x in 0..<nextQueueGrid.cellsX {
+            nextQueueGrid.clearTexture(x: x, y: y)
+        }
+    }
+}
+// Creates a next item at a specific item position with a specific shape and texture.
+func addNextItemToQueue(pos: Int, shape: Shape, texture: Int) {
+    for mino in shape.minos {
+        nextQueueGrid.setTexture(texture, x: 0 + mino.mx, y: (19 + mino.my))
+    }
 }
 
 func refreshSlideTimer() {
@@ -269,6 +282,8 @@ func spawnMino(){
         }
         fallCounter = 0
         tetromino = nextItem
+        print(tetromino.name)
+        addNextItem()
         generateNextItem()
         slidetimer = stickdelay
         gameOverCheck = 1
@@ -409,8 +424,8 @@ func swapBags() {
 
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
-    //rotateright   UP                   X
     if gameState == "play" {
+        //rotateright   UP              X
         if key == (126) || key == (7){
             if tetromino.onGround() {
                 refreshSlideTimer()
@@ -544,7 +559,7 @@ func keyPress(key: Int) {
                 tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
             }
             if keyIsPressed(5) {
-                print(linesToClear)
+                addNextItem()
             }
         }
     }
@@ -557,8 +572,42 @@ func generateNextItem() {
     }
     nextItem = bag1[0]
     bag1.removeFirst()
+}
 
+func addNextItem() {
+    clearNextQueue()
+    print("addNextItem, tetromino.name =", tetromino.name)
 
+    if tetromino.name == "I" {
+        addNextItemToQueue(pos: 0, shape: iNorth, texture: cyanbasic)
+        return
+    }
+    if tetromino.name == "O" {
+        addNextItemToQueue(pos: 0, shape: oNorth, texture: yellowbasic)
+        return
+    }
+    if tetromino.name == "T" {
+        addNextItemToQueue(pos: 0, shape: tNorth, texture: purplebasic)
+        return
+    }
+    if tetromino.name == "S" {
+        addNextItemToQueue(pos: 0, shape: sNorth, texture: greenbasic)
+        return
+    }
+    if tetromino.name == "Z" {
+        addNextItemToQueue(pos: 0, shape: zNorth, texture: redbasic)
+        return
+    }
+    if tetromino.name == "J" {
+        addNextItemToQueue(pos: 0, shape: jNorth, texture: bluebasic)
+        return
+    }
+    if tetromino.name == "L" {
+        addNextItemToQueue(pos: 0, shape: lNorth, texture: orangebasic)
+        return
+    }
+    
+    print("Unknown tetromino, name =", tetromino.name)
 }
 
 // This function starts the game and must be called at the end of the file.
