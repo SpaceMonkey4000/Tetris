@@ -59,6 +59,8 @@ var autoRepeatSpeed = 2
 var ghostStyle = "color"
 //If DAS can be preserved.
 var diagonalMove = true
+// The amount of next items the player sees. 0-6.
+var nextItems = 6
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -185,7 +187,7 @@ func createNextQueueGrid() {
     // Set the next queue grid's background texture. We could leave this out
     // to make it blank, but it is useful to show how big the next queue grid is
     // during development.
-    nextQueueGrid.setBackgroundTexture(backgroundtexture)
+//    nextQueueGrid.setBackgroundTexture(backgroundtexture)
 
     // Clear a cell in the next queue grid.
     nextQueueGrid.clearTexture(x: 0, y: 0)
@@ -206,7 +208,7 @@ func clearNextQueue() {
 // Creates a next item at a specific item position with a specific shape and texture.
 func addNextItemToQueue(pos: Int, shape: Shape, texture: Int) {
     for mino in shape.minos {
-        nextQueueGrid.setTexture(texture, x: 0 + mino.mx, y: (19 + mino.my))
+        nextQueueGrid.setTexture(texture, x: 0 + mino.mx, y: (19 + mino.my) - (pos * 3))
     }
 }
 
@@ -283,7 +285,7 @@ func spawnMino(){
         fallCounter = 0
         tetromino = nextItem
         print(tetromino.name)
-        addNextItem()
+        showNextItems()
         generateNextItem()
         slidetimer = stickdelay
         gameOverCheck = 1
@@ -559,7 +561,7 @@ func keyPress(key: Int) {
                 tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
             }
             if keyIsPressed(5) {
-                addNextItem()
+                // stuff go here
             }
         }
     }
@@ -574,40 +576,65 @@ func generateNextItem() {
     bag1.removeFirst()
 }
 
-func addNextItem() {
-    clearNextQueue()
-    print("addNextItem, tetromino.name =", tetromino.name)
-
-    if tetromino.name == "I" {
-        addNextItemToQueue(pos: 0, shape: iNorth, texture: cyanbasic)
-        return
-    }
-    if tetromino.name == "O" {
-        addNextItemToQueue(pos: 0, shape: oNorth, texture: yellowbasic)
-        return
-    }
-    if tetromino.name == "T" {
-        addNextItemToQueue(pos: 0, shape: tNorth, texture: purplebasic)
-        return
-    }
-    if tetromino.name == "S" {
-        addNextItemToQueue(pos: 0, shape: sNorth, texture: greenbasic)
-        return
-    }
-    if tetromino.name == "Z" {
-        addNextItemToQueue(pos: 0, shape: zNorth, texture: redbasic)
-        return
-    }
-    if tetromino.name == "J" {
-        addNextItemToQueue(pos: 0, shape: jNorth, texture: bluebasic)
-        return
-    }
-    if tetromino.name == "L" {
-        addNextItemToQueue(pos: 0, shape: lNorth, texture: orangebasic)
-        return
+func addNextItem(pos: Int) {
+    var name = ""
+    
+    if pos < bag1.count {
+        name = bag1[pos].name
+    } else {
+        name = bag2[pos - bag1.count].name
     }
     
-    print("Unknown tetromino, name =", tetromino.name)
+    if name == "I" {
+        addNextItemToQueue(pos: pos, shape: iNorth, texture: cyanbasic)
+        return
+    }
+    if name == "O" {
+        addNextItemToQueue(pos: pos, shape: oNorth, texture: yellowbasic)
+        return
+    }
+    if name == "T" {
+        addNextItemToQueue(pos: pos, shape: tNorth, texture: purplebasic)
+        return
+    }
+    if name == "S" {
+        addNextItemToQueue(pos: pos, shape: sNorth, texture: greenbasic)
+        return
+    }
+    if name == "Z" {
+        addNextItemToQueue(pos: pos, shape: zNorth, texture: redbasic)
+        return
+    }
+    if name == "J" {
+        addNextItemToQueue(pos: pos, shape: jNorth, texture: bluebasic)
+        return
+    }
+    if name == "L" {
+        addNextItemToQueue(pos: pos, shape: lNorth, texture: orangebasic)
+        return
+    }
+
+}
+func showNextItems() {
+    clearNextQueue()
+    if nextItems > 0 {
+        addNextItem(pos: 0)
+    }
+    if nextItems > 1 {
+        addNextItem(pos: 1)
+    }
+    if nextItems > 2 {
+        addNextItem(pos: 2)
+    }
+    if nextItems > 3 {
+        addNextItem(pos: 3)
+    }
+    if nextItems > 4 {
+        addNextItem(pos: 4)
+    }
+    if nextItems > 5 {
+        addNextItem(pos: 5)
+    }
 }
 
 // This function starts the game and must be called at the end of the file.

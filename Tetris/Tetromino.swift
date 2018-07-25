@@ -194,3 +194,11 @@ class Tetromino {
         }
     }
 }
+
+extension Tetromino: CustomStringConvertible {
+
+    var description: String {
+        return "Tetromino(name: \(name))"
+    }
+    
+}
