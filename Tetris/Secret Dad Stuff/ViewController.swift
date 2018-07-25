@@ -78,7 +78,7 @@ class ViewController: NSViewController {
         // We use the default matrix to define the base scale of every other matrix in the scene.
         let scale: CGFloat = 1.0
 
-        TetrisManager.shared.grid = createGrid(cellsX: gridSizeX, cellsY: gridSizeY, center: center, scale: scale)
+        TetrisManager.shared.grid = createGrid(cellsX: gridSizeX, cellsY: gridSizeY, centerX: Float(center.x), centerY: Float(center.y), scale: scale)
     }
 
 }

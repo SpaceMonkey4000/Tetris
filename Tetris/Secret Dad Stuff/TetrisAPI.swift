@@ -104,6 +104,11 @@ public func random(min: Int, max: Int) -> Int {
 ///         extends from the bottom of the window to the top of the window.
 ///     - scale: The scale of the cells, relative to the default grid. 0.5 indicates
 ///         half height cells.
-public func createGrid(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) -> Grid {
-    return Grid(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
+public func createGrid(cellsX: Int, cellsY: Int, centerX: Float, centerY: Float, scale: CGFloat) -> Grid {
+    guard let _ = TetrisManager.shared.scene else {
+        print("Error: createGrid must only be called in the first or update functions.")
+        fatalError()
+    }
+    
+    return Grid(cellsX: cellsX, cellsY: cellsY, center: CGPoint(x: CGFloat(centerX), y: CGFloat(centerY)), scale: scale)
 }
