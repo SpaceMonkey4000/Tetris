@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Matrix {
+public class Matrix {
 
     private let columns: Int
     private let rows: Int

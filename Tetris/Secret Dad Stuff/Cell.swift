@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Cell {
+public class Cell {
 
     private let spriteNode = SKSpriteNode()
 

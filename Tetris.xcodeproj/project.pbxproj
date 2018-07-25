@@ -30,6 +30,7 @@
 		77A2983D2101330800E30011 /* RotationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983C2101330800E30011 /* RotationSystem.swift */; };
 		77A2983F2102AEDC00E30011 /* Scoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983E2102AEDC00E30011 /* Scoring.swift */; };
 		77D1D1262105259100CBB46A /* Ghostpiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1D1252105259100CBB46A /* Ghostpiece.swift */; };
+		77E42ADC21082E5500FD0152 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E42ADB21082E5500FD0152 /* Grid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		77A2983C2101330800E30011 /* RotationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationSystem.swift; sourceTree = "<group>"; };
 		77A2983E2102AEDC00E30011 /* Scoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoring.swift; sourceTree = "<group>"; };
 		77D1D1252105259100CBB46A /* Ghostpiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghostpiece.swift; sourceTree = "<group>"; };
+		77E42ADB21082E5500FD0152 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				3A5F13E420FA78B900A43C21 /* Scene.swift */,
 				3A5F13F920FA843100A43C21 /* Matrix.swift */,
 				3A2FB97C20FA8B4500AF6592 /* Cell.swift */,
+				77E42ADB21082E5500FD0152 /* Grid.swift */,
 				3A2FB98020FA9A3300AF6592 /* TextureAtlasController.swift */,
 				3A2FB98620FADE6A00AF6592 /* KeyController.swift */,
 				3A2FB98420FABE6400AF6592 /* NSImage+Resized.swift */,
@@ -201,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77E42ADC21082E5500FD0152 /* Grid.swift in Sources */,
 				3A2FB98320FAA1A200AF6592 /* TetrisAPI.swift in Sources */,
 				3A2FB98520FABE6400AF6592 /* NSImage+Resized.swift in Sources */,
 				3A5F13E720FA78B900A43C21 /* ViewController.swift in Sources */,

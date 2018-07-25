@@ -1,9 +1,10 @@
+import Foundation
 
-class Grid {
+public class Grid {
 
     public let matrix: Matrix
     
-    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: GGFloat) {
+    init(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) {
         matrix = Matrix(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
         matrix.layoutCells()
     }

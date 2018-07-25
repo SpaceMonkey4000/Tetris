@@ -38,7 +38,7 @@ class ViewController: NSViewController {
     private func initScene() {
         // The aspect ratio of the scene, as width/height. We want the scene to be
         // as least as wide as we expect the user to resize the window.
-        let sceneAspectRatio: CGFloat = 2.0
+        let sceneAspectRatio: CGFloat = 2.7
         
         let sceneHeight: CGFloat = CGFloat(gridSizeY) - CGFloat(hiddenMatrixRows)
         let sceneWidth: CGFloat = sceneHeight*sceneAspectRatio

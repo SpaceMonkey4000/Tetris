@@ -20,7 +20,7 @@ public func createTextureAtlasControllerIfNecessary() {
 
 /// Adds a texture with a name of an image in the asset catalog.
 public func texture(named name: String) -> Int {
-    guard TetrisManager.shared.matrix == nil else {
+    guard TetrisManager.shared.grid == nil else {
         print("Error: texture(named:) must not be called in the first or update functions.")
         fatalError()
     }
@@ -72,7 +72,7 @@ public func hasTextureAt(x: Int, y: Int) -> Bool {
         fatalError()
     }
 
-    return grid.hasTexture(x: x, y: y)
+    return grid.hasTextureAt(x: x, y: y)
 }
 
 /// Returns the texture at a grid cell. Returns 0 if the cell has no texture.
@@ -82,7 +82,7 @@ public func textureAt(x: Int, y: Int) -> Int {
         fatalError()
     }
     
-    return textureAt(x: x, y: y)
+    return grid.textureAt(x: x, y: y)
 }
 
 public func keyIsPressed(_ key: Int) -> Bool {
@@ -104,6 +104,6 @@ public func random(min: Int, max: Int) -> Int {
 ///         extends from the bottom of the window to the top of the window.
 ///     - scale: The scale of the cells, relative to the default grid. 0.5 indicates
 ///         half height cells.
-public func createGrid(cellsX: Int, cellsY: Int, center: CGPoint, scale: GGFloat) -> Grid {
+public func createGrid(cellsX: Int, cellsY: Int, center: CGPoint, scale: CGFloat) -> Grid {
     return Grid(cellsX: cellsX, cellsY: cellsY, center: center, scale: scale)
 }
