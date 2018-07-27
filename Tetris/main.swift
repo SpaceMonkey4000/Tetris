@@ -1,5 +1,3 @@
-
-
 //TRUE LETS: these are lets. Let let let let let let let let
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
@@ -15,12 +13,12 @@ var gridSizeY = 24
 // The amount of frames that the player has before the piece locks down.
 var stickdelay = 30
 // Allows the player to use special keys to make tetrominos and debug pieces.
-var debugTools = 1
+var debugTools = 0
 // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
 var stMaxRefreshes = 15
 //If the piece instantly locks down when hard dropped.
 var hardDropInstantLock = 1
-//SPINS:
+//SPINS: 
 //If the player gets rewarded for doing spin moves for certain blocks.
 var tSpinsRewarded = true
 var sSpinsRewarded = true
@@ -61,6 +59,8 @@ var ghostStyle = "color"
 var diagonalMove = true
 // The amount of next items the player sees. 0-6.
 var nextItems = 6
+// The amount of frames it will take until auto repeat activates.
+var framesUntilAutoRepeat = 12
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -90,8 +90,8 @@ var ghostred = texture(named: "Ghostred")
 var ghostgreen = texture(named: "Ghostgreen")
 
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
-var fallspeed = 30
-var softdropfallspeed = 2
+var fallspeed = 40
+var softdropfallspeed = 1
 // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
 var softdropcounter = 0
 var fallCounter = 0
@@ -250,7 +250,7 @@ func update() {
         if keyIsPressed(123) {
             if !keyIsPressed(124) {
                 shiftAutoRepeatCounter += 1
-                if shiftAutoRepeatCounter > 14 {
+                if shiftAutoRepeatCounter > framesUntilAutoRepeat {
                     shiftAutoRepeatCounter2 += 1
                     if shiftAutoRepeatCounter2 > autoRepeatSpeed {
                         if !tetromino.blockLeft() {
@@ -267,7 +267,7 @@ func update() {
         if keyIsPressed(124) {
             if !keyIsPressed(123) {
                 shiftAutoRepeatCounter += 1
-                if shiftAutoRepeatCounter > 14 {
+                if shiftAutoRepeatCounter > framesUntilAutoRepeat {
                     shiftAutoRepeatCounter2 += 1
                     if shiftAutoRepeatCounter2 > autoRepeatSpeed {
                         if !tetromino.blockRight() {

@@ -31,15 +31,15 @@ func noSpinScore() {
 func spinScore() {
     switch tetromino.name {
     case "L":
-        noSpinScore()
+        basicSpinScore(message: "L-spin")
     case "J":
-        noSpinScore()
+        basicSpinScore(message: "J-spin")
     case "S":
-        noSpinScore()
+        basicSpinScore(message: "S-spin")
     case "Z":
-        noSpinScore()
+        basicSpinScore(message: "Z-spin")
     case "I":
-        noSpinScore()
+        basicSpinScore(message: "I-spin")
     case "O":
         if tetromino.blocked() {
             if lineScore == 0 {
@@ -83,23 +83,23 @@ func threeCornerTest() {
         if lastSuccessfulAction == "rotate" {
             if lineScore == 0 {
                 if miniTspin() {
-                    print ("T spin mini")
+                    print ("T-spin mini")
                 } else {
-                    print ("T spin")
+                    print ("T-spin")
                 }
             }
             if lineScore == 1 {
                 if miniTspin() {
-                    print ("T spin mini single")
+                    print ("T-spin mini single")
                 } else {
-                    print ("T spin single")
+                    print ("T-spin single")
                 }
             }
             if lineScore == 2 {
-                print ("T spin double")
+                print ("T-spin double")
             }
             if lineScore == 3 {
-                print ("T spin triple")
+                print ("T-spin triple")
             }
         } else {
             noSpinScore()
@@ -109,6 +109,7 @@ func threeCornerTest() {
         noSpinScore()
     }
 }
+
 func miniTspin() -> Bool {
     if lastTranslationWas(dx: -1, dy: -1, ddirection: 1) || lastTranslationWas(dx: 1, dy: -1, ddirection: -1){
         return true
@@ -118,6 +119,7 @@ func miniTspin() -> Bool {
         return false
     }
 }
+
 func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
     if tetromino.lastXmovement == dx && tetromino.lastYmovement == dy && tetromino.lastDirMovement == ddirection {
         return true
@@ -126,3 +128,18 @@ func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
     }
 }
 
+func basicSpinScore(message: String) {
+    if tetromino.blocked() {
+        if lineScore == 0 {
+            print(message)
+        } else if lineScore == 1 {
+            print(message,"single")
+        } else if lineScore == 2 {
+            print(message,"double")
+        } else if lineScore == 3 {
+            print(message,"triple")
+        } else if lineScore == 4 {
+            print(message,"quadruple")
+        }
+    }
+}
