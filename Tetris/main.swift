@@ -142,6 +142,9 @@ var lastSuccessfulAction = "0"
 // The item in the hold.
 var holdItem: Tetromino = Tetromino()
 
+// Play sounds like this: rotateSound.play()
+let rotateSound = Sound(named: "Rotate8bit")
+
 // This variable dissalows the use of hold spamming.
 var holdAllowed = 0
 createStyleColors()
@@ -454,6 +457,7 @@ func keyPress(key: Int) {
     if gameState == "play" {
         //rotateright   UP              X
         if key == (126) || key == (7){
+            rotateSound.play()
             if tetromino.onGround() {
                 refreshSlideTimer()
             }
