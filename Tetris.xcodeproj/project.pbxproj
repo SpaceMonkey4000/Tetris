@@ -27,6 +27,11 @@
 		3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD3FE120FB8D6900D9EEDB /* Shape.swift */; };
 		3AB47A2620FBFCF000779E6D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2520FBFCF000779E6D /* Tetromino.swift */; };
 		3AB47A2820FC00B800779E6D /* Tetrominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2720FC00B800779E6D /* Tetrominos.swift */; };
+		7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AB210CF357007E5972 /* Rotate8bit.wav */; };
+		7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AC210CF357007E5972 /* Lineclear8bit.wav */; };
+		7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AD210CF357007E5972 /* Shift8bit.wav */; };
+		7758F1B3210CF357007E5972 /* Land8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AE210CF357007E5972 /* Land8bit.wav */; };
+		7758F1B4210CF357007E5972 /* Tetris8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AF210CF357007E5972 /* Tetris8bit.wav */; };
 		7769072F20FBBE70003F4C57 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7769072E20FBBE70003F4C57 /* Shapes.swift */; };
 		77A2983D2101330800E30011 /* RotationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983C2101330800E30011 /* RotationSystem.swift */; };
 		77A2983F2102AEDC00E30011 /* Scoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2983E2102AEDC00E30011 /* Scoring.swift */; };
@@ -59,6 +64,11 @@
 		3AAD3FE120FB8D6900D9EEDB /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		3AB47A2520FBFCF000779E6D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		3AB47A2720FC00B800779E6D /* Tetrominos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrominos.swift; sourceTree = "<group>"; };
+		7758F1AB210CF357007E5972 /* Rotate8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rotate8bit.wav; sourceTree = "<group>"; };
+		7758F1AC210CF357007E5972 /* Lineclear8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lineclear8bit.wav; sourceTree = "<group>"; };
+		7758F1AD210CF357007E5972 /* Shift8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shift8bit.wav; sourceTree = "<group>"; };
+		7758F1AE210CF357007E5972 /* Land8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Land8bit.wav; sourceTree = "<group>"; };
+		7758F1AF210CF357007E5972 /* Tetris8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Tetris8bit.wav; sourceTree = "<group>"; };
 		7769072E20FBBE70003F4C57 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		77A2983C2101330800E30011 /* RotationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationSystem.swift; sourceTree = "<group>"; };
 		77A2983E2102AEDC00E30011 /* Scoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoring.swift; sourceTree = "<group>"; };
@@ -97,6 +107,7 @@
 		3A5F13DD20FA78B900A43C21 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				7758F1AA210CF346007E5972 /* New Group */,
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
 				3A5F13F520FA7D9E00A43C21 /* main.swift */,
@@ -135,6 +146,18 @@
 				3A5F13EE20FA78BA00A43C21 /* Tetris.entitlements */,
 			);
 			path = "Secret Dad Stuff";
+			sourceTree = "<group>";
+		};
+		7758F1AA210CF346007E5972 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				7758F1AE210CF357007E5972 /* Land8bit.wav */,
+				7758F1AC210CF357007E5972 /* Lineclear8bit.wav */,
+				7758F1AB210CF357007E5972 /* Rotate8bit.wav */,
+				7758F1AD210CF357007E5972 /* Shift8bit.wav */,
+				7758F1AF210CF357007E5972 /* Tetris8bit.wav */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,10 +218,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7758F1B4210CF357007E5972 /* Tetris8bit.wav in Resources */,
+				7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */,
 				3A5F13E120FA78B900A43C21 /* GameScene.sks in Resources */,
 				3A5F13E920FA78BA00A43C21 /* Assets.xcassets in Resources */,
 				3A5F13E320FA78B900A43C21 /* Actions.sks in Resources */,
+				7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */,
 				3A5F13EC20FA78BA00A43C21 /* Main.storyboard in Resources */,
+				7758F1B3210CF357007E5972 /* Land8bit.wav in Resources */,
+				7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */,
 				3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
