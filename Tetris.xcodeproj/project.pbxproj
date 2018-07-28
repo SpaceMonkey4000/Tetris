@@ -107,8 +107,8 @@
 		3A5F13DD20FA78B900A43C21 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
-				7758F1AA210CF346007E5972 /* New Group */,
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
+				7758F1AA210CF346007E5972 /* Sounds */,
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
 				3A5F13F520FA7D9E00A43C21 /* main.swift */,
 				3AAD3FE120FB8D6900D9EEDB /* Shape.swift */,
@@ -148,7 +148,7 @@
 			path = "Secret Dad Stuff";
 			sourceTree = "<group>";
 		};
-		7758F1AA210CF346007E5972 /* New Group */ = {
+		7758F1AA210CF346007E5972 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				7758F1AE210CF357007E5972 /* Land8bit.wav */,
@@ -157,7 +157,7 @@
 				7758F1AD210CF357007E5972 /* Shift8bit.wav */,
 				7758F1AF210CF357007E5972 /* Tetris8bit.wav */,
 			);
-			path = "New Group";
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
