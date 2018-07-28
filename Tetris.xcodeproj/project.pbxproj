@@ -23,6 +23,7 @@
 		3A5F13F620FA7D9E00A43C21 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F520FA7D9E00A43C21 /* main.swift */; };
 		3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */; };
 		3A5F13FA20FA843100A43C21 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F13F920FA843100A43C21 /* Matrix.swift */; };
+		3A8C2041210CDBE60072FD80 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C2040210CDBE60072FD80 /* WindowController.swift */; };
 		3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD3FE120FB8D6900D9EEDB /* Shape.swift */; };
 		3AB47A2620FBFCF000779E6D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2520FBFCF000779E6D /* Tetromino.swift */; };
 		3AB47A2820FC00B800779E6D /* Tetrominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2720FC00B800779E6D /* Tetrominos.swift */; };
@@ -54,6 +55,7 @@
 		3A5F13F520FA7D9E00A43C21 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "2009 Tetris Design Guideline.pdf"; sourceTree = "<group>"; };
 		3A5F13F920FA843100A43C21 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		3A8C2040210CDBE60072FD80 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		3AAD3FE120FB8D6900D9EEDB /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		3AB47A2520FBFCF000779E6D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		3AB47A2720FC00B800779E6D /* Tetrominos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrominos.swift; sourceTree = "<group>"; };
@@ -115,6 +117,8 @@
 			children = (
 				3A2FB98220FAA1A200AF6592 /* TetrisAPI.swift */,
 				3A5F13DE20FA78B900A43C21 /* AppDelegate.swift */,
+				3A5F13EA20FA78BA00A43C21 /* Main.storyboard */,
+				3A8C2040210CDBE60072FD80 /* WindowController.swift */,
 				3A5F13E620FA78B900A43C21 /* ViewController.swift */,
 				3A2FB97E20FA8EDE00AF6592 /* TetrisManager.swift */,
 				3A5F13E420FA78B900A43C21 /* Scene.swift */,
@@ -125,7 +129,6 @@
 				3A2FB98620FADE6A00AF6592 /* KeyController.swift */,
 				77D1D1272105468000CBB46A /* Shuffle.swift */,
 				3A2FB98420FABE6400AF6592 /* NSImage+Resized.swift */,
-				3A5F13EA20FA78BA00A43C21 /* Main.storyboard */,
 				3A5F13E020FA78B900A43C21 /* GameScene.sks */,
 				3A5F13E220FA78B900A43C21 /* Actions.sks */,
 				3A5F13ED20FA78BA00A43C21 /* Info.plist */,
@@ -217,6 +220,7 @@
 				3A5F13E520FA78B900A43C21 /* Scene.swift in Sources */,
 				77D1D1262105259100CBB46A /* Ghostpiece.swift in Sources */,
 				3A2FB98120FA9A3300AF6592 /* TextureAtlasController.swift in Sources */,
+				3A8C2041210CDBE60072FD80 /* WindowController.swift in Sources */,
 				77A2983F2102AEDC00E30011 /* Scoring.swift in Sources */,
 				3A2FB97F20FA8EDF00AF6592 /* TetrisManager.swift in Sources */,
 				3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */,
