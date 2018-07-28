@@ -1,3 +1,5 @@
+import AppKit
+
 //TRUE LETS: these are lets. Let let let let let let let let
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
@@ -160,7 +162,8 @@ tetromino = createJTetromino()
 var nextQueueGrid = Grid()
 var holdQueueGrid = Grid()
 
-
+var label1 = Label()
+var label2 = Label()
 
 // This function is called once, before the game starts.
 func first() {
@@ -176,6 +179,13 @@ func first() {
     
     generateNextItem()
     spawnMino()
+
+    label1 = createLabel(x: -1.25, y: 0.3, text: "Whatever")
+    label2 = createLabel(x: -1.25, y: 0.2)
+
+    label2.color = "#ff3333"
+    label2.text = "Poopy"
+    label2.isHidden = false
 }
 
 func createNextQueueGrid() {

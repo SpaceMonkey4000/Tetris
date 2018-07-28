@@ -112,3 +112,7 @@ public func createGrid(cellsX: Int, cellsY: Int, centerX: Float, centerY: Float,
     
     return Grid(cellsX: cellsX, cellsY: cellsY, center: CGPoint(x: CGFloat(centerX), y: CGFloat(centerY)), scale: scale)
 }
+
+public func createLabel(x: Float, y: Float, text: String? = nil) -> Label {
+    return Label(position: CGPoint(x: CGFloat(x), y: CGFloat(y)), text: text)
+}
