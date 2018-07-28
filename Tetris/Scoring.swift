@@ -141,5 +141,7 @@ func basicSpinScore(message: String) {
         } else if lineScore == 4 {
             print(message,"quadruple")
         }
+    } else {
+        noSpinScore()
     }
 }
