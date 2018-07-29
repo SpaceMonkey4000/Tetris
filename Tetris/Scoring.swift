@@ -19,45 +19,34 @@ func scoreLines(){
 //Handles scoring if no spins have been performed.
 func noSpinScore() {
     if lineScore == 1 {
-        print("Single")
+        changeMoveLabel(name: "Single", color: "FFFFFF")
         scorePoints(amount: 100, strong: false)
-        if perfectClearing == 0 {
             lineSound.play()
-        }
-        perfectClearing = 0
         return
     } else if lineScore == 2 {
-        print("Double")
+        changeMoveLabel(name: "Double", color: "FFFFFF")
         scorePoints(amount: 300, strong: false)
-        if perfectClearing == 0 {
             lineSound.play()
-        }
-        perfectClearing = 0
         return
     } else if lineScore == 3 {
-        print("Triple")
+        changeMoveLabel(name: "Triple", color: "FFFFFF")
         scorePoints(amount: 500, strong: false)
-        if perfectClearing == 0 {
             lineSound.play()
-        }
-        perfectClearing = 0
         return
     } else if lineScore == 4 {
-        scorePoints(amount: 800, strong: true)
-        print("Tetris")
-        if perfectClearing == 0 {
-            tetrisSound.play()
+        if backToBackBonus == 1 {
+            changeMoveLabel(name: "Back to back tetris", color: "FFFFFF")
+        } else {
+            changeMoveLabel(name: "Tetris", color: "FFFFFF")
         }
-        perfectClearing = 0
+        scorePoints(amount: 800, strong: true)
+            tetrisSound.play()
         return
     } else if lineScore == 0 {
         comboCount = 0
-        if perfectClearing == 0 {
             landSound.play()
         }
-        perfectClearing = 0
     }
-}
 
 //Handles scoring if spins other than T have been performed.
 func spinScore() {
@@ -77,25 +66,30 @@ func spinScore() {
             if lineScore == 0 {
                 comboCount = 0
                 print("O-spin")
-                scorePoints(amount: 400, strong: true)
-                if perfectClearing == 0 {
-                    landSound.play()
+                if backToBackBonus == 1 {
+                    changeMoveLabel(name: "Back to back O-spin", color: "FFFFFF")
+                } else {
+                    changeMoveLabel(name: "O-spin", color: "FFFFFF")
                 }
-                perfectClearing = 0
+                    landSound.play()
             } else if lineScore == 1 {
                 scorePoints(amount: 800, strong: true)
                 print("O-spin single")
-                if perfectClearing == 0 {
-                    tetrisSound.play()
+                if backToBackBonus == 1 {
+                    changeMoveLabel(name: "Back to back O-spin single", color: "FFFFFF")
+                } else {
+                    changeMoveLabel(name: "O-spin single", color: "FFFFFF")
                 }
-                perfectClearing = 0
+                    tetrisSound.play()
             } else if lineScore == 2 {
                 scorePoints(amount: 1200, strong: true)
                 print("O-spin double")
-                if perfectClearing == 0 {
-                    tetrisSound.play()
+                if backToBackBonus == 1 {
+                    changeMoveLabel(name: "Back to back O-spin double", color: "FFFFFF")
+                } else {
+                    changeMoveLabel(name: "O-spin double", color: "FFFFFF")
                 }
-                perfectClearing = 0
+                    tetrisSound.play()
             }
         } else {
             noSpinScore()
@@ -133,52 +127,58 @@ func threeCornerTest() {
                 comboCount = 0
                 if miniTspin() {
                     print ("T-spin mini")
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back T-spin mini", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "T-spin mini", color: "FFFFFF")
+                    }
                     scorePoints(amount: 100, strong: true)
-                    if perfectClearing == 0 {
                        landSound.play()
-                    }
-                    perfectClearing = 0
                 } else {
-                    print ("T-spin")
-                    scorePoints(amount: 400, strong: true)
-                    if perfectClearing == 0 {
-                        landSound.play()
+                    print("T-spin")
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back T-spin", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "T-spin", color: "FFFFFF")
                     }
-                    perfectClearing = 0
+                    scorePoints(amount: 400, strong: true)
+                        landSound.play()
                 }
             }
             if lineScore == 1 {
                 if miniTspin() {
                     print ("T-spin mini single")
-                    scorePoints(amount: 200, strong: true)
-                    if perfectClearing == 0 {
-                        tetrisSound.play()
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back T-spin mini sing;e", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "T-spin mini single", color: "FFFFFF")
                     }
-                    perfectClearing = 0
+                    scorePoints(amount: 200, strong: true)
+                        tetrisSound.play()
                 } else {
+                    changeMoveLabel(name: "T-spin single", color: "FFFFFF")
                     print ("T-spin single")
                     scorePoints(amount: 800, strong: true)
-                    if perfectClearing == 0 {
                         tetrisSound.play()
-                    }
-                    perfectClearing = 0
                 }
             }
             if lineScore == 2 {
-                print ("T-spin double")
-                scorePoints(amount: 1200, strong: true)
-                if perfectClearing == 0 {
-                    tetrisSound.play()
+                if backToBackBonus == 1 {
+                    changeMoveLabel(name: "Back to back T-spin double", color: "FFFFFF")
+                } else {
+                    changeMoveLabel(name: "T-spin double", color: "FFFFFF")
                 }
-                perfectClearing = 0
+                scorePoints(amount: 1200, strong: true)
+                    tetrisSound.play()
             }
             if lineScore == 3 {
-                print ("T-spin triple")
-                scorePoints(amount: 1600, strong: true)
-                if perfectClearing == 0 {
-                    tetrisSound.play()
+                if backToBackBonus == 1 {
+                    changeMoveLabel(name: "Back to back T-spin triple", color: "FFFFFF")
+                } else {
+                    changeMoveLabel(name: "T-spin triple", color: "FFFFFF")
                 }
-                perfectClearing = 0
+                scorePoints(amount: 1600, strong: true)
+                    tetrisSound.play()
             }
         } else {
             noSpinScore()
@@ -207,44 +207,54 @@ func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
     }
 }
 
+// Add a color parameter to this function. Use the color for the movelabeling.
 func basicSpinScore(message: String) {
     if tetromino.blocked() {
         if lineScore == 0 {
             comboCount = 0
             scorePoints(amount: 400, strong: true)
-            if perfectClearing == 0 {
                 landSound.play()
+            if backToBackBonus == 1 {
+                changeMoveLabel(name: "back to back " + message, color: "FFFFFF")
+            } else {
+                changeMoveLabel(name: message, color: "FFFFFF")
             }
-            perfectClearing = 0
-            print(message)
         } else if lineScore == 1 {
             scorePoints(amount: 800, strong: true)
-            if perfectClearing == 0 {
                 tetrisSound.play()
-            }
-            perfectClearing = 0
             print(message,"single")
+            if backToBackBonus == 1 {
+                changeMoveLabel(name: "Back to back " + message + " single", color: "FFFFFF")
+            } else {
+                changeMoveLabel(name: message + " single", color: "FFFFFF")
+            }
         } else if lineScore == 2 {
             scorePoints(amount: 1200, strong: true)
-            if perfectClearing == 0 {
                 tetrisSound.play()
-            }
-            perfectClearing = 0
             print(message,"double")
+            if backToBackBonus == 1 {
+                changeMoveLabel(name: "Back to back " + message + " double", color: "FFFFFF")
+            } else {
+                changeMoveLabel(name: message + " double", color: "FFFFFF")
+            }
         } else if lineScore == 3 {
             scorePoints(amount: 1600, strong: true)
-            if perfectClearing == 0 {
                 tetrisSound.play()
-            }
-            perfectClearing = 0
             print(message,"triple")
+            if backToBackBonus == 1 {
+                changeMoveLabel(name: "Back to back " + message + " triple", color: "FFFFFF")
+            } else {
+                changeMoveLabel(name: message + " triple", color: "FFFFFF")
+            }
         } else if lineScore == 4 {
             scorePoints(amount: 1800, strong: true)
-            if perfectClearing == 0 {
                 tetrisSound.play()
-            }
-            perfectClearing = 0
             print(message,"quadruple")
+            if backToBackBonus == 1 {
+                changeMoveLabel(name: "Back to back " + message + " quadruple", color: "FFFFFF")
+            } else {
+                changeMoveLabel(name: message + " quadruple", color: "FFFFFF")
+            }
         }
     } else {
         noSpinScore()

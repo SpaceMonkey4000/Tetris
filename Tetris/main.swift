@@ -152,11 +152,8 @@ var level = 1
 var lastSuccessfulAction = "0"
 // The item in the hold.
 var holdItem: Tetromino = Tetromino()
-// The combo counter. Whenever the player doesn't clear a line, combo count resets. Whenever the player DOES clear a line, the combo goes up. Getting a higher combo count gives you more points!
+// The combo counter. Whenever the player doesn't clear a line, combo count resets. Whenever the player doea clear a line, the combo goes up. Getting a higher combo count gives the player more points.
 var comboCount = 0
-// This variable makes sure that the perfect clear sound and basic line scoring sounds don't overlap.
-var perfectClearing = 0
-
 
 // This variable dissalows the use of hold spamming.
 var holdAllowed = 0
@@ -191,6 +188,12 @@ var comboLabel = Label()
 var comboLabel2 = Label()
 
 
+//This label is at the bottom of the screen. If you get a single, it will say "single" for some time.
+var moveLabel = Label()
+
+//This is used to count how long the moveLabel should be not hidden.
+var moveHideDelay = 0
+
 // This function is called once, before the game starts.
 func first() {
     minosOnScreen = 0
@@ -214,11 +217,16 @@ func first() {
     
     comboLabel = createLabel(x: -1.25, y: 0.2, text: "Combo:")
     comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
+
+    moveLabel = createLabel(x: -1.25, y: -0.6, text: "poopy")
+    moveLabel.isHidden = true
 //
 //    label2.color = "#ff3333"
 //    label2.text = "Poopy"
 //    label2.isHidden = false
 }
+
+
 
 func createNextQueueGrid() {
     // Create the next queue grid. The createGrid function must be called in the first function.
@@ -285,12 +293,27 @@ func refreshSlideTimer() {
     }
 }
 
+func changeMoveLabel(name: String, color: String) {
+    moveLabel.isHidden = false
+    moveLabel.text = name
+    moveLabel.color = color
+    moveHideDelay = 180
+}
+
+func moveLabelUpdate() {
+    moveHideDelay -= 1
+    if moveHideDelay == 0 {
+        moveLabel.isHidden = true
+    }
+}
+
 // This function is called 60 times per second.
 func update() {
     if gameState == "play" {
         levelLabel2 = createLabel(x: -0.97, y: 0.3, text: String(level))
         scoreLabel2 = createLabel(x: -0.97, y: 0.4, text: String(points))
         comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
+        moveLabelUpdate()
         fallMino()
         softFall()
         checkForGameOver()
@@ -342,7 +365,6 @@ func softFall(){
 func spawnMino(){
     if gameState == "play" {
         if minosOnScreen == 0 && tetrominosPlaced != 0 {
-            perfectClearing = 1
             perfectClearSound.play()
             print("Perfect clear")
             scorePoints(amount: 4000, strong: true)
