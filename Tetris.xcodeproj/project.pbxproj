@@ -31,6 +31,7 @@
 		3AAD3FE220FB8D6900D9EEDB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD3FE120FB8D6900D9EEDB /* Shape.swift */; };
 		3AB47A2620FBFCF000779E6D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2520FBFCF000779E6D /* Tetromino.swift */; };
 		3AB47A2820FC00B800779E6D /* Tetrominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2720FC00B800779E6D /* Tetrominos.swift */; };
+		773651DD210D6F3200BA9F89 /* PerfectClear.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651DC210D6F3200BA9F89 /* PerfectClear.wav */; };
 		7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AB210CF357007E5972 /* Rotate8bit.wav */; };
 		7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AC210CF357007E5972 /* Lineclear8bit.wav */; };
 		7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AD210CF357007E5972 /* Shift8bit.wav */; };
@@ -85,6 +86,7 @@
 		3AAD3FE120FB8D6900D9EEDB /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		3AB47A2520FBFCF000779E6D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		3AB47A2720FC00B800779E6D /* Tetrominos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrominos.swift; sourceTree = "<group>"; };
+		773651DC210D6F3200BA9F89 /* PerfectClear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PerfectClear.wav; sourceTree = "<group>"; };
 		7758F1AB210CF357007E5972 /* Rotate8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rotate8bit.wav; sourceTree = "<group>"; };
 		7758F1AC210CF357007E5972 /* Lineclear8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lineclear8bit.wav; sourceTree = "<group>"; };
 		7758F1AD210CF357007E5972 /* Shift8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shift8bit.wav; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		7758F1AA210CF346007E5972 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				773651DC210D6F3200BA9F89 /* PerfectClear.wav */,
 				7758F1AE210CF357007E5972 /* Land8bit.wav */,
 				7758F1AC210CF357007E5972 /* Lineclear8bit.wav */,
 				7758F1AB210CF357007E5972 /* Rotate8bit.wav */,
@@ -261,6 +264,7 @@
 				3A5F13EC20FA78BA00A43C21 /* Main.storyboard in Resources */,
 				7758F1B3210CF357007E5972 /* Land8bit.wav in Resources */,
 				7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */,
+				773651DD210D6F3200BA9F89 /* PerfectClear.wav in Resources */,
 				3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

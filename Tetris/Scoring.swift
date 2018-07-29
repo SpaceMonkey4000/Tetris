@@ -3,6 +3,10 @@ import Foundation
 var backToBackBonus = 0
 
 func scoreLines(){
+    if comboCount > 0 {
+        points += 50 * comboCount * level
+    }
+    comboCount += 1
     if tetromino.name == "T" {
         tSpinScore()
         return
@@ -17,25 +21,41 @@ func noSpinScore() {
     if lineScore == 1 {
         print("Single")
         scorePoints(amount: 100, strong: false)
-        lineSound.play()
+        if perfectClearing == 0 {
+            lineSound.play()
+        }
+        perfectClearing = 0
         return
     } else if lineScore == 2 {
         print("Double")
         scorePoints(amount: 300, strong: false)
-        lineSound.play()
+        if perfectClearing == 0 {
+            lineSound.play()
+        }
+        perfectClearing = 0
         return
     } else if lineScore == 3 {
         print("Triple")
         scorePoints(amount: 500, strong: false)
-        lineSound.play()
+        if perfectClearing == 0 {
+            lineSound.play()
+        }
+        perfectClearing = 0
         return
     } else if lineScore == 4 {
         scorePoints(amount: 800, strong: true)
         print("Tetris")
-        tetrisSound.play()
+        if perfectClearing == 0 {
+            tetrisSound.play()
+        }
+        perfectClearing = 0
         return
     } else if lineScore == 0 {
-        landSound.play()
+        comboCount = 0
+        if perfectClearing == 0 {
+            landSound.play()
+        }
+        perfectClearing = 0
     }
 }
 
@@ -55,17 +75,27 @@ func spinScore() {
     case "O":
         if tetromino.blocked() {
             if lineScore == 0 {
+                comboCount = 0
                 print("O-spin")
                 scorePoints(amount: 400, strong: true)
-                landSound.play()
+                if perfectClearing == 0 {
+                    landSound.play()
+                }
+                perfectClearing = 0
             } else if lineScore == 1 {
                 scorePoints(amount: 800, strong: true)
                 print("O-spin single")
-                tetrisSound.play()
+                if perfectClearing == 0 {
+                    tetrisSound.play()
+                }
+                perfectClearing = 0
             } else if lineScore == 2 {
                 scorePoints(amount: 1200, strong: true)
                 print("O-spin double")
-                tetrisSound.play()
+                if perfectClearing == 0 {
+                    tetrisSound.play()
+                }
+                perfectClearing = 0
             }
         } else {
             noSpinScore()
@@ -100,36 +130,55 @@ func threeCornerTest() {
     if cornersFull > 2 {
         if lastSuccessfulAction == "rotate" {
             if lineScore == 0 {
+                comboCount = 0
                 if miniTspin() {
                     print ("T-spin mini")
                     scorePoints(amount: 100, strong: true)
-                    landSound.play()
+                    if perfectClearing == 0 {
+                       landSound.play()
+                    }
+                    perfectClearing = 0
                 } else {
                     print ("T-spin")
                     scorePoints(amount: 400, strong: true)
-                    landSound.play()
+                    if perfectClearing == 0 {
+                        landSound.play()
+                    }
+                    perfectClearing = 0
                 }
             }
             if lineScore == 1 {
                 if miniTspin() {
                     print ("T-spin mini single")
                     scorePoints(amount: 200, strong: true)
-                    tetrisSound.play()
+                    if perfectClearing == 0 {
+                        tetrisSound.play()
+                    }
+                    perfectClearing = 0
                 } else {
                     print ("T-spin single")
                     scorePoints(amount: 800, strong: true)
-                    tetrisSound.play()
+                    if perfectClearing == 0 {
+                        tetrisSound.play()
+                    }
+                    perfectClearing = 0
                 }
             }
             if lineScore == 2 {
                 print ("T-spin double")
                 scorePoints(amount: 1200, strong: true)
-                tetrisSound.play()
+                if perfectClearing == 0 {
+                    tetrisSound.play()
+                }
+                perfectClearing = 0
             }
             if lineScore == 3 {
                 print ("T-spin triple")
                 scorePoints(amount: 1600, strong: true)
-                tetrisSound.play()
+                if perfectClearing == 0 {
+                    tetrisSound.play()
+                }
+                perfectClearing = 0
             }
         } else {
             noSpinScore()
@@ -161,24 +210,40 @@ func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
 func basicSpinScore(message: String) {
     if tetromino.blocked() {
         if lineScore == 0 {
+            comboCount = 0
             scorePoints(amount: 400, strong: true)
-            landSound.play()
+            if perfectClearing == 0 {
+                landSound.play()
+            }
+            perfectClearing = 0
             print(message)
         } else if lineScore == 1 {
             scorePoints(amount: 800, strong: true)
-            tetrisSound.play()
+            if perfectClearing == 0 {
+                tetrisSound.play()
+            }
+            perfectClearing = 0
             print(message,"single")
         } else if lineScore == 2 {
             scorePoints(amount: 1200, strong: true)
-            tetrisSound.play()
+            if perfectClearing == 0 {
+                tetrisSound.play()
+            }
+            perfectClearing = 0
             print(message,"double")
         } else if lineScore == 3 {
             scorePoints(amount: 1600, strong: true)
-            tetrisSound.play()
+            if perfectClearing == 0 {
+                tetrisSound.play()
+            }
+            perfectClearing = 0
             print(message,"triple")
         } else if lineScore == 4 {
             scorePoints(amount: 1800, strong: true)
-            tetrisSound.play()
+            if perfectClearing == 0 {
+                tetrisSound.play()
+            }
+            perfectClearing = 0
             print(message,"quadruple")
         }
     } else {
@@ -186,6 +251,9 @@ func basicSpinScore(message: String) {
     }
 }
 func scorePoints(amount: Int, strong: Bool) {
+    if comboCount > 4 {
+        perfectClearSound.play()
+    }
     if strong {
         if backToBackBonus == 1 {
             points += ((amount * level) / 2)

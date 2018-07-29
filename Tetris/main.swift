@@ -11,6 +11,7 @@ let shiftSound = Sound(named: "Shift8bit")
 let landSound = Sound(named: "Land8bit")
 let lineSound = Sound(named: "Lineclear8bit")
 let tetrisSound = Sound(named: "Tetris8bit")
+let perfectClearSound = Sound(named: "PerfectClear")
 
 //This is the amount of rows that are hidden from the player. It is a float value.
 let hiddenMatrixRows = 3.8
@@ -153,6 +154,8 @@ var lastSuccessfulAction = "0"
 var holdItem: Tetromino = Tetromino()
 // The combo counter. Whenever the player doesn't clear a line, combo count resets. Whenever the player DOES clear a line, the combo goes up. Getting a higher combo count gives you more points!
 var comboCount = 0
+// This variable makes sure that the perfect clear sound and basic line scoring sounds don't overlap.
+var perfectClearing = 0
 
 
 // This variable dissalows the use of hold spamming.
@@ -203,13 +206,13 @@ func first() {
     generateNextItem()
     spawnMino()
 
-    scoreLabel = createLabel(x: -1.25, y: 0.3, text: "Score:")
-    scoreLabel2 = createLabel(x: -0.97, y: 0.3, text: String(points))
+    scoreLabel = createLabel(x: -1.25, y: 0.4, text: "Score:")
+    scoreLabel2 = createLabel(x: -0.97, y: 0.4, text: String(points))
     
-    levelLabel = createLabel(x: -1.25, y: 0.2, text: "Level:")
-    levelLabel2 = createLabel(x: -0.97, y: 0.2, text: String(level))
+    levelLabel = createLabel(x: -1.25, y: 0.3, text: "Level:")
+    levelLabel2 = createLabel(x: -0.97, y: 0.3, text: String(level))
     
-    comboLabel = createLabel(x: -1.25, y: 0.2, text: "Level:")
+    comboLabel = createLabel(x: -1.25, y: 0.2, text: "Combo:")
     comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
 //
 //    label2.color = "#ff3333"
@@ -285,7 +288,8 @@ func refreshSlideTimer() {
 // This function is called 60 times per second.
 func update() {
     if gameState == "play" {
-        scoreLabel2 = createLabel(x: -0.97, y: 0.3, text: String(points))
+        levelLabel2 = createLabel(x: -0.97, y: 0.3, text: String(level))
+        scoreLabel2 = createLabel(x: -0.97, y: 0.4, text: String(points))
         comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
         fallMino()
         softFall()
@@ -337,10 +341,13 @@ func softFall(){
 }
 func spawnMino(){
     if gameState == "play" {
-        holdAllowed -= 1
         if minosOnScreen == 0 && tetrominosPlaced != 0 {
+            perfectClearing = 1
+            perfectClearSound.play()
             print("Perfect clear")
+            scorePoints(amount: 4000, strong: true)
         }
+        holdAllowed -= 1
         if !diagonalMove {
             shiftAutoRepeatCounter = 0
         }
