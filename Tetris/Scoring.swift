@@ -1,5 +1,7 @@
 import Foundation
 
+var backToBackBonus = 0
+
 func scoreLines(){
     if tetromino.name == "T" {
         tSpinScore()
@@ -14,16 +16,26 @@ func scoreLines(){
 func noSpinScore() {
     if lineScore == 1 {
         print("Single")
+        scorePoints(amount: 100, strong: false)
+        lineSound.play()
         return
     } else if lineScore == 2 {
         print("Double")
+        scorePoints(amount: 300, strong: false)
+        lineSound.play()
         return
     } else if lineScore == 3 {
         print("Triple")
+        scorePoints(amount: 500, strong: false)
+        lineSound.play()
         return
     } else if lineScore == 4 {
+        scorePoints(amount: 800, strong: true)
         print("Tetris")
+        tetrisSound.play()
         return
+    } else if lineScore == 0 {
+        landSound.play()
     }
 }
 
@@ -44,10 +56,16 @@ func spinScore() {
         if tetromino.blocked() {
             if lineScore == 0 {
                 print("O-spin")
+                scorePoints(amount: 400, strong: true)
+                landSound.play()
             } else if lineScore == 1 {
+                scorePoints(amount: 800, strong: true)
                 print("O-spin single")
+                tetrisSound.play()
             } else if lineScore == 2 {
+                scorePoints(amount: 1200, strong: true)
                 print("O-spin double")
+                tetrisSound.play()
             }
         } else {
             noSpinScore()
@@ -84,22 +102,34 @@ func threeCornerTest() {
             if lineScore == 0 {
                 if miniTspin() {
                     print ("T-spin mini")
+                    scorePoints(amount: 100, strong: true)
+                    landSound.play()
                 } else {
                     print ("T-spin")
+                    scorePoints(amount: 400, strong: true)
+                    landSound.play()
                 }
             }
             if lineScore == 1 {
                 if miniTspin() {
                     print ("T-spin mini single")
+                    scorePoints(amount: 200, strong: true)
+                    tetrisSound.play()
                 } else {
                     print ("T-spin single")
+                    scorePoints(amount: 800, strong: true)
+                    tetrisSound.play()
                 }
             }
             if lineScore == 2 {
                 print ("T-spin double")
+                scorePoints(amount: 1200, strong: true)
+                tetrisSound.play()
             }
             if lineScore == 3 {
                 print ("T-spin triple")
+                scorePoints(amount: 1600, strong: true)
+                tetrisSound.play()
             }
         } else {
             noSpinScore()
@@ -131,17 +161,38 @@ func lastTranslationWas(dx: Int, dy: Int, ddirection: Int) -> Bool {
 func basicSpinScore(message: String) {
     if tetromino.blocked() {
         if lineScore == 0 {
+            scorePoints(amount: 400, strong: true)
+            landSound.play()
             print(message)
         } else if lineScore == 1 {
+            scorePoints(amount: 800, strong: true)
+            tetrisSound.play()
             print(message,"single")
         } else if lineScore == 2 {
+            scorePoints(amount: 1200, strong: true)
+            tetrisSound.play()
             print(message,"double")
         } else if lineScore == 3 {
+            scorePoints(amount: 1600, strong: true)
+            tetrisSound.play()
             print(message,"triple")
         } else if lineScore == 4 {
+            scorePoints(amount: 1800, strong: true)
+            tetrisSound.play()
             print(message,"quadruple")
         }
     } else {
         noSpinScore()
     }
+}
+func scorePoints(amount: Int, strong: Bool) {
+    if strong {
+        if backToBackBonus == 1 {
+            points += ((amount * level) / 2)
+        }
+            backToBackBonus = 1
+    } else {
+        backToBackBonus = 0
+    }
+    points += (amount * level)
 }

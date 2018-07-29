@@ -4,6 +4,14 @@ import AppKit
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
 
+// Sound effects.
+// Play sounds like this: rotateSound.play()
+let rotateSound = Sound(named: "Rotate8bit")
+let shiftSound = Sound(named: "Shift8bit")
+let landSound = Sound(named: "Land8bit")
+let lineSound = Sound(named: "Lineclear8bit")
+let tetrisSound = Sound(named: "Tetris8bit")
+
 //This is the amount of rows that are hidden from the player. It is a float value.
 let hiddenMatrixRows = 3.8
 
@@ -143,9 +151,9 @@ var level = 1
 var lastSuccessfulAction = "0"
 // The item in the hold.
 var holdItem: Tetromino = Tetromino()
+// The combo counter. Whenever the player doesn't clear a line, combo count resets. Whenever the player DOES clear a line, the combo goes up. Getting a higher combo count gives you more points!
+var comboCount = 0
 
-// Play sounds like this: rotateSound.play()
-let rotateSound = Sound(named: "Rotate8bit")
 
 // This variable dissalows the use of hold spamming.
 var holdAllowed = 0
@@ -162,8 +170,23 @@ tetromino = createJTetromino()
 var nextQueueGrid = Grid()
 var holdQueueGrid = Grid()
 
-var label1 = Label()
-var label2 = Label()
+// These labels will act like this:
+
+// Part that says "Score:"
+var scoreLabel = Label()
+// Part that says the value of the points var.
+var scoreLabel2 = Label()
+
+// Part that says "Level:"
+var levelLabel = Label()
+// Part that says the value of the level var.
+var levelLabel2 = Label()
+
+// Part that says "Combo:"
+var comboLabel = Label()
+// Part that says the value of the combocount var.
+var comboLabel2 = Label()
+
 
 // This function is called once, before the game starts.
 func first() {
@@ -180,12 +203,18 @@ func first() {
     generateNextItem()
     spawnMino()
 
-    label1 = createLabel(x: -1.25, y: 0.3, text: "Whatever")
-    label2 = createLabel(x: -1.25, y: 0.2)
-
-    label2.color = "#ff3333"
-    label2.text = "Poopy"
-    label2.isHidden = false
+    scoreLabel = createLabel(x: -1.25, y: 0.3, text: "Score:")
+    scoreLabel2 = createLabel(x: -0.97, y: 0.3, text: String(points))
+    
+    levelLabel = createLabel(x: -1.25, y: 0.2, text: "Level:")
+    levelLabel2 = createLabel(x: -0.97, y: 0.2, text: String(level))
+    
+    comboLabel = createLabel(x: -1.25, y: 0.2, text: "Level:")
+    comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
+//
+//    label2.color = "#ff3333"
+//    label2.text = "Poopy"
+//    label2.isHidden = false
 }
 
 func createNextQueueGrid() {
@@ -256,6 +285,8 @@ func refreshSlideTimer() {
 // This function is called 60 times per second.
 func update() {
     if gameState == "play" {
+        scoreLabel2 = createLabel(x: -0.97, y: 0.3, text: String(points))
+        comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
         fallMino()
         softFall()
         checkForGameOver()
@@ -367,6 +398,7 @@ func fallMino() {
             if keyIsPressed(125) {
                 for _ in 0..<softDropTiles {
                     tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+                    points += 1
                 }
             } else {
                 for _ in 0..<fallTiles {
@@ -484,6 +516,7 @@ func keyPress(key: Int) {
         
         //rotateleft    Z
         if key == (6){
+            rotateSound.play()
             if tetromino.onGround() {
                 refreshSlideTimer()
             }
@@ -499,6 +532,7 @@ func keyPress(key: Int) {
         
         //leftarrow
         if key == (123) {
+            shiftSound.play()
             shiftAutoRepeatCounter = 0
             if !tetromino.blockLeft(){
                 lastSuccessfulAction = "move"
@@ -509,6 +543,7 @@ func keyPress(key: Int) {
         }
         //rightarrow
         if key == (124) {
+            shiftSound.play()
             shiftAutoRepeatCounter = 0
             if !tetromino.blockRight(){
                 lastSuccessfulAction = "move"
@@ -522,6 +557,7 @@ func keyPress(key: Int) {
         if key == (49) {
             while !tetromino.onGround() {
                 tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+                points += 2
             }
             lastSuccessfulAction = "harddrop"
             if hardDropInstantLock == 1{
