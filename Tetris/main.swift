@@ -630,6 +630,7 @@ func keyPress(key: Int) {
                     holdItem = holdTemp
                 } else {
                     holdFail.play()
+                    changeMoveLabel(name: "Can't hold!", color: "FF0000")
                 }
             } else {
                 holdSound.play()

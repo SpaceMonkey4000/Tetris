@@ -72,8 +72,8 @@ func spinScore() {
                     changeMoveLabel(name: "O-spin", color: "FFFFFF")
                 }
                     landSound.play()
+                scorePoints(amount: 400, strong: true)
             } else if lineScore == 1 {
-                scorePoints(amount: 800, strong: true)
                 print("O-spin single")
                 if backToBackBonus == 1 {
                     changeMoveLabel(name: "Back to back O-spin single", color: "FFFFFF")
@@ -81,8 +81,8 @@ func spinScore() {
                     changeMoveLabel(name: "O-spin single", color: "FFFFFF")
                 }
                     tetrisSound.play()
+                scorePoints(amount: 800, strong: true)
             } else if lineScore == 2 {
-                scorePoints(amount: 1200, strong: true)
                 print("O-spin double")
                 if backToBackBonus == 1 {
                     changeMoveLabel(name: "Back to back O-spin double", color: "FFFFFF")
@@ -90,6 +90,7 @@ func spinScore() {
                     changeMoveLabel(name: "O-spin double", color: "FFFFFF")
                 }
                     tetrisSound.play()
+                scorePoints(amount: 1200, strong: true)
             }
         } else {
             noSpinScore()
@@ -212,15 +213,14 @@ func basicSpinScore(message: String) {
     if tetromino.blocked() {
         if lineScore == 0 {
             comboCount = 0
-            scorePoints(amount: 400, strong: true)
                 landSound.play()
             if backToBackBonus == 1 {
                 changeMoveLabel(name: "back to back " + message, color: "FFFFFF")
             } else {
                 changeMoveLabel(name: message, color: "FFFFFF")
             }
+            scorePoints(amount: 400, strong: true)
         } else if lineScore == 1 {
-            scorePoints(amount: 800, strong: true)
                 tetrisSound.play()
             print(message,"single")
             if backToBackBonus == 1 {
@@ -228,8 +228,8 @@ func basicSpinScore(message: String) {
             } else {
                 changeMoveLabel(name: message + " single", color: "FFFFFF")
             }
+            scorePoints(amount: 800, strong: true)
         } else if lineScore == 2 {
-            scorePoints(amount: 1200, strong: true)
                 tetrisSound.play()
             print(message,"double")
             if backToBackBonus == 1 {
@@ -237,8 +237,8 @@ func basicSpinScore(message: String) {
             } else {
                 changeMoveLabel(name: message + " double", color: "FFFFFF")
             }
+            scorePoints(amount: 1200, strong: true)
         } else if lineScore == 3 {
-            scorePoints(amount: 1600, strong: true)
                 tetrisSound.play()
             print(message,"triple")
             if backToBackBonus == 1 {
@@ -246,8 +246,8 @@ func basicSpinScore(message: String) {
             } else {
                 changeMoveLabel(name: message + " triple", color: "FFFFFF")
             }
-        } else if lineScore == 4 {
             scorePoints(amount: 1800, strong: true)
+        } else if lineScore == 4 {
                 tetrisSound.play()
             print(message,"quadruple")
             if backToBackBonus == 1 {
@@ -255,6 +255,7 @@ func basicSpinScore(message: String) {
             } else {
                 changeMoveLabel(name: message + " quadruple", color: "FFFFFF")
             }
+            scorePoints(amount: 1800, strong: true)
         }
     } else {
         noSpinScore()
@@ -263,19 +264,25 @@ func basicSpinScore(message: String) {
 func scorePoints(amount: Int, strong: Bool) {
     if comboCount == 4 {
         comboLow.play()
+        changeMoveLabel(name: "Mini combo", color: "FFFFFF")
     }
     if comboCount == 5 {
         comboMedium.play()
+        changeMoveLabel(name: "Combo", color: "FFFFCC")
     }
     if comboCount == 6 {
         comboHigh.play()
+        changeMoveLabel(name: "Good combo", color: "FFFFAA")
     }
     if comboCount == 7 {
         comboVeryHigh.play()
+        changeMoveLabel(name: "Super combo", color: "FFFF77")
     }
     if comboCount > 7 {
         comboMax.play()
+        changeMoveLabel(name: "Max combo!", color: "FFFF00")
     }
+    
     if strong {
         if backToBackBonus == 1 {
             points += ((amount * level) / 2)
