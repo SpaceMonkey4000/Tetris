@@ -3,6 +3,7 @@ import Foundation
 var backToBackBonus = 0
 
 func scoreLines(){
+    landSound.play()
     if comboCount > 0 {
         points += 50 * comboCount * level
     }
@@ -21,17 +22,17 @@ func noSpinScore() {
     if lineScore == 1 {
         changeMoveLabel(name: "Single", color: "FFFFFF")
         scorePoints(amount: 100, strong: false)
-            lineSound.play()
+        lineSound.play()
         return
     } else if lineScore == 2 {
         changeMoveLabel(name: "Double", color: "FFFFFF")
         scorePoints(amount: 300, strong: false)
-            lineSound.play()
+        lineSound.play()
         return
     } else if lineScore == 3 {
         changeMoveLabel(name: "Triple", color: "FFFFFF")
         scorePoints(amount: 500, strong: false)
-            lineSound.play()
+        lineSound.play()
         return
     } else if lineScore == 4 {
         if backToBackBonus == 1 {
@@ -40,13 +41,12 @@ func noSpinScore() {
             changeMoveLabel(name: "Tetris", color: "FFFFFF")
         }
         scorePoints(amount: 800, strong: true)
-            tetrisSound.play()
+        tetrisSound.play()
         return
     } else if lineScore == 0 {
         comboCount = 0
-            landSound.play()
-        }
     }
+}
 
 //Handles scoring if spins other than T have been performed.
 func spinScore() {
@@ -264,23 +264,36 @@ func basicSpinScore(message: String) {
 func scorePoints(amount: Int, strong: Bool) {
     if comboCount == 4 {
         comboLow.play()
-        changeMoveLabel(name: "Mini combo", color: "FFFFFF")
+        changeMoveLabel(name: "Combo  x4", color: "FFFFEE")
     }
     if comboCount == 5 {
         comboMedium.play()
-        changeMoveLabel(name: "Combo", color: "FFFFCC")
+        changeMoveLabel(name: "Combo  x5", color: "FFFFDD")
     }
     if comboCount == 6 {
         comboHigh.play()
-        changeMoveLabel(name: "Good combo", color: "FFFFAA")
+        changeMoveLabel(name: "Combo  x6", color: "FFFFCC")
     }
     if comboCount == 7 {
         comboVeryHigh.play()
-        changeMoveLabel(name: "Super combo", color: "FFFF77")
+        changeMoveLabel(name: "Combo  x7", color: "FFFFBB")
     }
-    if comboCount > 7 {
+    if comboCount == 8 {
         comboMax.play()
-        changeMoveLabel(name: "Max combo!", color: "FFFF00")
+        changeMoveLabel(name: "Combo  x8", color: "FFFF88")
+    }
+    if comboCount == 9 {
+        comboMax.play()
+        changeMoveLabel(name: "Combo  x9", color: "FFFF66")
+    }
+    if comboCount == 10 {
+        comboMax.play()
+        changeMoveLabel(name: "Combo  x10", color: "FFFF33")
+    }
+    if comboCount > 10 {
+        comboMax.play()
+        perfectClearSound.play()
+        changeMoveLabel(name: "Combo  10+", color: "FFFF00")
     }
     
     if strong {

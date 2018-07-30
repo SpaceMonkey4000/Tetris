@@ -27,13 +27,11 @@ let hiddenMatrixRows = 3.8
 
 //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
 // Size of the grid in cells.
-var gridSizeX = 10
+var gridSizeX = 4
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
 var stickdelay = 30
-// Allows the player to use special keys to make tetrominos and debug pieces.
-var debugTools = 0
 // The amount of refreshes the player gets upon piece spawning. When a player rotates or moves a piece, the piece will set the slide timer to stickdelay.
 var stMaxRefreshes = 15
 //If the piece instantly locks down when hard dropped.
@@ -167,6 +165,9 @@ var holdItem: Tetromino = Tetromino()
 // The combo counter. Whenever the player doesn't clear a line, combo count resets. Whenever the player doea clear a line, the combo goes up. Getting a higher combo count gives the player more points.
 var comboCount = 0
 
+// The amount of lines that the player has cleared.
+var linesCleared = 0
+
 // This variable dissalows the use of hold spamming.
 var holdAllowed = 0
 createStyleColors()
@@ -177,6 +178,9 @@ createAllPieces()
 var tetromino: Tetromino = Tetromino()
 // Create a new J tetromino.
 tetromino = createJTetromino()
+
+// The amount of perfect clears the player gets.
+var perfectClears = 0
 
 // The next and hold queue grids.
 var nextQueueGrid = Grid()
@@ -194,10 +198,25 @@ var levelLabel = Label()
 // Part that says the value of the level var.
 var levelLabel2 = Label()
 
+// Part that says "Lines:"
+var linesClearedLabel = Label()
+// Part that says the value of the linesCleared var.
+var linesClearedLabel2 = Label()
+
 // Part that says "Combo:"
 var comboLabel = Label()
 // Part that says the value of the combocount var.
 var comboLabel2 = Label()
+
+// Part that says "Placed:"
+var blocksPlacedLabel = Label()
+// Part that says the value of the blocksPlaced var.
+var blocksPlacedLabel2 = Label()
+
+// Part that says "Perfect clears:"
+var perfectClearLabel = Label()
+// Part that says the value of the perfectclears var.
+var perfectClearLabel2 = Label()
 
 
 //This label is at the bottom of the screen. If you get a single, it will say "single" for some time.
@@ -219,7 +238,7 @@ func first() {
     createHoldQueueGrid()
     
     generateNextItem()
-    spawnMino()
+    spawnMino(perfectClearCheck: true)
 
     scoreLabel = createLabel(x: -1.25, y: 0.4, text: "Score:")
     scoreLabel2 = createLabel(x: -0.97, y: 0.4, text: String(points))
@@ -227,11 +246,20 @@ func first() {
     levelLabel = createLabel(x: -1.25, y: 0.3, text: "Level:")
     levelLabel2 = createLabel(x: -0.97, y: 0.3, text: String(level))
     
-    comboLabel = createLabel(x: -1.25, y: 0.2, text: "Combo:")
-    comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
+    linesClearedLabel = createLabel(x: -1.25, y: 0.2, text: "Lines:")
+    linesClearedLabel2 = createLabel(x: -0.97, y: 0.2, text: String(linesCleared))
+    
+    comboLabel = createLabel(x: -1.25, y: 0.1, text: "Combo:")
+    comboLabel2 = createLabel(x: -0.97, y: 0.1, text: String(comboCount))
+    
+    blocksPlacedLabel = createLabel(x: -1.25, y: -0.1, text: "Placed:")
+    blocksPlacedLabel2 = createLabel(x: -0.97, y: -0.1, text: String(tetrominosPlaced))
 
     moveLabel = createLabel(x: -1.25, y: -0.6, text: "poopy")
     moveLabel.isHidden = true
+    
+    perfectClearLabel = createLabel(x: -1.25, y: 0.0, text: "Perfect clears:")
+    perfectClearLabel2 = createLabel(x: -0.57, y: 0.0, text: String(perfectClears))
 //
 //    label2.color = "#ff3333"
 //    label2.text = "Poopy"
@@ -324,7 +352,10 @@ func update() {
     if gameState == "play" {
         levelLabel2 = createLabel(x: -0.97, y: 0.3, text: String(level))
         scoreLabel2 = createLabel(x: -0.97, y: 0.4, text: String(points))
-        comboLabel2 = createLabel(x: -0.97, y: 0.2, text: String(comboCount))
+            linesClearedLabel2 = createLabel(x: -0.97, y: 0.2, text: String(linesCleared))
+        comboLabel2 = createLabel(x: -0.97, y: 0.1, text: String(comboCount))
+        perfectClearLabel2 = createLabel(x: -0.57, y: 0.0, text: String(perfectClears))
+        blocksPlacedLabel2 = createLabel(x: -0.9, y: -0.1, text: String(tetrominosPlaced))
         moveLabelUpdate()
         fallMino()
         softFall()
@@ -374,12 +405,22 @@ func softFall(){
         }
     }
 }
-func spawnMino(){
+func spawnMino(perfectClearCheck: Bool){
     if gameState == "play" {
-        if minosOnScreen == 0 && tetrominosPlaced != 0 {
-            perfectClearSound.play()
-            print("Perfect clear")
-            scorePoints(amount: 4000, strong: true)
+        if perfectClearCheck {
+            if minosOnScreen == 0 && tetrominosPlaced != 0 {
+                perfectClearSound.play()
+                print("Perfect clear")
+                perfectClears += 1
+                if perfectClears == 1 {
+                    scorePoints(amount: 5000, strong: false)
+                } else if perfectClears == 2 {
+                    scorePoints(amount: 10000, strong: false)
+                } else {
+                    scorePoints(amount: 15000, strong: false)
+                }
+                
+            }
         }
         holdAllowed -= 1
         if !diagonalMove {
@@ -429,7 +470,7 @@ func fallMino() {
                 minosOnScreen += 4
                 tetrominosPlaced += 1
                 linecheck()
-                spawnMino()
+                spawnMino(perfectClearCheck: true)
             }
             return
         }
@@ -453,6 +494,7 @@ func fallMino() {
 
 //line clear
 func clearline(y: Int) {
+    linesCleared += 1
     minosOnScreen -= gridSizeX
     for ye in y..<gridSizeY {
         for x in 0..<gridSizeX {
@@ -485,10 +527,10 @@ func linecheck() {
     clearLines()
 }
 func clearLines(){
-    var linesCleared = 0
+    var linesErased = 0
     for y in linesToClear {
-        clearline(y: y - linesCleared)
-        linesCleared += 1
+        clearline(y: y - linesErased)
+        linesErased += 1
     }
     linesToClear = []
 }
@@ -641,80 +683,9 @@ func keyPress(key: Int) {
                 stRefreshes = stMaxRefreshes
                 slidetimer = stickdelay
                 print ("hold item:",holdItem.name)
-                spawnMino()
+                spawnMino(perfectClearCheck: false)
             }
             
-        }
-        //debug
-        if debugTools == 1 {
-            if keyIsPressed(12) {
-                tetromino.removeFromGrid()
-                tetromino = createLTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(13) {
-                tetromino.removeFromGrid()
-                tetromino = createJTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(14) {
-                tetromino.removeFromGrid()
-                tetromino = createITetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(15) {
-                tetromino.removeFromGrid()
-                tetromino = createOTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(17) {
-                tetromino.removeFromGrid()
-                tetromino = createTTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(16) {
-                tetromino.removeFromGrid()
-                tetromino = createZTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(32) {
-                tetromino.removeFromGrid()
-                tetromino = createSTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(0) {
-                tetromino.removeFromGrid()
-                tetromino = createMonominoTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(1) {
-                tetromino.removeFromGrid()
-                tetromino = createTetrisplusTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(51) {
-                tetromino.removeFromGrid()
-                tetromino = createInstaclearTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(3) {
-                tetromino.removeFromGrid()
-                tetromino = createXtetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(2) {
-                tetromino.removeFromGrid()
-                tetromino = createEDifTetromino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(4) {
-                tetromino.removeFromGrid()
-                tetromino = createDomino()
-                tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
-            }
-            if keyIsPressed(5) {
-                print("relativebloccatggg",tetromino.relativeBlockAt(dx: 1, dy: -1))
-            }
         }
     }
 }
