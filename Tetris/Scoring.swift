@@ -261,8 +261,20 @@ func basicSpinScore(message: String) {
     }
 }
 func scorePoints(amount: Int, strong: Bool) {
-    if comboCount > 4 {
-        perfectClearSound.play()
+    if comboCount == 4 {
+        comboLow.play()
+    }
+    if comboCount == 5 {
+        comboMedium.play()
+    }
+    if comboCount == 6 {
+        comboHigh.play()
+    }
+    if comboCount == 7 {
+        comboVeryHigh.play()
+    }
+    if comboCount > 7 {
+        comboMax.play()
     }
     if strong {
         if backToBackBonus == 1 {

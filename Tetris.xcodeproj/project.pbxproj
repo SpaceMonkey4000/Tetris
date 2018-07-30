@@ -32,6 +32,13 @@
 		3AB47A2620FBFCF000779E6D /* Tetromino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2520FBFCF000779E6D /* Tetromino.swift */; };
 		3AB47A2820FC00B800779E6D /* Tetrominos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB47A2720FC00B800779E6D /* Tetrominos.swift */; };
 		773651DD210D6F3200BA9F89 /* PerfectClear.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651DC210D6F3200BA9F89 /* PerfectClear.wav */; };
+		773651DF210EA2C700BA9F89 /* Combolow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651DE210EA2C700BA9F89 /* Combolow.wav */; };
+		773651E1210EA2D400BA9F89 /* Combomed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651E0210EA2D400BA9F89 /* Combomed.wav */; };
+		773651E3210EA2E300BA9F89 /* Combohigh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651E2210EA2E300BA9F89 /* Combohigh.wav */; };
+		773651E5210EA4BE00BA9F89 /* Comboveryhigh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651E4210EA4BD00BA9F89 /* Comboveryhigh.wav */; };
+		773651E7210EA4E500BA9F89 /* Combomax.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651E6210EA4E500BA9F89 /* Combomax.wav */; };
+		773651EB210EA7C200BA9F89 /* Holdfail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651EA210EA7C200BA9F89 /* Holdfail.wav */; };
+		773651F5210EAE7A00BA9F89 /* Holdsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651F4210EAE7A00BA9F89 /* Holdsound.wav */; };
 		7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AB210CF357007E5972 /* Rotate8bit.wav */; };
 		7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AC210CF357007E5972 /* Lineclear8bit.wav */; };
 		7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AD210CF357007E5972 /* Shift8bit.wav */; };
@@ -87,6 +94,13 @@
 		3AB47A2520FBFCF000779E6D /* Tetromino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetromino.swift; sourceTree = "<group>"; };
 		3AB47A2720FC00B800779E6D /* Tetrominos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tetrominos.swift; sourceTree = "<group>"; };
 		773651DC210D6F3200BA9F89 /* PerfectClear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PerfectClear.wav; sourceTree = "<group>"; };
+		773651DE210EA2C700BA9F89 /* Combolow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Combolow.wav; sourceTree = "<group>"; };
+		773651E0210EA2D400BA9F89 /* Combomed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Combomed.wav; sourceTree = "<group>"; };
+		773651E2210EA2E300BA9F89 /* Combohigh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Combohigh.wav; sourceTree = "<group>"; };
+		773651E4210EA4BD00BA9F89 /* Comboveryhigh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Comboveryhigh.wav; sourceTree = "<group>"; };
+		773651E6210EA4E500BA9F89 /* Combomax.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Combomax.wav; sourceTree = "<group>"; };
+		773651EA210EA7C200BA9F89 /* Holdfail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Holdfail.wav; sourceTree = "<group>"; };
+		773651F4210EAE7A00BA9F89 /* Holdsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Holdsound.wav; sourceTree = "<group>"; };
 		7758F1AB210CF357007E5972 /* Rotate8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rotate8bit.wav; sourceTree = "<group>"; };
 		7758F1AC210CF357007E5972 /* Lineclear8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lineclear8bit.wav; sourceTree = "<group>"; };
 		7758F1AD210CF357007E5972 /* Shift8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shift8bit.wav; sourceTree = "<group>"; };
@@ -186,6 +200,13 @@
 		7758F1AA210CF346007E5972 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				773651F4210EAE7A00BA9F89 /* Holdsound.wav */,
+				773651EA210EA7C200BA9F89 /* Holdfail.wav */,
+				773651E6210EA4E500BA9F89 /* Combomax.wav */,
+				773651E4210EA4BD00BA9F89 /* Comboveryhigh.wav */,
+				773651E2210EA2E300BA9F89 /* Combohigh.wav */,
+				773651E0210EA2D400BA9F89 /* Combomed.wav */,
+				773651DE210EA2C700BA9F89 /* Combolow.wav */,
 				773651DC210D6F3200BA9F89 /* PerfectClear.wav */,
 				7758F1AE210CF357007E5972 /* Land8bit.wav */,
 				7758F1AC210CF357007E5972 /* Lineclear8bit.wav */,
@@ -256,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7758F1B4210CF357007E5972 /* Tetris8bit.wav in Resources */,
+				773651EB210EA7C200BA9F89 /* Holdfail.wav in Resources */,
+				773651E5210EA4BE00BA9F89 /* Comboveryhigh.wav in Resources */,
 				7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */,
 				3A5F13E120FA78B900A43C21 /* GameScene.sks in Resources */,
 				3A5F13E920FA78BA00A43C21 /* Assets.xcassets in Resources */,
@@ -263,9 +286,14 @@
 				7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */,
 				3A5F13EC20FA78BA00A43C21 /* Main.storyboard in Resources */,
 				7758F1B3210CF357007E5972 /* Land8bit.wav in Resources */,
+				773651DF210EA2C700BA9F89 /* Combolow.wav in Resources */,
 				7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */,
+				773651E1210EA2D400BA9F89 /* Combomed.wav in Resources */,
 				773651DD210D6F3200BA9F89 /* PerfectClear.wav in Resources */,
 				3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */,
+				773651E7210EA4E500BA9F89 /* Combomax.wav in Resources */,
+				773651E3210EA2E300BA9F89 /* Combohigh.wav in Resources */,
+				773651F5210EAE7A00BA9F89 /* Holdsound.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

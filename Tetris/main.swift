@@ -13,6 +13,15 @@ let lineSound = Sound(named: "Lineclear8bit")
 let tetrisSound = Sound(named: "Tetris8bit")
 let perfectClearSound = Sound(named: "PerfectClear")
 
+let comboLow = Sound(named: "Combolow")
+let comboMedium = Sound(named: "Combomed")
+let comboHigh = Sound(named: "Combohigh")
+let comboVeryHigh = Sound(named: "Comboveryhigh")
+let comboMax = Sound(named: "Combomax")
+
+let holdSound = Sound(named: "Holdsound")
+let holdFail = Sound(named: "Holdfail")
+
 //This is the amount of rows that are hidden from the player. It is a float value.
 let hiddenMatrixRows = 3.8
 
@@ -59,7 +68,7 @@ var rotationSystem = "OSSRS"
  invisible == You can't see anything.*/
 var textureStyle = "default"
 //How fast holding left/right autorepeats.
-var autoRepeatSpeed = 2
+var autoRepeatSpeed = 1
 //The ghost style.
 /* default == ghost is gray.
    off == No ghost.
@@ -101,7 +110,7 @@ var ghostred = texture(named: "Ghostred")
 var ghostgreen = texture(named: "Ghostgreen")
 
 // How fast naturally falling and softdropping will be. They will change as the player progresses.
-var fallspeed = 40
+var fallspeed = 25
 var softdropfallspeed = 1
 // These variables are used to drop the piece. The counters count down from their fallspeeds to 0. When they reach zero, the piece will move downwards and will be reset back to their fallspeeds.
 var softdropcounter = 0
@@ -129,6 +138,9 @@ var nextSayer = "0"
 var stRefreshes = 0
 //If the game is over, in a menu, or in play. (over, menu, play)
 var gameState = "play"
+enum Gamestate {
+    case play, over, menu
+}
 // This variable is used to sense if the game should end.
 /* When the piece is spawned, this variable is set to 1.
  if the mino moves, the variable is set to 0.
@@ -488,6 +500,7 @@ func checkForGameOver() {
         tetromino = createInstaclearTetromino()
         tetromino.addToGridAt(x: 3, y: gridSizeY - 5, direction: 0)
         print("Game over!")
+        changeMoveLabel(name: "Game over!", color: "FFAA22")
     }
 }
 
@@ -601,6 +614,7 @@ func keyPress(key: Int) {
             if holdItem.name != "" {
                 if holdAllowed < 1 {
                     let holdTemp: Tetromino = tetromino
+                    holdSound.play()
                     clearHoldQueue()
                     holdAllowed = 1
                     tetromino.removeFromGrid()
@@ -614,8 +628,11 @@ func keyPress(key: Int) {
                         tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 4, direction: 0)
                     }
                     holdItem = holdTemp
+                } else {
+                    holdFail.play()
                 }
             } else {
+                holdSound.play()
                 tetromino.removeFromGrid()
                 tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
                 holdItem = tetromino
