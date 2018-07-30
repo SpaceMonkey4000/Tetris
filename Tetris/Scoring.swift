@@ -294,6 +294,9 @@ func scorePoints(amount: Int, strong: Bool) {
         comboMax.play()
         perfectClearSound.play()
         changeMoveLabel(name: "Combo  10+", color: "FFFF00")
+        if textureStyle == "default" {
+            replaceAllTexturesWith(texture: charged)
+        }
     }
     
     if strong {

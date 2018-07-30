@@ -3,6 +3,7 @@ import AppKit
 //TRUE LETS: these are lets. Let let let let let let let let
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
+let charged = texture(named: "ChargedMino")
 
 // Sound effects.
 // Play sounds like this: rotateSound.play()
@@ -709,11 +710,26 @@ func addNextItem(pos: Int) {
     }
     drawTetrominoInNextQueue(pos: pos, tetromino: tetromino)
 }
+
 func showNextItems() {
     clearNextQueue()
     for item in 0..<nextItems {
         addNextItem(pos: item)
     }
+}
+
+func replaceAllTexturesWith(texture: Int) {
+    var y = 0
+    while y < gridSizeY {
+        tilesinline = 0
+        for x in 0..<gridSizeX {
+            if hasTextureAt (x: x, y: y) {
+                setTexture(texture, x: x, y: y)
+            }
+        }
+        y += 1
+    }
+
 }
 
 // This function starts the game and must be called at the end of the file.
