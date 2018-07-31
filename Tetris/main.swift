@@ -4,6 +4,8 @@ import AppKit
 //This defines the garbage icon.
 let garbage = texture(named: "Garbageicon")
 let charged = texture(named: "ChargedMino")
+let charged2 = texture(named: "ChargedMino2")
+let charged3 = texture(named: "ChargedMino3")
 
 // Sound effects.
 // Play sounds like this: rotateSound.play()
@@ -19,6 +21,7 @@ let comboMedium = Sound(named: "Combomed")
 let comboHigh = Sound(named: "Combohigh")
 let comboVeryHigh = Sound(named: "Comboveryhigh")
 let comboMax = Sound(named: "Combomax")
+let comboOutbreak = Sound(named: "ComboOutbreak")
 
 let holdSound = Sound(named: "Holdsound")
 let holdFail = Sound(named: "Holdfail")

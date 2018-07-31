@@ -262,24 +262,20 @@ func basicSpinScore(message: String) {
     }
 }
 func scorePoints(amount: Int, strong: Bool) {
-    if comboCount == 4 {
-        comboLow.play()
-        changeMoveLabel(name: "Combo  x4", color: "FFFFEE")
-    }
     if comboCount == 5 {
-        comboMedium.play()
+        comboLow.play()
         changeMoveLabel(name: "Combo  x5", color: "FFFFDD")
     }
     if comboCount == 6 {
-        comboHigh.play()
+        comboMedium.play()
         changeMoveLabel(name: "Combo  x6", color: "FFFFCC")
     }
     if comboCount == 7 {
-        comboVeryHigh.play()
+        comboHigh.play()
         changeMoveLabel(name: "Combo  x7", color: "FFFFBB")
     }
     if comboCount == 8 {
-        comboMax.play()
+        comboVeryHigh.play()
         changeMoveLabel(name: "Combo  x8", color: "FFFF88")
     }
     if comboCount == 9 {
@@ -290,12 +286,25 @@ func scorePoints(amount: Int, strong: Bool) {
         comboMax.play()
         changeMoveLabel(name: "Combo  x10", color: "FFFF33")
     }
-    if comboCount > 10 {
-        comboMax.play()
-        perfectClearSound.play()
-        changeMoveLabel(name: "Combo  10+", color: "FFFF00")
+    if comboCount == 11 {
+        comboLow.play()
+        changeMoveLabel(name: "Combo  super", color: "FFFF00")
         if textureStyle == "default" {
             replaceAllTexturesWith(texture: charged)
+        }
+    }
+    if comboCount == 12 {
+        comboLow.play()
+        changeMoveLabel(name: "Combo  ultra", color: "FFBB00")
+        if textureStyle == "default" {
+            replaceAllTexturesWith(texture: charged2)
+        }
+    }
+    if comboCount > 12 {
+        comboOutbreak.play()
+        changeMoveLabel(name: "Combo  outbreak!", color: "FF2200")
+        if textureStyle == "default" {
+            replaceAllTexturesWith(texture: charged3)
         }
     }
     

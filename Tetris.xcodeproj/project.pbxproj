@@ -39,6 +39,7 @@
 		773651E7210EA4E500BA9F89 /* Combomax.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651E6210EA4E500BA9F89 /* Combomax.wav */; };
 		773651EB210EA7C200BA9F89 /* Holdfail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651EA210EA7C200BA9F89 /* Holdfail.wav */; };
 		773651F5210EAE7A00BA9F89 /* Holdsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651F4210EAE7A00BA9F89 /* Holdsound.wav */; };
+		773651F7210FDB8500BA9F89 /* ComboOutbreak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651F6210FDB8500BA9F89 /* ComboOutbreak.wav */; };
 		7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AB210CF357007E5972 /* Rotate8bit.wav */; };
 		7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AC210CF357007E5972 /* Lineclear8bit.wav */; };
 		7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AD210CF357007E5972 /* Shift8bit.wav */; };
@@ -101,6 +102,7 @@
 		773651E6210EA4E500BA9F89 /* Combomax.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Combomax.wav; sourceTree = "<group>"; };
 		773651EA210EA7C200BA9F89 /* Holdfail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Holdfail.wav; sourceTree = "<group>"; };
 		773651F4210EAE7A00BA9F89 /* Holdsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Holdsound.wav; sourceTree = "<group>"; };
+		773651F6210FDB8500BA9F89 /* ComboOutbreak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ComboOutbreak.wav; sourceTree = "<group>"; };
 		7758F1AB210CF357007E5972 /* Rotate8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rotate8bit.wav; sourceTree = "<group>"; };
 		7758F1AC210CF357007E5972 /* Lineclear8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lineclear8bit.wav; sourceTree = "<group>"; };
 		7758F1AD210CF357007E5972 /* Shift8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shift8bit.wav; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		7758F1AA210CF346007E5972 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				773651F6210FDB8500BA9F89 /* ComboOutbreak.wav */,
 				773651F4210EAE7A00BA9F89 /* Holdsound.wav */,
 				773651EA210EA7C200BA9F89 /* Holdfail.wav */,
 				773651E6210EA4E500BA9F89 /* Combomax.wav */,
@@ -294,6 +297,7 @@
 				773651E7210EA4E500BA9F89 /* Combomax.wav in Resources */,
 				773651E3210EA2E300BA9F89 /* Combohigh.wav in Resources */,
 				773651F5210EAE7A00BA9F89 /* Holdsound.wav in Resources */,
+				773651F7210FDB8500BA9F89 /* ComboOutbreak.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
