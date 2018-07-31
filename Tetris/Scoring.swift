@@ -288,21 +288,21 @@ func scorePoints(amount: Int, strong: Bool) {
     }
     if comboCount == 11 {
         comboLow.play()
-        changeMoveLabel(name: "Combo  super", color: "FFFF00")
+        changeMoveLabel(name: "Combo  super", color: "0000FF")
         if textureStyle == "default" {
             replaceAllTexturesWith(texture: charged)
         }
     }
     if comboCount == 12 {
         comboLow.play()
-        changeMoveLabel(name: "Combo  ultra", color: "FFBB00")
+        changeMoveLabel(name: "Combo  ultra", color: "FF0000")
         if textureStyle == "default" {
             replaceAllTexturesWith(texture: charged2)
         }
     }
     if comboCount > 12 {
         comboOutbreak.play()
-        changeMoveLabel(name: "Combo  outbreak!", color: "FF2200")
+        changeMoveLabel(name: "Combo  outbreak!", color: "000000")
         if textureStyle == "default" {
             replaceAllTexturesWith(texture: charged3)
         }

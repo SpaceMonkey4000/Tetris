@@ -31,7 +31,7 @@ let hiddenMatrixRows = 3.8
 
 //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
 // Size of the grid in cells.
-var gridSizeX = 4
+var gridSizeX = 10
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
@@ -222,8 +222,13 @@ var perfectClearLabel = Label()
 // Part that says the value of the perfectclears var.
 var perfectClearLabel2 = Label()
 
+// Next label.
+var nextLabel = Label()
 
-//This label is at the bottom of the screen. If you get a single, it will say "single" for some time.
+// Hold label.
+var holdLabel = Label()
+
+//This label is near the bottom of the screen. If you get a single, it will say "single" for some time.
 var moveLabel = Label()
 
 //This is used to count how long the moveLabel should be not hidden.
@@ -261,6 +266,9 @@ func first() {
 
     moveLabel = createLabel(x: -1.25, y: -0.6, text: "poopy")
     moveLabel.isHidden = true
+    
+    holdLabel = createLabel(x: -0.92, y: 0.77, text: "Hold")
+    nextLabel = createLabel(x: 0.68, y: 0.84, text: "Next")
     
     perfectClearLabel = createLabel(x: -1.25, y: 0.0, text: "Perfect clears:")
     perfectClearLabel2 = createLabel(x: -0.57, y: 0.0, text: String(perfectClears))
