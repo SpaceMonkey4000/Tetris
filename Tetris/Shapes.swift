@@ -1,11 +1,3 @@
-//
-//  Shapes.swift
-//  Tetris
-//
-//  Created by Axel on 7/15/18.
-//  Copyright © 2018 Retroactive Fiasco. All rights reserved.
-//
-
 import Foundation
 
 

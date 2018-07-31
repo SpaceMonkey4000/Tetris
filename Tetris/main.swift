@@ -70,7 +70,7 @@ var rotationSystem = "OSSRS"
  invisible == You can't see anything.*/
 var textureStyle = "default"
 //How fast holding left/right autorepeats.
-var autoRepeatSpeed = 1
+var autoRepeatSpeed = 2
 //The ghost style.
 /* default == ghost is gray.
    off == No ghost.
@@ -174,6 +174,13 @@ var linesCleared = 0
 
 // This variable dissalows the use of hold spamming.
 var holdAllowed = 0
+
+//This is used to count how long the moveLabel should be not hidden.
+var moveHideDelay = 0
+
+//This variable is used to count down every time a line is cleared. When it reaches zero, the level variable increases by one and this var gets reset.
+var linesUntilLevelUp = 0
+
 createStyleColors()
 
 createAllPieces()
@@ -231,11 +238,11 @@ var holdLabel = Label()
 //This label is near the bottom of the screen. If you get a single, it will say "single" for some time.
 var moveLabel = Label()
 
-//This is used to count how long the moveLabel should be not hidden.
-var moveHideDelay = 0
+
 
 // This function is called once, before the game starts.
 func first() {
+    linesUntilLevelUp = 10
     minosOnScreen = 0
     tetrominosPlaced = 0
     points = 0
@@ -434,6 +441,7 @@ func spawnMino(perfectClearCheck: Bool){
                 
             }
         }
+        setFallSpeeds()
         holdAllowed -= 1
         if !diagonalMove {
             shiftAutoRepeatCounter = 0
@@ -507,6 +515,13 @@ func fallMino() {
 //line clear
 func clearline(y: Int) {
     linesCleared += 1
+    linesUntilLevelUp -= 1
+    if linesUntilLevelUp < 1 {
+        linesUntilLevelUp = 10
+        if level != 15 {
+            level += 1
+        }
+    }
     minosOnScreen -= gridSizeX
     for ye in y..<gridSizeY {
         for x in 0..<gridSizeX {
