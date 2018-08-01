@@ -76,6 +76,31 @@ func setFallSpeeds() {
         softdropfallspeed = 1
         fallTiles = 1
         softDropTiles = 5
+    } else if level == 16 {
+        fallspeed = 1
+        softdropfallspeed = 1
+        fallTiles = 2
+        softDropTiles = 5
+    } else if level == 17 {
+        fallspeed = 1
+        softdropfallspeed = 1
+        fallTiles = 3
+        softDropTiles = 5
+    } else if level == 18 {
+        fallspeed = 1
+        softdropfallspeed = 1
+        fallTiles = 4
+        softDropTiles = 5
+    } else if level == 19 {
+        fallspeed = 1
+        softdropfallspeed = 1
+        fallTiles = 5
+        softDropTiles = 5
+    } else if level == 20 {
+        fallspeed = 1
+        softdropfallspeed = 1
+        fallTiles = 20
+        softDropTiles = 5
     } else {
         assertionFailure("Level value expected to be in a normal range.")
     }

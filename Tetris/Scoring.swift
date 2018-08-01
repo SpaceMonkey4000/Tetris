@@ -262,29 +262,25 @@ func basicSpinScore(message: String) {
     }
 }
 func scorePoints(amount: Int, strong: Bool) {
-    if comboCount == 5 {
-        comboLow.play()
-        changeMoveLabel(name: "Combo  x5", color: "FFFFDD")
-    }
     if comboCount == 6 {
-        comboMedium.play()
-        changeMoveLabel(name: "Combo  x6", color: "FFFFCC")
+        comboLow.play()
+        changeMoveLabel(name: "Combo  x6", color: "FFFFDD")
     }
     if comboCount == 7 {
-        comboHigh.play()
-        changeMoveLabel(name: "Combo  x7", color: "FFFFBB")
+        comboMedium.play()
+        changeMoveLabel(name: "Combo  x7", color: "FFFFCC")
     }
     if comboCount == 8 {
-        comboVeryHigh.play()
-        changeMoveLabel(name: "Combo  x8", color: "FFFF88")
+        comboHigh.play()
+        changeMoveLabel(name: "Combo  x8", color: "FFFFBB")
     }
     if comboCount == 9 {
-        comboMax.play()
-        changeMoveLabel(name: "Combo  x9", color: "FFFF66")
+        comboVeryHigh.play()
+        changeMoveLabel(name: "Combo  x9", color: "FFFF88")
     }
     if comboCount == 10 {
         comboMax.play()
-        changeMoveLabel(name: "Combo  x10", color: "FFFF33")
+        changeMoveLabel(name: "Combo  x10", color: "FFFF66")
     }
     if comboCount == 11 {
         comboLow.play()

@@ -31,7 +31,7 @@ let hiddenMatrixRows = 3.8
 
 //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
 // Size of the grid in cells.
-var gridSizeX = 10
+var gridSizeX = 4
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
@@ -518,7 +518,7 @@ func clearline(y: Int) {
     linesUntilLevelUp -= 1
     if linesUntilLevelUp < 1 {
         linesUntilLevelUp = 10
-        if level != 15 {
+        if level != 20 {
             level += 1
         }
     }
