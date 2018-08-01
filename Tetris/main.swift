@@ -31,7 +31,7 @@ let hiddenMatrixRows = 3.8
 
 //SEMI LETS: these should never be changed while the game is playing, but they can be changed in menus.
 // Size of the grid in cells.
-var gridSizeX = 4
+var gridSizeX = 10
 var gridSizeY = 24
 
 // The amount of frames that the player has before the piece locks down.
