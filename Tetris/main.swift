@@ -15,6 +15,7 @@ let landSound = Sound(named: "Land8bit")
 let lineSound = Sound(named: "Lineclear8bit")
 let tetrisSound = Sound(named: "Tetris8bit")
 let perfectClearSound = Sound(named: "PerfectClear")
+let spinSound = Sound(named: "Spin")
 
 let comboLow = Sound(named: "Combolow")
 let comboMedium = Sound(named: "Combomed")
@@ -25,6 +26,8 @@ let comboOutbreak = Sound(named: "ComboOutbreak")
 
 let holdSound = Sound(named: "Holdsound")
 let holdFail = Sound(named: "Holdfail")
+
+let maxLevelSound = Sound(named: "LevelThirty")
 
 //This is the amount of rows that are hidden from the player. It is a float value.
 let hiddenMatrixRows = 3.8
@@ -40,6 +43,11 @@ var stickdelay = 30
 var stMaxRefreshes = 15
 //If the piece instantly locks down when hard dropped.
 var hardDropInstantLock = 1
+//The game mode.
+//basicShort: Marathon mode. 15 levels.
+//basicMedium: Survival mode. 20 levels.
+//basicLong: Revengeance mode. 30 levels. The 30th level has 20g and very low stickdelay, but is only one line.
+var gameMode = "basicShort"
 //SPINS: 
 //If the player gets rewarded for doing spin moves for certain blocks.
 var tSpinsRewarded = true
@@ -138,7 +146,7 @@ var nextItem: Tetromino = createOTetromino()
 var nextSayer = "0"
 // The current amount of refreshes the player has left. Upon piece generation, it will be set to stmaxrefreshes. If it reaches zero, the piece will instantly lock down.
 var stRefreshes = 0
-//If the game is over, in a menu, or in play. (over, menu, play)
+//If the game is over, in a menu, in play, or won. (over, menu, play, won)
 var gameState = "play"
 enum Gamestate {
     case play, over, menu
@@ -162,6 +170,8 @@ var minosOnScreen = 0
 var tetrominosPlaced = 0
 // Level.
 var level = 1
+
+
 // This variable is used to check for T-spins.
 var lastSuccessfulAction = "0"
 // The item in the hold.
@@ -177,6 +187,9 @@ var holdAllowed = 0
 
 //This is used to count how long the moveLabel should be not hidden.
 var moveHideDelay = 0
+
+//This reduces the amount of stick delay the player gets on levels 21+.
+var stickDelayReduction = 0
 
 //This variable is used to count down every time a line is cleared. When it reaches zero, the level variable increases by one and this var gets reset.
 var linesUntilLevelUp = 0
@@ -347,7 +360,7 @@ func refreshSlideTimer() {
         if stRefreshes < 1 {
             slidetimer = 1
         } else {
-            slidetimer = stickdelay
+            slidetimer = stickdelay - stickDelayReduction
         }
     }
 }
@@ -450,7 +463,7 @@ func spawnMino(perfectClearCheck: Bool){
         tetromino = nextItem
         showNextItems()
         generateNextItem()
-        slidetimer = stickdelay
+        slidetimer = stickdelay - stickDelayReduction
         gameOverCheck = 1
         if tetromino.name == "I" {
             tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
@@ -518,7 +531,7 @@ func clearline(y: Int) {
     linesUntilLevelUp -= 1
     if linesUntilLevelUp < 1 {
         linesUntilLevelUp = 10
-        if level != 20 {
+        if level != 31 {
             level += 1
         }
     }
@@ -604,6 +617,10 @@ func swapBags() {
     fillBag(bag: 2)
 }
 
+func winGame() {
+    gameState = "won"
+    changeMoveLabel(name: "You won!", color: "CCFFFF")
+}
 
 // This function is called whenever the user presses a key.
 func keyPress(key: Int) {
@@ -690,7 +707,7 @@ func keyPress(key: Int) {
                     tetromino.drawOnGrid(x: 0, y: 0, direction: 0, grid: holdQueueGrid)
                     tetromino = holdItem
                     stRefreshes = stMaxRefreshes
-                    slidetimer = stickdelay
+                    slidetimer = stickdelay - stickDelayReduction
                     if tetromino.name == "I" {
                         tetromino.addToGridAt(x: (gridSizeX / 2) - 2, y: gridSizeY - 5, direction: 0)
                     } else {
@@ -708,7 +725,7 @@ func keyPress(key: Int) {
                 holdItem = tetromino
                 holdAllowed = 2
                 stRefreshes = stMaxRefreshes
-                slidetimer = stickdelay
+                slidetimer = stickdelay - stickDelayReduction
                 print ("hold item:",holdItem.name)
                 spawnMino(perfectClearCheck: false)
             }

@@ -72,6 +72,7 @@ func spinScore() {
                     changeMoveLabel(name: "O-spin", color: "FFFFFF")
                 }
                     landSound.play()
+                
                 scorePoints(amount: 400, strong: true)
             } else if lineScore == 1 {
                 print("O-spin single")
