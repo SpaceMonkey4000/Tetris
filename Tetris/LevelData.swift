@@ -285,75 +285,75 @@ func setFallSpeeds() {
             fallTiles = 1
             softDropTiles = 1
         } else if level == 2 {
-            fallspeed = 55
+            fallspeed = 50
             softdropfallspeed = 3
             fallTiles = 1
             softDropTiles = 1
         } else if level == 3 {
-            fallspeed = 50
+            fallspeed = 40
             softdropfallspeed = 2
             fallTiles = 1
             softDropTiles = 1
         } else if level == 4 {
-            fallspeed = 45
-            softdropfallspeed = 1
-            fallTiles = 1
-            softDropTiles = 1
-        } else if level == 5 {
-            fallspeed = 40
-            softdropfallspeed = 1
-            fallTiles = 1
-            softDropTiles = 1
-        } else if level == 6 {
-            fallspeed = 35
-            softdropfallspeed = 1
-            fallTiles = 1
-            softDropTiles = 1
-        } else if level == 7 {
             fallspeed = 30
             softdropfallspeed = 1
             fallTiles = 1
             softDropTiles = 1
-        } else if level == 8 {
-            fallspeed = 25
-            softdropfallspeed = 1
-            fallTiles = 1
-            softDropTiles = 1
-        } else if level == 9 {
+        } else if level == 5 {
             fallspeed = 20
             softdropfallspeed = 1
             fallTiles = 1
             softDropTiles = 1
-        } else if level == 10 {
+        } else if level == 6 {
             fallspeed = 15
             softdropfallspeed = 1
             fallTiles = 1
-            softDropTiles = 2
-        } else if level == 11 {
+            softDropTiles = 1
+        } else if level == 7 {
             fallspeed = 10
             softdropfallspeed = 1
             fallTiles = 1
-            softDropTiles = 2
-        } else if level == 12 {
+            softDropTiles = 1
+        } else if level == 8 {
+            fallspeed = 7
+            softdropfallspeed = 1
+            fallTiles = 1
+            softDropTiles = 1
+        } else if level == 9 {
             fallspeed = 5
             softdropfallspeed = 1
             fallTiles = 1
-            softDropTiles = 2
-        } else if level == 13 {
+            softDropTiles = 1
+        } else if level == 10 {
             fallspeed = 4
             softdropfallspeed = 1
             fallTiles = 1
             softDropTiles = 2
-        } else if level == 14 {
+        } else if level == 11 {
             fallspeed = 3
             softdropfallspeed = 1
             fallTiles = 1
             softDropTiles = 2
-        } else if level == 15 {
+        } else if level == 12 {
             fallspeed = 2
             softdropfallspeed = 1
             fallTiles = 1
+            softDropTiles = 2
+        } else if level == 13 {
+            fallspeed = 1
+            softdropfallspeed = 1
+            fallTiles = 1
             softDropTiles = 3
+        } else if level == 14 {
+            fallspeed = 1
+            softdropfallspeed = 1
+            fallTiles = 2
+            softDropTiles = 4
+        } else if level == 15 {
+            fallspeed = 1
+            softdropfallspeed = 1
+            fallTiles = 3
+            softDropTiles = 5
         } else {
             winGame()
         }

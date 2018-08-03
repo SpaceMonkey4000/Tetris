@@ -15,7 +15,7 @@ let landSound = Sound(named: "Land8bit")
 let lineSound = Sound(named: "Lineclear8bit")
 let tetrisSound = Sound(named: "Tetris8bit")
 let perfectClearSound = Sound(named: "PerfectClear")
-let spinSound = Sound(named: "Spin")
+let winSound = Sound(named: "WinSound")
 
 let comboLow = Sound(named: "Combolow")
 let comboMedium = Sound(named: "Combomed")
@@ -620,6 +620,7 @@ func swapBags() {
 func winGame() {
     gameState = "won"
     changeMoveLabel(name: "You won!", color: "CCFFFF")
+    winSound.play()
 }
 
 // This function is called whenever the user presses a key.
