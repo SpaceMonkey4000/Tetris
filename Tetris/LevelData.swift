@@ -276,9 +276,12 @@ func setFallSpeeds() {
             fallTiles = 20
             softDropTiles = 20
         } else {
-            winGame()
+            fallspeed = 1
+            softdropfallspeed = 1
+            fallTiles = 20
+            softDropTiles = 20
         }
-    } else if gameMode == "basicShort" {
+    } else if gameMode == "basicShort" || gameMode == "speed" {
         if level == 1 {
             fallspeed = 60
             softdropfallspeed = 3
@@ -355,7 +358,10 @@ func setFallSpeeds() {
             fallTiles = 3
             softDropTiles = 5
         } else {
-            winGame()
+            fallspeed = 1
+            softdropfallspeed = 1
+            fallTiles = 3
+            softDropTiles = 5
         }
     }
 }

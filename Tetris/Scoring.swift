@@ -52,49 +52,71 @@ func noSpinScore() {
 func spinScore() {
     switch tetromino.name {
     case "L":
-        basicSpinScore(message: "L-spin")
-    case "J":
-        basicSpinScore(message: "J-spin")
-    case "S":
-        basicSpinScore(message: "S-spin")
-    case "Z":
-        basicSpinScore(message: "Z-spin")
-    case "I":
-        basicSpinScore(message: "I-spin")
-    case "O":
-        if tetromino.blocked() {
-            if lineScore == 0 {
-                comboCount = 0
-                print("O-spin")
-                if backToBackBonus == 1 {
-                    changeMoveLabel(name: "Back to back O-spin", color: "FFFFFF")
-                } else {
-                    changeMoveLabel(name: "O-spin", color: "FFFFFF")
-                }
-                    landSound.play()
-                
-                scorePoints(amount: 400, strong: true)
-            } else if lineScore == 1 {
-                print("O-spin single")
-                if backToBackBonus == 1 {
-                    changeMoveLabel(name: "Back to back O-spin single", color: "FFFFFF")
-                } else {
-                    changeMoveLabel(name: "O-spin single", color: "FFFFFF")
-                }
-                    tetrisSound.play()
-                scorePoints(amount: 800, strong: true)
-            } else if lineScore == 2 {
-                print("O-spin double")
-                if backToBackBonus == 1 {
-                    changeMoveLabel(name: "Back to back O-spin double", color: "FFFFFF")
-                } else {
-                    changeMoveLabel(name: "O-spin double", color: "FFFFFF")
-                }
-                    tetrisSound.play()
-                scorePoints(amount: 1200, strong: true)
-            }
+        if lSpinsRewarded == true {
+            basicSpinScore(message: "L-spin")
         } else {
             noSpinScore()
+        }
+    case "J":
+        if jSpinsRewarded == true {
+            basicSpinScore(message: "J-spin")
+        } else {
+            noSpinScore()
+        }
+    case "S":
+        if sSpinsRewarded == true {
+            basicSpinScore(message: "S-spin")
+        } else {
+            noSpinScore()
+        }
+    case "Z":
+        if zSpinsRewarded == true {
+            basicSpinScore(message: "Z-spin")
+        } else {
+            noSpinScore()
+        }
+    case "I":
+        if iSpinsRewarded == true {
+            basicSpinScore(message: "I-spin")
+        } else {
+            noSpinScore()
+        }
+    case "O":
+        if oSpinsRewarded == true {
+            if tetromino.blocked() {
+                if lineScore == 0 {
+                    comboCount = 0
+                    print("O-spin")
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back O-spin", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "O-spin", color: "FFFFFF")
+                    }
+                    landSound.play()
+                    
+                    scorePoints(amount: 400, strong: true)
+                } else if lineScore == 1 {
+                    print("O-spin single")
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back O-spin single", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "O-spin single", color: "FFFFFF")
+                    }
+                    tetrisSound.play()
+                    scorePoints(amount: 800, strong: true)
+                } else if lineScore == 2 {
+                    print("O-spin double")
+                    if backToBackBonus == 1 {
+                        changeMoveLabel(name: "Back to back O-spin double", color: "FFFFFF")
+                    } else {
+                        changeMoveLabel(name: "O-spin double", color: "FFFFFF")
+                    }
+                    tetrisSound.play()
+                    scorePoints(amount: 1200, strong: true)
+                }
+            } else {
+                noSpinScore()
+            }
         }
     default:
         noSpinScore()

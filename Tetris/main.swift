@@ -47,7 +47,8 @@ var hardDropInstantLock = 1
 //basicShort: Marathon mode. 15 levels.
 //basicMedium: Survival mode. 20 levels.
 //basicLong: Revengeance mode. 30 levels. The 30th level has 20g and very low stickdelay, but is only one line.
-var gameMode = "basicShort"
+//speed: Like Marathon, but levels are only four lines.
+var gameMode = "basicMedium"
 //SPINS: 
 //If the player gets rewarded for doing spin moves for certain blocks.
 var tSpinsRewarded = true
@@ -255,7 +256,11 @@ var moveLabel = Label()
 
 // This function is called once, before the game starts.
 func first() {
-    linesUntilLevelUp = 10
+    if gameMode == "speed" {
+        linesUntilLevelUp = 4
+    } else {
+        linesUntilLevelUp = 10
+    }
     minosOnScreen = 0
     tetrominosPlaced = 0
     points = 0
@@ -530,9 +535,31 @@ func clearline(y: Int) {
     linesCleared += 1
     linesUntilLevelUp -= 1
     if linesUntilLevelUp < 1 {
-        linesUntilLevelUp = 10
-        if level != 31 {
-            level += 1
+        if gameMode == "speed" {
+            linesUntilLevelUp = 4
+        } else {
+            linesUntilLevelUp = 10
+        }
+        level += 1
+        if gameMode == "basicShort" {
+            if linesCleared > 149 {
+                winGame()
+            }
+        }
+        if gameMode == "basicMedium" {
+            if linesCleared > 149 {
+                winGame()
+            }
+        }
+        if gameMode == "basicLong" {
+            if linesCleared > 149 {
+                winGame()
+            }
+        }
+        if gameMode == "speed" {
+            if linesCleared > 59 {
+                winGame()
+            }
         }
     }
     minosOnScreen -= gridSizeX
