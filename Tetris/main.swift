@@ -15,6 +15,7 @@ let landSound = Sound(named: "Land8bit")
 let lineSound = Sound(named: "Lineclear8bit")
 let tetrisSound = Sound(named: "Tetris8bit")
 let perfectClearSound = Sound(named: "PerfectClear")
+let mediumDropSound = Sound(named: "Mediumdrop")
 let winSound = Sound(named: "WinSound")
 
 let comboLow = Sound(named: "Combolow")
@@ -48,7 +49,7 @@ var hardDropInstantLock = 1
 //basicMedium: Survival mode. 20 levels.
 //basicLong: Revengeance mode. 30 levels. The 30th level has 20g and very low stickdelay, but is only one line.
 //speed: Like Marathon, but levels are only four lines.
-var gameMode = "basicMedium"
+var gameMode = "basicShort"
 //SPINS: 
 //If the player gets rewarded for doing spin moves for certain blocks.
 var tSpinsRewarded = true
@@ -92,6 +93,8 @@ var diagonalMove = true
 var nextItems = 6
 // The amount of frames it will take until auto repeat activates.
 var framesUntilAutoRepeat = 12
+// If this var is true, the player will be able to press the V key to do a medium drop.
+var mediumDrop = true
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -257,7 +260,7 @@ var moveLabel = Label()
 // This function is called once, before the game starts.
 func first() {
     if gameMode == "speed" {
-        linesUntilLevelUp = 4
+        linesUntilLevelUp = 3
     } else {
         linesUntilLevelUp = 10
     }
@@ -541,27 +544,7 @@ func clearline(y: Int) {
             linesUntilLevelUp = 10
         }
         level += 1
-        if gameMode == "basicShort" {
-            if linesCleared > 149 {
-                winGame()
-            }
-        }
-        if gameMode == "basicMedium" {
-            if linesCleared > 149 {
-                winGame()
-            }
-        }
-        if gameMode == "basicLong" {
-            if linesCleared > 149 {
-                winGame()
-            }
-        }
-        if gameMode == "speed" {
-            if linesCleared > 59 {
-                winGame()
-            }
-        }
-    }
+      }
     minosOnScreen -= gridSizeX
     for ye in y..<gridSizeY {
         for x in 0..<gridSizeX {
@@ -711,15 +694,35 @@ func keyPress(key: Int) {
         
         //harddrop
         if key == (49) {
+            var dropDistance = 0
             while !tetromino.onGround() {
                 tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
                 points += 2
+                dropDistance += 1
             }
-            lastSuccessfulAction = "harddrop"
+            if dropDistance != 0 {
+                lastSuccessfulAction = "harddrop"
+            }
             if hardDropInstantLock == 1{
                 slidetimer = 0
                 stRefreshes = 0
                 fallCounter = -1
+            }
+        }
+        
+        //mediumdrop
+        if mediumDrop == true {
+            if key == (9) {
+                var dropDistance = 0
+                while !tetromino.onGround() {
+                    tetromino.moveBy(dx: 0, dy: -1, ddirection: 0)
+                    points += 1
+                    dropDistance += 1
+                }
+                mediumDropSound.play()
+                if dropDistance != 0 {
+                    lastSuccessfulAction = "mediumdrop"
+                }
             }
         }
         

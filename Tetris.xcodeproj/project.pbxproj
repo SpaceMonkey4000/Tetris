@@ -44,6 +44,7 @@
 		773651FB2112557600BA9F89 /* Spin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651FA2112557600BA9F89 /* Spin.wav */; };
 		773651FD2113C78F00BA9F89 /* LevelThirty.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651FC2113C78F00BA9F89 /* LevelThirty.wav */; };
 		773651FF2113F31700BA9F89 /* WinSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773651FE2113F31700BA9F89 /* WinSound.wav */; };
+		773652012119EF2700BA9F89 /* Mediumdrop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 773652002119EF2700BA9F89 /* Mediumdrop.wav */; };
 		7758F1B0210CF357007E5972 /* Rotate8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AB210CF357007E5972 /* Rotate8bit.wav */; };
 		7758F1B1210CF357007E5972 /* Lineclear8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AC210CF357007E5972 /* Lineclear8bit.wav */; };
 		7758F1B2210CF357007E5972 /* Shift8bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7758F1AD210CF357007E5972 /* Shift8bit.wav */; };
@@ -111,6 +112,7 @@
 		773651FA2112557600BA9F89 /* Spin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Spin.wav; sourceTree = "<group>"; };
 		773651FC2113C78F00BA9F89 /* LevelThirty.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = LevelThirty.wav; sourceTree = "<group>"; };
 		773651FE2113F31700BA9F89 /* WinSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WinSound.wav; sourceTree = "<group>"; };
+		773652002119EF2700BA9F89 /* Mediumdrop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Mediumdrop.wav; sourceTree = "<group>"; };
 		7758F1AB210CF357007E5972 /* Rotate8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rotate8bit.wav; sourceTree = "<group>"; };
 		7758F1AC210CF357007E5972 /* Lineclear8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lineclear8bit.wav; sourceTree = "<group>"; };
 		7758F1AD210CF357007E5972 /* Shift8bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Shift8bit.wav; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		7758F1AA210CF346007E5972 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				773652002119EF2700BA9F89 /* Mediumdrop.wav */,
 				773651FE2113F31700BA9F89 /* WinSound.wav */,
 				773651FC2113C78F00BA9F89 /* LevelThirty.wav */,
 				773651FA2112557600BA9F89 /* Spin.wav */,
@@ -310,6 +313,7 @@
 				3A5F13F820FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf in Resources */,
 				773651E7210EA4E500BA9F89 /* Combomax.wav in Resources */,
 				773651FD2113C78F00BA9F89 /* LevelThirty.wav in Resources */,
+				773652012119EF2700BA9F89 /* Mediumdrop.wav in Resources */,
 				773651E3210EA2E300BA9F89 /* Combohigh.wav in Resources */,
 				773651F5210EAE7A00BA9F89 /* Holdsound.wav in Resources */,
 				773651F7210FDB8500BA9F89 /* ComboOutbreak.wav in Resources */,
