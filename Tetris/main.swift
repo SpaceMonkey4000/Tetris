@@ -63,7 +63,7 @@ var oSpinsRewarded = true
  SRS == The super rotation system. The standard RS that the tetris guideline uses.
  OSSRS == The O-spin super rotation system. Like SRS, but it allows for O-spins.
  Simple == The simple rotation system. Uses no wall kicks. */
-var rotationSystem = "OSSRS"
+var rotationSystem = "DFRS"
 /*The visual style the game uses.
  default == The default visual style. Based off of the default style in Tetris Friends.
  solid == Solid colors. Based off of... solid colors. Not implemented yet.
@@ -95,6 +95,8 @@ var nextItems = 6
 var framesUntilAutoRepeat = 12
 // If this var is true, the player will be able to press the V key to do a medium drop.
 var mediumDrop = true
+// If this var is true, the player will be able to press the A or S keys to snap the piece to the left or right wall.
+var wallSnaps = true
 //VARS: True variables that will change outside of menus.
 //These variables are used to define textures.
 var orangebasic = texture(named: "Orangebasic")
@@ -646,6 +648,8 @@ func keyPress(key: Int) {
                 superRotationSystemRightRot()
             } else if rotationSystem == "OSSRS"{
                 oSpinSuperRotationSystemRightRot()
+            } else if rotationSystem == "DFRS"{
+                downForceRotationSystemRightRot()
             } else {
                 simpleRotationSystemRot()
             }
@@ -663,6 +667,8 @@ func keyPress(key: Int) {
                 superRotationSystemLeftRot()
             } else if rotationSystem == "OSSRS"{
                 oSpinSuperRotationSystemLeftRot()
+            } else if rotationSystem == "DFRS"{
+                downForceRotationSystemLeftRot()
             } else {
                 simpleRotationSystemRot()
             }
@@ -723,6 +729,28 @@ func keyPress(key: Int) {
                 if dropDistance != 0 {
                     lastSuccessfulAction = "mediumdrop"
                 }
+            }
+        }
+        
+        //wallsnapleft
+        if wallSnaps == true {
+            if key == (44) {
+                var dropDistance = 0
+                while !tetromino.blockLeft() {
+                    tetromino.moveBy(dx: -1, dy: 0, ddirection: 0)
+                    dropDistance += 1
+                }
+                shiftSound.play()
+            }
+        }
+        if wallSnaps == true {
+            if key == (60) {
+                var dropDistance = 0
+                while !tetromino.blockRight() {
+                    tetromino.moveBy(dx: 1, dy: 0, ddirection: 0)
+                    dropDistance += 1
+                }
+                shiftSound.play()
             }
         }
         

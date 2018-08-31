@@ -132,6 +132,14 @@ func normalSrsLeftRot() {
     }
 }
 
+func downForceRotationSystemRightRot() {
+    rotationSystem(ddirection: 1, offsets: [(0,0),(0,-1),(0,-2),(0,-3),(0,-4),(0,-5),(0,-6),(0,-7),(0,-8),(0,-9),(0,-10),(0,1),(0,2),(0,3),(0,4),(0,5),(0,6),(0,7),(0,8),(0,9),(0,10)])
+}
+
+func downForceRotationSystemLeftRot() {
+   rotationSystem(ddirection: -1, offsets: [(0,0),(0,-1),(0,-2),(0,-3),(0,-4),(0,-5),(0,-6),(0,-7),(0,-8),(0,-9),(0,-10),(0,1),(0,2),(0,3),(0,4),(0,5),(0,6),(0,7),(0,8),(0,9),(0,10)])
+}
+
 func rotationSystem(ddirection: Int, offsets: [(Int, Int)]) {
     wallKicks = 0
     for offset in offsets {
