@@ -166,7 +166,6 @@
 			children = (
 				3A5F13E820FA78BA00A43C21 /* Assets.xcassets */,
 				7758F1AA210CF346007E5972 /* Sounds */,
-				7758F1AC210CF357007E5972 /* Lineclear8bit.wav */,
 				3A20D4DC210D0D65000928ED /* Fonts */,
 				3A5F13F720FA80D400A43C21 /* 2009 Tetris Design Guideline.pdf */,
 				3A5F13F520FA7D9E00A43C21 /* main.swift */,
@@ -231,6 +230,7 @@
 				7758F1AB210CF357007E5972 /* Rotate8bit.wav */,
 				7758F1AD210CF357007E5972 /* Shift8bit.wav */,
 				7758F1AF210CF357007E5972 /* Tetris8bit.wav */,
+				7758F1AC210CF357007E5972 /* Lineclear8bit.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
